@@ -65,7 +65,7 @@
 	<!-- Fin menú principal -->
 	
 	<!-- Carousel -->
-	<div class="row">
+	<!-- <div class="row">
 		<div class="offset-2 col-8">
 			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
@@ -106,6 +106,6 @@
 				</a>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Fin Carousel -->
