@@ -29,25 +29,25 @@
 					<a class="nav-link" href="#">FMN</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Museos</a>
+					<a class="nav-link" href="<?= site_url('museos');?>">Museos</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Centros</a>
+					<a class="nav-link" href="<?= site_url('centros');?>">Centros</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Colecciones</a>
+					<a class="nav-link" href="<?= site_url('colecciones');?>">Colecciones</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Exposiciones</a>
+					<a class="nav-link" href="<?= site_url('exposiciones');?>">Exposiciones</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Noticias</a>
+					<a class="nav-link" href="<?= site_url('noticias');?>">Noticias</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Educación</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Multimedia</a>
+					<a class="nav-link" href="<?= site_url('multimedia');?>">Multimedia</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Enlaces</a>
