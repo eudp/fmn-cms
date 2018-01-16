@@ -21,6 +21,7 @@ class Centros extends CI_Controller {
     public function view($establishment_id)
     {
         $data['establishment_item'] = $this->establecimientos_model->get('instituto', $establishment_id);
+        $data['establishment_item']['description'] = strip_tags($data['establishment_item']['description'],'<a><em><strong><p>');
         $data['establishment_carousel'] = $this->establecimientos_model->get_carousel($establishment_id);
         if (empty($data['establishment_item'])) {
             show_404();
