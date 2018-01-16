@@ -61,4 +61,6 @@ $route['colecciones/(:any)'] = 'colecciones/view/$1';
 $route['colecciones'] = 'colecciones';
 $route['exposiciones/(:any)'] = 'exposiciones/view/$1';
 $route['exposiciones'] = 'exposiciones';
+$route['noticias/(:any)'] = 'noticias/view/$1';
+$route['noticias'] = 'noticias';
 //$route['default_controller'] = 'pages/view';
