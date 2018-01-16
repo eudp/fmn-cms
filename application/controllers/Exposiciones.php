@@ -22,7 +22,7 @@ class Exposiciones extends CI_Controller {
     public function view($exposition_id)
     {
         $data['exposition_item'] = $this->exposiciones_model->get(1,$exposition_id);
-        $data['exposition_item']['description'] = strip_tags($data['exposition_item']['description'],'<a><em><strong><p>');
+        $data['exposition_item']['description'] = strip_tags($data['exposition_item']['description'],'<a><em><strong><p><br>');
         $data['exposition_carousel'] = $this->exposiciones_model->get_carousel($exposition_id);
 
         if (empty($data['exposition_item'])) {

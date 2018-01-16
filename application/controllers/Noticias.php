@@ -23,6 +23,7 @@ class Noticias extends CI_Controller {
         $data['news_item'] = $this->noticias_model->get($news_id);
 
         $data['news_item']['publication_date'] = date('j \d\e F, Y', $data['news_item']['publication_date']);
+        $data['news_item']['description'] = strip_tags($data['news_item']['description'],'<a><em><strong><p><br>');
 
         if (empty($data['news_item'])) {
             show_404();

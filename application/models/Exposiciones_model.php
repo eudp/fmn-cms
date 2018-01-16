@@ -14,6 +14,7 @@ class Exposiciones_model extends CI_Model {
             $this->db->from('exposiciones as e');
             $this->db->join('archivos as a', 'a.file_id = e.image_id');
             $this->db->where(array('status' => 1, 'active' => $active ));
+            $this->db->order_by('e.creation_date', 'DESC');
             $query = $this->db->get();
             return $query->result_array();
         }

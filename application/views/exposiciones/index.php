@@ -9,7 +9,7 @@
             
             <div class="col-3">
                 <h5><?= $exposition_item['title']; ?></h5>
-                <p><?= substr(strip_tags($exposition_item['description']),0,200); ?></p>
+                <p><?= substr(strip_tags($exposition_item['description']),0,200) . ' ...'; ?></p>
                 <a href="<?= site_url('exposiciones/'. $exposition_item['exposition_id']);?>">Ver más: </a>
                 <p>Image: <a href="<?= $exposition_item['path']; ?>"><?= $exposition_item['path']; ?></a></p>
             </div>
@@ -27,7 +27,7 @@
             
             <div class="col-3">
                 <h5><?= $exposition_item['title']; ?></h5>
-                <p><?= substr(strip_tags($exposition_item['description']),0,200); ?></p>
+                <p><?= substr(strip_tags($exposition_item['description']),0,200) . ' ...'; ?></p>
                 <a href="<?= site_url('exposiciones/'. $exposition_item['exposition_id']);?>">Ver más: </a>
                 <p>Image: <a href="<?= $exposition_item['path']; ?>"><?= $exposition_item['path']; ?></a></p>
             </div>
