@@ -13,7 +13,7 @@
 <body>
 	<!-- Menú principal -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">
+		<a class="navbar-brand" href="<?= site_url('');?>">
 			<img src="http://www.fmn.gob.ve/sites/default/files/logo.jpg" width="120" height="64" alt="">
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,10 +23,10 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
+					<a class="nav-link" href="<?= site_url('');?>">Inicio <span class="sr-only">(actual)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">FMN</a>
+					<a class="nav-link" href="<?= site_url('fmn');?>">FMN</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('museos');?>">Museos</a>
@@ -44,20 +44,22 @@
 					<a class="nav-link" href="<?= site_url('noticias');?>">Noticias</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Educación</a>
+					<a class="nav-link" href="<?= site_url('educacion');?>">Educación</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('multimedia');?>">Multimedia</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Enlaces</a>
+					<a class="nav-link" href="<?= site_url('enlaces');?>">Enlaces</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Contacto</a>
+					<a class="nav-link" href="<?= site_url('contactenos');?>">Contacto</a>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">
+
+			<?php echo form_open('search', 'class="form-inline my-2 my-lg-0"'); ?>
+
+				<input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search" name="search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 			</form>
 		</div>
