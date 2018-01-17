@@ -31,4 +31,21 @@ class Multimedia_model extends CI_Model {
 
         return $query->row_array();
     }
+
+    public function get_multimedia($limit = 4, $search = null)
+    {
+        $this->db->select('n.title, n.multimedia_id, n.creation_date');
+        $this->db->from('multimedia as n');
+        $this->db->where(array('status' => 1 ));
+        $this->db->order_by('creation_date', 'DESC');
+        $this->db->limit($limit);
+
+        if ($search !== null){
+            $this->db->like('LOWER(description)', strtolower($search));
+            $this->db->or_like('LOWER(title)', strtolower($search));
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

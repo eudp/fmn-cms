@@ -27,4 +27,22 @@ class Noticias_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function get_news($limit = 4, $search = null)
+    {
+        $this->db->select('n.title, n.news_id, n.publication_date, n.excerpt, a.path');
+        $this->db->from('noticias as n');
+        $this->db->join('archivos as a', 'a.file_id = n.image_id');
+        $this->db->where(array('status' => 1 ));
+        $this->db->order_by('publication_date', 'DESC');
+        $this->db->limit($limit);
+
+        if ($search !== null){
+            $this->db->like('LOWER(description)', strtolower($search));
+            $this->db->or_like('LOWER(title)', strtolower($search));
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 }

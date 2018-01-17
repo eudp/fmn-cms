@@ -37,4 +37,21 @@ class Exposiciones_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function get_expositions($limit = 4, $search = null)
+    {
+        $this->db->select('n.title,, n.exposition_id, n.creation_date');
+        $this->db->from('exposiciones as n');
+        $this->db->where(array('status' => 1 ));
+        $this->db->order_by('creation_date', 'DESC');
+        $this->db->limit($limit);
+
+        if ($search !== null){
+            $this->db->like('LOWER(description)', strtolower($search));
+            $this->db->or_like('LOWER(title)', strtolower($search));
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
