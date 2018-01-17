@@ -18,7 +18,7 @@
                     <?php echo (isset($establishment_item['facebook_url']) ? '<p>' . $establishment_item['facebook_url'] . '</p>' : ''); ?>
                     <?php echo (isset($establishment_item['twitter_url']) ? '<p>' . $establishment_item['twitter_url'] . '</p>' : ''); ?>
                     <?php echo (isset($establishment_item['site_url']) ? '<p>' . $establishment_item['site_url'] . '</p>' : ''); ?>
-                    <?php echo (isset($establishment_item['email']) ? '<p>' . $establishment_item['femail'] . '</p>' : ''); ?>
+                    <?php echo (isset($establishment_item['email']) ? '<p>' . $establishment_item['email'] . '</p>' : ''); ?>
                 </div>
                 <div class="col-12">
                     <h4>Servicios</h4>
