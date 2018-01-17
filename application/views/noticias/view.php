@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <p>Imagen: <?= $news_item['path']; ?></p>
+            <img src="<?= site_url('assets/images') . $news_item['path']; ?>" alt="">
         </div>
         <div class="col-6">
             <div class="row">

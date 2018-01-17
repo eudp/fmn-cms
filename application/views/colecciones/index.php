@@ -6,7 +6,7 @@
         
         <div class="col-3">
             <a href="<?= site_url('colecciones/'. $collection_item['collection_id']);?>"><h3><?= $collection_item['title']; ?></h2></a>
-            <p>Image: <a href="<?= $collection_item['path']; ?>"><?= $collection_item['path']; ?></a></p>
+            <img src="<?= site_url('assets/images') . str_replace('public:/', '', $collection_item['path']); ?>" alt="">
         </div>
 
     <?php endforeach; ?>

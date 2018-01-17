@@ -2,7 +2,7 @@
     
     <div class="row">
         <div class="col-6">
-            <p>Image: <?= $multimedia_item['path']; ?></p>
+            <img src="<?= site_url('assets/images') . $multimedia_item['path']; ?>" alt="">
         </div>
         <div class="col-6">
             <h2><?= $multimedia_item['title']; ?></h2>

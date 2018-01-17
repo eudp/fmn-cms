@@ -10,7 +10,7 @@
             <div class="col-3">
                 
                 <a href="<?= site_url('multimedia/'. $multimedia_item['multimedia_id']);?>"><h5><?= $multimedia_item['title']; ?></h5></a>
-                <p>Image: <a href="<?= $multimedia_item['path']; ?>"><?= $multimedia_item['path']; ?></a></p>
+                <img src="<?= site_url('assets/images') . str_replace('public:/', '', $multimedia_item['path']); ?>" alt="">
             </div>
 
         <?php endforeach; ?>
@@ -26,7 +26,7 @@
             <div class="col-3">
                 
                 <a href="<?= site_url('multimedia/'. $multimedia_item['multimedia_id']);?>"><h5><?= $multimedia_item['title']; ?></h5></a>
-                <p>Image: <a href="<?= $multimedia_item['path']; ?>"><?= $multimedia_item['path']; ?></a></p>
+                <img src="<?= site_url('assets/images') . str_replace('public:/', '', $multimedia_item['path']); ?>" alt="">
             </div>
 
         <?php endforeach; ?>
