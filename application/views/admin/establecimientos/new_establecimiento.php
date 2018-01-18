@@ -1,10 +1,10 @@
 <div class="container">
 	<div class="row">
 		<div class="col-12">
-			<h3>Agrega un nuevo museo</h3>
+			<h3>Agrega un nuevo <?= $type; ?></h3>
 		</div>
 		<div class="col-12">
-			<?php echo form_open_multipart('admin/set_establecimiento/museo'); ?>
+			<?php echo form_open_multipart('admin/set_establecimiento/' . $type ); ?>
 				<div class="form-group">
 					<label for="acronimo">Acrónimo</label>
 					<input type="text" class="form-control"  placeholder="" name="acronimo" >
@@ -66,7 +66,7 @@
 				</button> -->
 
 				<input type="hidden" name="id" >
-				<button type="submit" class="btn btn-primary">Actualizar</button>
+				<button type="submit" class="btn btn-primary">Crear</button>
 			</form>
 		</div>
 	</div>

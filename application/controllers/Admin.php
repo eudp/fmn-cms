@@ -35,25 +35,26 @@ class Admin extends CI_Controller {
 
     		/* Edit establishment*/
 
-    		$data['establishment'] = $this->establecimientos_model->get(null, $establishment_id);
+    		$data['establishment'] = $this->establecimientos_model->get(null, $establishment_id, null);
     		$data['establishment']['description'] = strip_tags($data['establishment']['description'],'<a><em><strong><p><br>');
 
 	    	$h_data['title'] = 'Admin | Fundación Museos Nacionales';
 	        $h_data['active'] = 'admin';
 
 	        $this->load->view('includes/header_admin',$h_data);
-	        $this->load->view('admin/establecimientos/edit_museo', $data);
+	        $this->load->view('admin/establecimientos/edit_establecimiento', $data);
 	        $this->load->view('includes/footer_admin');
     	}
     }
 
-    public function nuevo_museo () 
+    public function nuevo_establecimiento ($type) 
     {
+        $data['type'] = $type;
     	$h_data['title'] = 'Admin | Fundación Museos Nacionales';
         $h_data['active'] = 'admin';
 
         $this->load->view('includes/header_admin',$h_data);
-        $this->load->view('admin/establecimientos/new_museo');
+        $this->load->view('admin/establecimientos/new_establecimiento', $data);
         $this->load->view('includes/footer_admin');
     }
 
@@ -123,7 +124,8 @@ class Admin extends CI_Controller {
     {
 
         $upload_path = [
-            "museo" => "./assets/images/museos/",
+            "museo"     => "./assets/images/museos/",
+            "instituto" => "./assets/images/institutos/"
         ];
 
         $config['upload_path']   = $upload_path[$u_path];

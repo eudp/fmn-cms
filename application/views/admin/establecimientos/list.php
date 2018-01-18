@@ -6,6 +6,7 @@
 					<tr>
 					<th scope="col">ID</th>
 					<th scope="col">Title</th>
+					<th scope="col">Tipo</th>
 					<th scope="col">Fecha de creación</th>
 					<th scope="col">Fecha de última modificación</th>
 					<th scope="col">Status</th>
@@ -18,6 +19,7 @@
 						<tr>
 							<th scope="row"><?= $establishment_item['establishment_id']; ?></th>
 							<td><a href="<?= site_url('admin/establecimientos/'. $establishment_item['establishment_id']);?>"><?= $establishment_item['title']; ?></a></td>
+							<td><?= $establishment_item['type']; ?></td>
 							<td><?= date('j \d\e F, Y', $establishment_item['creation_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$establishment_item['modified_date']); ?></td>
 							<td><?= $establishment_item['status']; ?></td>
@@ -29,8 +31,11 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-12">
-			<a href="<?= site_url('admin/nuevo_museo/');?>"><button type="button" class="btn btn-success">Agregar museo</button></a>
+		<div class="col-3">
+			<a href="<?= site_url('admin/nuevo_establecimiento/museo');?>"><button type="button" class="btn btn-success">Agregar museo</button></a>
+		</div>
+		<div class="col-3">
+			<a href="<?= site_url('admin/nuevo_establecimiento/instituto');?>"><button type="button" class="btn btn-success">Agregar instituto</button></a>
 		</div>
 	</div>
 </div>

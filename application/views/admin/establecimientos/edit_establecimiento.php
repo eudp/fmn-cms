@@ -4,7 +4,7 @@
 			<h3>Actualizar "<?= $establishment['title'];?>"</h3>
 		</div>
 		<div class="col-12">
-			<?php echo form_open_multipart('admin/set_establecimiento/museo'); ?>
+			<?php echo form_open_multipart('admin/set_establecimiento/' . $establishment['type']); ?>
 			<div class="form-group">
 				<label for="acronimo">Acrónimo</label>
 				<input type="text" class="form-control"  placeholder="" name="acronimo" value="<?= $establishment['acronym'];?>">
@@ -45,6 +45,10 @@
 			<div class="form-group">
 				<label for="url">Site url</label>
 				<input type="text" class="form-control"  placeholder="" name="url" value="<?= $establishment['site_url'];?>">
+			</div>
+			<div class="form-group">
+				<label for="horario">Horario</label>
+				<input type="text" class="form-control"  placeholder="" name="horario" value="<?= $establishment['schedule'];?>">
 			</div>
 			<div class="form-group">
 				<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $establishment['path']); ?>"><?= $establishment['file_name'];?></a></p>
