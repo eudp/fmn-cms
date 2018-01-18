@@ -25,8 +25,9 @@ class Establecimientos_model extends CI_Model {
             return $query->result_array();
         }
 
-        $this->db->select('e.acronym, e.title, e.description, e.address, e.phone, e.email, e.facebook_url, e.twitter_url, e.site_url, e.schedule, e.services, e.instagram_url, e.establishment_id, e.status');
+        $this->db->select('e.acronym, e.title, e.description, e.address, e.phone, e.email, e.facebook_url, e.twitter_url, e.site_url, e.schedule, e.services, e.instagram_url, e.establishment_id, e.status, a.file_name, a.path');
         $this->db->from('establecimientos as e');
+        $this->db->join('archivos as a', 'a.file_id = e.image_id', 'left');
         if ($status != 'all') {
             $this->db->where('status' , $status );
         }
@@ -49,10 +50,23 @@ class Establecimientos_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function update ($array, $establishment_id)
+    public function set ($array, $establishment_id = null)
     {
-        $this->db->set($array);
-        $this->db->where('establishment_id', $establishment_id);
-        $this->db->update('establecimientos');
+        if ($establishment_id != null) {
+            $this->db->set($array);
+            $this->db->where('establishment_id', $establishment_id);
+            $this->db->update('establecimientos');
+        }
+        else {
+            $this->db->insert('establecimientos', $array);
+
+            return $this->db->insert_id();
+        }
+        
+    }
+
+    public function delete ($establishment_id)
+    {
+        $this->db->delete('establecimientos', array('establishment_id' => $establishment_id));   
     }
 }

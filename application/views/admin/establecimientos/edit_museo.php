@@ -4,7 +4,7 @@
 			<h3>Actualizar "<?= $establishment['title'];?>"</h3>
 		</div>
 		<div class="col-12">
-			<?php echo form_open_multipart('admin/update_establecimiento/museo'); ?>
+			<?php echo form_open_multipart('admin/set_establecimiento/museo'); ?>
 			  <div class="form-group">
 			    <label for="acronimo">Acrónimo</label>
 			    <input type="text" class="form-control"  placeholder="" name="acronimo" value="<?= $establishment['acronym'];?>">
@@ -47,6 +47,7 @@
 			    <input type="text" class="form-control"  placeholder="" name="url" value="<?= $establishment['site_url'];?>">
 			  </div>
 			<div class="form-group">
+				<p>Archivo actual : <a href="<?= site_url('assets/images') . $establishment['path']; ?>"><?= $establishment['file_name'];?></a></p>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
 			</div>
 			<div class="form-check">
@@ -72,7 +73,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="pick-image" tabindex="-1" role="dialog" aria-labelledby="pick-imageTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="pick-image" tabindex="-1" role="dialog" aria-labelledby="pick-imageTitle" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -98,4 +99,4 @@
 		</div>
 	</div>
 </div>
-
+ -->
