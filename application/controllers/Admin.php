@@ -8,6 +8,7 @@ class Admin extends CI_Controller {
         $this->load->model('archivos_model');
         $this->load->model('establecimientos_model');
         $this->load->model('noticias_model');
+        $this->load->model('exposiciones_model');
     }
 
     public function index()
@@ -75,7 +76,6 @@ class Admin extends CI_Controller {
         else
         {
             $status = $this->input->post('status');
-
 			$status = (!isset($status)? 0 : 1);
 
 	    	$array = array(
@@ -129,9 +129,10 @@ class Admin extends CI_Controller {
     {
 
         $upload_path = [
-            "museo"     => "./assets/images/museos/",
-            "instituto" => "./assets/images/institutos/",
-            "noticia"   => "./assets/images/noticias/"
+            "museo"      => "./assets/images/museos/",
+            "instituto"  => "./assets/images/institutos/",
+            "noticia"    => "./assets/images/noticias/",
+            "exposicion" => "./assets/images/exposiciones/"
         ];
 
         $config['upload_path']   = $upload_path[$u_path];
@@ -215,7 +216,6 @@ class Admin extends CI_Controller {
         else
         {
             $status = $this->input->post('status');
-
             $status = (!isset($status)? 0 : 1);
 
             $array = array(
@@ -258,4 +258,108 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/noticias/'), 'refresh');
     }
 
+    /*List of expositions and edit individual exposition*/
+
+    public function exposiciones($exposition_id = null)
+    {
+        if ($exposition_id == null) {
+            $data['exposition'] = $this->exposiciones_model->get(null, null, null);
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/exposiciones/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit exposition*/
+
+            $data['exposition'] = $this->exposiciones_model->get(null, $exposition_id, null);
+            $data['exposition']['description'] = strip_tags($data['exposition']['description'],'<a><em><strong><p><br>');
+
+            $data['establishments'] = $this->establecimientos_model->get(null, null);
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/exposiciones/edit_exposicion', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function nueva_exposicion () 
+    {
+        $data['establishments'] = $this->establecimientos_model->get(null, null);
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/exposiciones/new_exposicion', $data);
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function set_exposicion()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_image('exposicion');
+
+        /*Update exposition*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $actual = $this->input->post('actual');
+            $actual = (!isset($actual)? 0 : 1);
+
+            $array = array(
+                'title'            => $this->input->post('titulo'),
+                'description'      => $this->input->post('descripcion'),
+                'exhibition_place' => $this->input->post('lugar_exhibicion'),
+                'schedule'         => $this->input->post('horario'),
+                'establishment_id' => $this->input->post('id_establecimiento'),
+                'modified_date'    => time(),
+                'actual'           => $actual,
+                'status'           => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $exposition_id = $this->input->post('id');
+
+            if ($exposition_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->exposiciones_model->set($array);
+                redirect(site_url('admin/exposiciones/'), 'refresh');
+
+            } else {
+                $this->exposiciones_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/exposiciones/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /* Handle delete permisology*/
+    public function eliminar_exposicion ($exposition_id) 
+    {
+        $this->exposiciones_model->delete($exposition_id);
+
+        redirect(site_url('admin/exposiciones/'), 'refresh');
+    }
 }

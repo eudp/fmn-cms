@@ -6,25 +6,30 @@ class Exposiciones_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($active, $exposition_id = FALSE)
+    public function get($actual = null, $exposition_id = null, $status = 1)
     {
-        if ($exposition_id === FALSE)
+        if ($exposition_id === null)
         {
-            $this->db->select('e.title, a.path, e.description, e.exposition_id');
+            $this->db->select('e.title, a.path, e.description, e.exposition_id, e.exposition_id, e.creation_date, e.modified_date, e.status');
             $this->db->from('exposiciones as e');
-            $this->db->join('archivos as a', 'a.file_id = e.image_id');
-            $this->db->where(array('status' => 1, 'active' => $active ));
+            $this->db->join('archivos as a', 'a.file_id = e.image_id', 'left');
+            if ($actual != null) {
+                $this->db->where('actual', $actual);
+            }
+            if ($status != null) {
+                $this->db->where('status', $status);
+            }
             $this->db->order_by('e.creation_date', 'DESC');
             $query = $this->db->get();
             return $query->result_array();
         }
 
-        $this->db->select('e.title, e.description, t.title as title_m, t.address, e.exhibition_place, e.schedule');
+        $this->db->select('e.title, e.description, t.title as title_m, t.address, t.establishment_id, e.exhibition_place, e.schedule, e.status, e.actual, a.path, a.file_name, e.exposition_id');
         $this->db->from('exposiciones as e');
         $this->db->join('establecimientos as t', 'e.establishment_id = t.establishment_id');
-        $this->db->where(array('e.status' => 1,'exposition_id' => $exposition_id ));
+        $this->db->join('archivos as a', 'a.file_id = e.image_id', 'left');
+        $this->db->where('exposition_id', $exposition_id);
         $query = $this->db->get();
-
         return $query->row_array();
     }
     public function get_carousel($exposition_id)
@@ -53,5 +58,24 @@ class Exposiciones_model extends CI_Model {
 
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+    public function set ($array, $exposition_id = null)
+    {
+        if ($exposition_id != null) {
+            $this->db->set($array);
+            $this->db->where('exposition_id', $exposition_id);
+            $this->db->update('exposiciones');
+        }
+        else {
+            $this->db->insert('exposiciones', $array);
+
+            return $this->db->insert_id();
+        }  
+    }
+
+    public function delete ($exposition_id)
+    {
+        $this->db->delete('exposiciones', array('exposition_id' => $exposition_id));   
     }
 }
