@@ -29,13 +29,7 @@
 					<a class="nav-link" href="<?= site_url('admin/');?>">Admin <span class="sr-only">(actual)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?= site_url('admin/fmn');?>">FMN</a>
-				</li>
-				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('admin/establecimientos');?>">Establecimientos</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<?= site_url('admin/centros');?>">Centros</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('admin/colecciones');?>">Colecciones</a>
@@ -45,9 +39,6 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('admin/noticias');?>">Noticias</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<?= site_url('admin/educacion');?>">Educación</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('admin/multimedia');?>">Multimedia</a>

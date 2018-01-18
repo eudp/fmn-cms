@@ -22,8 +22,9 @@
         $(document).ready(function () {
 
             /* If it's edit page*/
-
             if($("#descripcion").length != 0) {
+
+                /* Retrieve value from hidden input and set in tinymce*/
                 $('#descripcion').html($('#descripcion-oculta').val());
                 tinymce.init({
                     selector: '#descripcion',
@@ -33,8 +34,6 @@
                         view: {title: 'Edit', items: 'cut, copy, paste'}
                     }
                 });
-
-                
             }
 
             $( "#pick-image-button" ).on( "click", function() {
