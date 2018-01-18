@@ -5,68 +5,68 @@
 		</div>
 		<div class="col-12">
 			<?php echo form_open_multipart('admin/set_establecimiento/museo'); ?>
-			  <div class="form-group">
-			    <label for="acronimo">Acrónimo</label>
-			    <input type="text" class="form-control"  placeholder="" name="acronimo" >
-			  </div>
-			  <div class="form-group">
-			    <label for="titulo">Tïtulo</label>
-			    <input type="text" class="form-control"  placeholder="" name="titulo" >
-			  </div>
-			  <div class="form-group">
-			    <label for="descripcion">Descripción</label>
-			    <textarea rows="3" class="form-control" id="descripcion" placeholder="" name="descripcion" "></textarea>
-			    <input type="hidden" id="descripcion-oculta" name="descripcion-oculta">
-			  </div>
-			 <div class="form-group">
-			    <label for="direccion">Dirección</label>
-			    <input type="text" class="form-control"  placeholder="" name="direccion" >
-			  </div>
-			  <div class="form-group">
-			    <label for="telefono">Teléfono</label>
-			    <input type="tel" class="form-control"  placeholder="" name="telefono" >
-			  </div>
-			  <div class="form-group">
-			    <label for="correo">Correo</label>
-			    <input type="email" class="form-control"  placeholder="" name="correo" >
-			  </div>
-			  <div class="form-group">
-			    <label for="facebook">Facebook</label>
-			    <input type="text" class="form-control"  placeholder="" name="facebook" >
-			  </div>
-			  <div class="form-group">
-			    <label for="instagram">Instagram</label>
-			    <input type="text" class="form-control"  placeholder="" name="instagram" >
-			  </div>
-			  <div class="form-group">
-			    <label for="twitter">Twitter</label>
-			    <input type="text" class="form-control"  placeholder="" name="twitter" >
-			  </div>
-			  <div class="form-group">
-			    <label for="url">Site url</label>
-			    <input type="text" class="form-control"  placeholder="" name="url">
-			  </div>
-			  <div class="form-group">
-			    <label for="url">Horario</label>
-			    <input type="text" class="form-control"  placeholder="" name="horario">
-			  </div>
-			<div class="form-group">
-				<input  type="file" class="form-control-file" name="userfile" size="20" />
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" name='status' type="checkbox" value="1">
-				<label class="form-check-label" for="status">
-					Activo
-				</label>
-			</div>
+				<div class="form-group">
+					<label for="acronimo">Acrónimo</label>
+					<input type="text" class="form-control"  placeholder="" name="acronimo" >
+				</div>
+				<div class="form-group">
+					<label for="titulo">Tïtulo</label>
+					<input type="text" class="form-control"  placeholder="" name="titulo" >
+				</div>
+				<div class="form-group">
+					<label for="descripcion">Descripción</label>
+					<textarea rows="3" class="form-control" id="descripcion" placeholder="" name="descripcion" "></textarea>
+					<input type="hidden" id="descripcion-oculta" name="descripcion-oculta">
+					</div>
+				<div class="form-group">
+					<label for="direccion">Dirección</label>
+					<input type="text" class="form-control"  placeholder="" name="direccion" >
+				</div>
+				<div class="form-group">
+					<label for="telefono">Teléfono</label>
+					<input type="tel" class="form-control"  placeholder="" name="telefono" >
+				</div>
+				<div class="form-group">
+					<label for="correo">Correo</label>
+					<input type="email" class="form-control"  placeholder="" name="correo" >
+				</div>
+				<div class="form-group">
+					<label for="facebook">Facebook</label>
+					<input type="text" class="form-control"  placeholder="" name="facebook" >
+				</div>
+				<div class="form-group">
+					<label for="instagram">Instagram</label>
+					<input type="text" class="form-control"  placeholder="" name="instagram" >
+				</div>
+				<div class="form-group">
+					<label for="twitter">Twitter</label>
+					<input type="text" class="form-control"  placeholder="" name="twitter" >
+				</div>
+				<div class="form-group">
+					<label for="url">Site url</label>
+					<input type="text" class="form-control"  placeholder="" name="url">
+				</div>
+				<div class="form-group">
+					<label for="url">Horario</label>
+					<input type="text" class="form-control"  placeholder="" name="horario">
+				</div>
+				<div class="form-group">
+					<input  type="file" class="form-control-file" name="userfile" size="20" />
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" name='status' type="checkbox" value="1">
+					<label class="form-check-label" for="status">
+						Activo
+					</label>
+				</div>
 
-			<!-- Button trigger modal -->
-<!-- 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pick-image" id="pick-image-button">
+				<!-- Button trigger modal -->
+				<!-- 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pick-image" id="pick-image-button">
 				Seleccionar imagen
-			</button> -->
+				</button> -->
 
-			  <input type="hidden" name="id" >
-			  <button type="submit" class="btn btn-primary">Actualizar</button>
+				<input type="hidden" name="id" >
+				<button type="submit" class="btn btn-primary">Actualizar</button>
 			</form>
 		</div>
 	</div>

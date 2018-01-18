@@ -5,47 +5,47 @@
 		</div>
 		<div class="col-12">
 			<?php echo form_open_multipart('admin/set_establecimiento/museo'); ?>
-			  <div class="form-group">
-			    <label for="acronimo">Acrónimo</label>
-			    <input type="text" class="form-control"  placeholder="" name="acronimo" value="<?= $establishment['acronym'];?>">
-			  </div>
-			  <div class="form-group">
-			    <label for="titulo">Tïtulo</label>
-			    <input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $establishment['title'];?>">
-			  </div>
-			  <div class="form-group">
-			    <label for="descripcion">Descripción</label>
-			    <textarea rows="3" class="form-control" id="descripcion" placeholder="" name="descripcion" "></textarea>
-			    <input type="hidden" id="descripcion-oculta" name="descripcion-oculta" value='<?= $establishment["description"];?>'>
-			  </div>
-			 <div class="form-group">
-			    <label for="direccion">Dirección</label>
-			    <input type="text" class="form-control"  placeholder="" name="direccion" value="<?= $establishment['address'];?>">
-			  </div>
-			  <div class="form-group">
-			    <label for="telefono">Teléfono</label>
-			    <input type="tel" class="form-control"  placeholder="" name="telefono" value="<?= $establishment['phone'];?>">
-			  </div>
-			  <div class="form-group">
-			    <label for="correo">Correo</label>
-			    <input type="email" class="form-control"  placeholder="" name="correo" value="<?= $establishment['email'];?>">
-			  </div>
-			  <div class="form-group">
-			    <label for="facebook">Facebook</label>
-			    <input type="text" class="form-control"  placeholder="" name="facebook" value="<?= $establishment['facebook_url'];?>">
-			  </div>
-			  <div class="form-group">
-			    <label for="instagram">Instagram</label>
-			    <input type="text" class="form-control"  placeholder="" name="instagram" value="<?= $establishment['instagram_url'];?>">
-			  </div>
-			  <div class="form-group">
-			    <label for="twitter">Twitter</label>
-			    <input type="text" class="form-control"  placeholder="" name="twitter" value="<?= $establishment['twitter_url'];?>">
-			  </div>
-			  <div class="form-group">
-			    <label for="url">Site url</label>
-			    <input type="text" class="form-control"  placeholder="" name="url" value="<?= $establishment['site_url'];?>">
-			  </div>
+			<div class="form-group">
+				<label for="acronimo">Acrónimo</label>
+				<input type="text" class="form-control"  placeholder="" name="acronimo" value="<?= $establishment['acronym'];?>">
+			</div>
+			<div class="form-group">
+				<label for="titulo">Tïtulo</label>
+				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $establishment['title'];?>">
+			</div>
+			<div class="form-group">
+				<label for="descripcion">Descripción</label>
+				<textarea rows="3" class="form-control" id="descripcion" placeholder="" name="descripcion" "></textarea>
+				<input type="hidden" id="descripcion-oculta" name="descripcion-oculta" value='<?= $establishment["description"];?>'>
+			</div>
+			<div class="form-group">
+				<label for="direccion">Dirección</label>
+				<input type="text" class="form-control"  placeholder="" name="direccion" value="<?= $establishment['address'];?>">
+			</div>
+			<div class="form-group">
+				<label for="telefono">Teléfono</label>
+				<input type="tel" class="form-control"  placeholder="" name="telefono" value="<?= $establishment['phone'];?>">
+			</div>
+			<div class="form-group">
+				<label for="correo">Correo</label>
+				<input type="email" class="form-control"  placeholder="" name="correo" value="<?= $establishment['email'];?>">
+			</div>
+			<div class="form-group">
+				<label for="facebook">Facebook</label>
+				<input type="text" class="form-control"  placeholder="" name="facebook" value="<?= $establishment['facebook_url'];?>">
+			</div>
+			<div class="form-group">
+				<label for="instagram">Instagram</label>
+				<input type="text" class="form-control"  placeholder="" name="instagram" value="<?= $establishment['instagram_url'];?>">
+			</div>
+			<div class="form-group">
+				<label for="twitter">Twitter</label>
+				<input type="text" class="form-control"  placeholder="" name="twitter" value="<?= $establishment['twitter_url'];?>">
+			</div>
+			<div class="form-group">
+				<label for="url">Site url</label>
+				<input type="text" class="form-control"  placeholder="" name="url" value="<?= $establishment['site_url'];?>">
+			</div>
 			<div class="form-group">
 				<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $establishment['path']); ?>"><?= $establishment['file_name'];?></a></p>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
@@ -59,12 +59,12 @@
 			</div>
 
 			<!-- Button trigger modal -->
-<!-- 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pick-image" id="pick-image-button">
-				Seleccionar imagen
+			<!-- 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pick-image" id="pick-image-button">
+			Seleccionar imagen
 			</button> -->
 
-			  <input type="hidden" name="id" value="<?= $establishment['establishment_id'];?>">
-			  <button type="submit" class="btn btn-primary">Actualizar</button>
+			<input type="hidden" name="id" value="<?= $establishment['establishment_id'];?>">
+			<button type="submit" class="btn btn-primary">Actualizar</button>
 			</form>
 		</div>
 	</div>
