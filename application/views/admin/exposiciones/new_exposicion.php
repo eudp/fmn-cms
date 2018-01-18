@@ -13,7 +13,7 @@
 					<label for="descripcion">Descripción</label>
 					<textarea rows="3" class="form-control" id="descripcion" placeholder="" name="descripcion" "></textarea>
 					<input type="hidden" id="descripcion-oculta" name="descripcion-oculta">
-					</div>
+				</div>
 				<div class="form-group">
 					<label for="lugar_exhibicion">Lugar de exhibicion</label>
 					<input type="text" class="form-control"  placeholder="" name="lugar_exhibicion" >

@@ -35,6 +35,9 @@
 					<a class="nav-link" href="<?= site_url('admin/colecciones');?>">Colecciones</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('admin/obras');?>">Obras</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('admin/exposiciones');?>">Exposiciones</a>
 				</li>
 				<li class="nav-item">
