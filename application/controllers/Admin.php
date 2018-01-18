@@ -7,6 +7,7 @@ class Admin extends CI_Controller {
         $this->load->helper('text');
         $this->load->model('archivos_model');
         $this->load->model('establecimientos_model');
+        $this->load->model('noticias_model');
     }
 
     public function index()
@@ -91,9 +92,13 @@ class Admin extends CI_Controller {
 			    'schedule' 		=> $this->input->post('horario'),
 			    'modified_date' => time(),
                 'type'          => $u_path,
-			    'status'        => $status,
-			    'image_id'		=> $image_id
+			    'status'        => $status
 			);
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
 
 			$establishment_id = $this->input->post('id');
 
@@ -112,7 +117,7 @@ class Admin extends CI_Controller {
 			}
         }
     }
-
+    /* Handle delete permisology*/
     public function eliminar_museo ($establishment_id) 
     {
 		$this->establecimientos_model->delete($establishment_id);
@@ -125,7 +130,8 @@ class Admin extends CI_Controller {
 
         $upload_path = [
             "museo"     => "./assets/images/museos/",
-            "instituto" => "./assets/images/institutos/"
+            "instituto" => "./assets/images/institutos/",
+            "noticia"   => "./assets/images/noticias/"
         ];
 
         $config['upload_path']   = $upload_path[$u_path];
@@ -155,4 +161,101 @@ class Admin extends CI_Controller {
             return $this->archivos_model->set($array);
         }
     }
+    /*List of news and edit individual news*/
+
+    public function noticias($news_id = null)
+    {
+        if ($news_id == null) {
+            $data['news'] = $this->noticias_model->get(null, null);
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/noticias/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit news*/
+
+            $data['news'] = $this->noticias_model->get($news_id, null);
+            $data['news']['description'] = strip_tags($data['news']['description'],'<a><em><strong><p><br>');
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/noticias/edit_noticia', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function nueva_noticia () 
+    {
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/noticias/new_noticia');
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function set_noticia()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_image('noticia');
+
+        /*Update news*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'            => $this->input->post('titulo'),
+                'description'      => $this->input->post('descripcion'),
+                'excerpt'          => $this->input->post('excerpt'),
+                'publication_date' => strtotime($this->input->post('fecha-publicacion')),
+                'modified_date'    => time(),
+                'status'           => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $news_id = $this->input->post('id');
+
+            if ($news_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->noticias_model->set($array);
+                redirect(site_url('admin/noticias/'), 'refresh');
+
+            } else {
+                $this->noticias_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/noticias/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /* Handle delete permisology*/
+    public function eliminar_noticia ($news_id) 
+    {
+        $this->noticias_model->delete($news_id);
+
+        redirect(site_url('admin/noticias/'), 'refresh');
+    }
+
 }
