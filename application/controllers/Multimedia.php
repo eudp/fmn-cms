@@ -22,6 +22,9 @@ class Multimedia extends CI_Controller {
     public function view($multimedia_id)
     {
         $data['multimedia_item'] = $this->multimedia_model->get('',$multimedia_id);
+        if (empty($data['multimedia_item'])){
+            show_404();
+        }
         $data['multimedia_item']['description'] = strip_tags($data['multimedia_item']['description'],'<a><em><strong><p><br>');
         $data['multimedia_item']['path'] = str_replace('public:/', '', $data['multimedia_item']['path']);
 

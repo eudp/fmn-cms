@@ -21,6 +21,9 @@ class Agenda extends CI_Controller {
     public function view($diary_id)
     {
         $data['diary_item'] = $this->agenda_model->get($diary_id);
+        if (empty($data['diary_item'])){
+            show_404();
+        }
         $data['diary_item_fechas'] = $this->agenda_model->get_fechas_agenda($diary_id);
         $data['diary_item']['description'] = strip_tags($data['diary_item']['description'],'<a><em><strong><p><br>');
 

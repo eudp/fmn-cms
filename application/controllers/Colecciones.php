@@ -21,6 +21,9 @@ class Colecciones extends CI_Controller {
     public function view($collection_id)
     {
         $data['collection_item'] = $this->colecciones_model->get($collection_id);
+        if (empty($data['collection_item'])){
+            show_404();
+        }
         $data['collection_item']['description'] = strip_tags($data['collection_item']['description'],'<a><em><strong><p><br>');
         $data['collection_carousel'] = $this->colecciones_model->get_carousel($collection_id);
         $data['collection_works'] = $this->colecciones_model->get_works($collection_id);
