@@ -22,7 +22,7 @@
 							<td><?= $establishment_item['type']; ?></td>
 							<td><?= date('j \d\e F, Y', $establishment_item['creation_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$establishment_item['modified_date']); ?></td>
-							<td><?= $establishment_item['status']; ?></td>
+							<td><?= ($establishment_item['status'] == 1 ? 'activo' : 'inactivo'); ?></td>
 							<!-- Handle delete permisology -->
 							<td><a href="<?= site_url('admin/eliminar_museo/'. $establishment_item['establishment_id']);?>"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
 						</tr>

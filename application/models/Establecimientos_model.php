@@ -59,8 +59,7 @@ class Establecimientos_model extends CI_Model {
             $this->db->insert('establecimientos', $array);
 
             return $this->db->insert_id();
-        }
-        
+        }  
     }
 
     public function delete ($establishment_id)

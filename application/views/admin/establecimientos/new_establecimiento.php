@@ -10,7 +10,7 @@
 					<input type="text" class="form-control"  placeholder="" name="acronimo" >
 				</div>
 				<div class="form-group">
-					<label for="titulo">Tïtulo</label>
+					<label for="titulo">Título</label>
 					<input type="text" class="form-control"  placeholder="" name="titulo" >
 				</div>
 				<div class="form-group">
