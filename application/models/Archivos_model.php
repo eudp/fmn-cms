@@ -8,7 +8,7 @@ class Archivos_model extends CI_Model {
 
     public function set ($array)
     {
-        $r = $this->db->insert('archivos', $array);
+        $this->db->insert('archivos', $array);
 
         return $this->db->insert_id();
     }
