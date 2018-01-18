@@ -28,7 +28,7 @@
 			</div>
 			<div class="form-check">
 				<?php $status = ($news['status'] == 1 ? 'checked' : '');?>
-				<input class="form-check-input" name='status' type="checkbox" value="1" <?= $status;?>>
+				<input class="form-check-input" name="status" type="checkbox" value="1" <?= $status;?>>
 				<label class="form-check-label" for="status">
 					Activo
 				</label>

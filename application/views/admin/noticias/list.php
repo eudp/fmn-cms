@@ -1,5 +1,6 @@
 <div class="container">
 	<div class="row">
+		<div class="col-12"></div>
 		<div class="col-12">
 			<a href="<?= site_url('admin/nueva_noticia');?>"><button type="button" class="btn btn-success">Agregar noticia</button></a>
 		</div>
