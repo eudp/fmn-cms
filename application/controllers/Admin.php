@@ -9,6 +9,7 @@ class Admin extends CI_Controller {
         $this->load->model('establecimientos_model');
         $this->load->model('noticias_model');
         $this->load->model('exposiciones_model');
+        $this->load->model('colecciones_model');
     }
 
     public function index()
@@ -132,7 +133,8 @@ class Admin extends CI_Controller {
             "museo"      => "./assets/images/museos/",
             "instituto"  => "./assets/images/institutos/",
             "noticia"    => "./assets/images/noticias/",
-            "exposicion" => "./assets/images/exposiciones/"
+            "exposicion" => "./assets/images/exposiciones/",
+            "coleccion"  => "./assets/images/colecciones/"
         ];
 
         $config['upload_path']   = $upload_path[$u_path];
@@ -361,5 +363,100 @@ class Admin extends CI_Controller {
         $this->exposiciones_model->delete($exposition_id);
 
         redirect(site_url('admin/exposiciones/'), 'refresh');
+    }
+
+    /*List of collections and edit individual collection*/
+
+    public function colecciones($collection_id = null)
+    {
+        if ($collection_id == null) {
+            $data['collection'] = $this->colecciones_model->get(null, null);
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/colecciones/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit collection*/
+
+            $data['collection'] = $this->colecciones_model->get($collection_id, null);
+            $data['collection']['description'] = strip_tags($data['collection']['description'],'<a><em><strong><p><br>');
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/colecciones/edit_coleccion', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function nueva_coleccion () 
+    {
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/colecciones/new_coleccion');
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function set_coleccion()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_image('coleccion');
+
+        /*Update collection*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'            => $this->input->post('titulo'),
+                'description'      => $this->input->post('descripcion'),
+                'modified_date'    => time(),
+                'status'           => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $collection_id = $this->input->post('id');
+
+            if ($collection_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->colecciones_model->set($array);
+                redirect(site_url('admin/colecciones/'), 'refresh');
+
+            } else {
+                $this->colecciones_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/colecciones/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /* Handle delete permisology*/
+    public function eliminar_coleccion ($collection_id) 
+    {
+        $this->colecciones_model->delete($collection_id);
+
+        redirect(site_url('admin/colecciones/'), 'refresh');
     }
 }
