@@ -6,19 +6,19 @@ class Establecimientos_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($type, $establishment_id = FALSE, $status=1)
+    public function get($type = null, $establishment_id = null, $status=1)
     {
-        if ($establishment_id === false)
+        if ($establishment_id === null)
         {
             $this->db->select('e.acronym, e.title, a.path, e.establishment_id, e.creation_date, e.modified_date, e.status');
             $this->db->from('establecimientos as e');
             $this->db->join('archivos as a', 'a.file_id = e.image_id', 'left');
 
-            if ($status != 'all') {
-                $this->db->where('status' , $status );
-            }
-            if ($type !== 'all'){
+            if ($type !== null){
                 $this->db->where('type' , $type );
+            }
+            if ($status != null) {
+                $this->db->where('status' , $status );
             }
 
             $query = $this->db->get();
@@ -28,11 +28,9 @@ class Establecimientos_model extends CI_Model {
         $this->db->select('e.acronym, e.title, e.description, e.address, e.phone, e.email, e.facebook_url, e.twitter_url, e.site_url, e.schedule, e.services, e.instagram_url, e.establishment_id, e.status, a.file_name, a.path');
         $this->db->from('establecimientos as e');
         $this->db->join('archivos as a', 'a.file_id = e.image_id', 'left');
-        if ($status != 'all') {
+        
+        if ($status != null) {
             $this->db->where('status' , $status );
-        }
-        if ($type !== 'all'){
-            $this->db->where('type' , $type );
         }
 
         $this->db->where('establishment_id', $establishment_id );

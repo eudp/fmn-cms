@@ -19,10 +19,12 @@ class Admin extends CI_Controller {
         $this->load->view('includes/footer_admin');
     }
 
+    /*List of establishments and edit individual establishments*/
+
     public function establecimientos($establishment_id = null)
     {
     	if ($establishment_id == null) {
-    		$data['establishments'] = $this->establecimientos_model->get('all', false, 'all');
+    		$data['establishments'] = $this->establecimientos_model->get(null, null, null);
 	    	$h_data['title'] = 'Admin | Fundación Museos Nacionales';
 	        $h_data['active'] = 'admin';
 
@@ -31,9 +33,9 @@ class Admin extends CI_Controller {
 	        $this->load->view('includes/footer_admin');
     	} else {
 
-    		/* Edit museum*/
+    		/* Edit establishment*/
 
-    		$data['establishment'] = $this->establecimientos_model->get('all', $establishment_id, 'all');
+    		$data['establishment'] = $this->establecimientos_model->get(null, $establishment_id);
     		$data['establishment']['description'] = strip_tags($data['establishment']['description'],'<a><em><strong><p><br>');
 
 	    	$h_data['title'] = 'Admin | Fundación Museos Nacionales';
@@ -45,7 +47,8 @@ class Admin extends CI_Controller {
     	}
     }
 
-    public function nuevo_museo () {
+    public function nuevo_museo () 
+    {
     	$h_data['title'] = 'Admin | Fundación Museos Nacionales';
         $h_data['active'] = 'admin';
 
@@ -54,42 +57,13 @@ class Admin extends CI_Controller {
         $this->load->view('includes/footer_admin');
     }
 
-    public function set_establecimiento($u_path){
+    public function set_establecimiento($u_path)
+    {
 
     	/* Upload image*/
+        $image_id = $this->upload_image($u_path);
 
-        $upload_path = [
-			"museo" => "./assets/images/museos/",
-		];
-
-        $config['upload_path']   = $upload_path[$u_path];
-        $config['allowed_types'] = 'gif|jpg|png';
-
-        $this->load->library('upload', $config);
-        $_FILES['userfile']['name'] = time() . '-' .  convert_accented_characters($_FILES['userfile']['name']) ;
-
-        if ( ! $this->upload->do_upload('userfile'))
-        {
-            $image_id = null;            
-            /* Handling this error*/
-        }
-        else
-        {
-        	$data = array('upload_data' => $this->upload->data());
-            $array = array(
-            	'user_id'		=> 66,
-			    'creation_date' => time(),
-			    'modified_date' => time(),
-			    'filemime' 		=> $data['upload_data']['file_type'],
-			    'path' 			=> str_replace('./assets/images', "", $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']),
-			    'file_size' 	=> $_FILES['userfile']['size'],
-			    'file_name' 	=> $data['upload_data']['file_name']
-			);
-
-			$image_id = $this->archivos_model->set($array);
-        }
-
-    	/*Update museo*/
+    	/*Update establishment*/
 
     	$this->load->library('form_validation');
     	$this->form_validation->set_rules('titulo', 'titulo', 'required');
@@ -136,15 +110,48 @@ class Admin extends CI_Controller {
 
 	    		redirect(site_url('admin/establecimientos/'. $this->input->post('id')), 'refresh');
 			}
-
-
         }
     }
 
-    public function eliminar_museo ($establishment_id) {
-
+    public function eliminar_museo ($establishment_id) 
+    {
 		$this->establecimientos_model->delete($establishment_id);
 
 		redirect(site_url('admin/establecimientos/'), 'refresh');
+    }
+
+    public function upload_image ($u_path)
+    {
+
+        $upload_path = [
+            "museo" => "./assets/images/museos/",
+        ];
+
+        $config['upload_path']   = $upload_path[$u_path];
+        $config['allowed_types'] = 'gif|jpg|png';
+
+        $this->load->library('upload', $config);
+        $_FILES['userfile']['name'] = time() . '-' .  convert_accented_characters($_FILES['userfile']['name']) ;
+
+        if ( ! $this->upload->do_upload('userfile'))
+        {
+            return null;            
+            /* Handling this error*/
+        }
+        else
+        {
+            $data = array('upload_data' => $this->upload->data());
+            $array = array(
+                'user_id'       => 66,
+                'creation_date' => time(),
+                'modified_date' => time(),
+                'filemime'      => $data['upload_data']['file_type'],
+                'path'          => str_replace('./assets/images', "", $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']),
+                'file_size'     => $_FILES['userfile']['size'],
+                'file_name'     => $data['upload_data']['file_name']
+            );
+
+            return $this->archivos_model->set($array);
+        }
     }
 }
