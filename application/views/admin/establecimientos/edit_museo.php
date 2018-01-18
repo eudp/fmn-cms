@@ -47,7 +47,7 @@
 			    <input type="text" class="form-control"  placeholder="" name="url" value="<?= $establishment['site_url'];?>">
 			  </div>
 			<div class="form-group">
-				<p>Archivo actual : <a href="<?= site_url('assets/images') . $establishment['path']; ?>"><?= $establishment['file_name'];?></a></p>
+				<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $establishment['path']); ?>"><?= $establishment['file_name'];?></a></p>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
 			</div>
 			<div class="form-check">
