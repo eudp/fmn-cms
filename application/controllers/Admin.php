@@ -10,6 +10,7 @@ class Admin extends CI_Controller {
         $this->load->model('noticias_model');
         $this->load->model('exposiciones_model');
         $this->load->model('colecciones_model');
+        $this->load->model('obras_model');
     }
 
     public function index()
@@ -134,7 +135,8 @@ class Admin extends CI_Controller {
             "instituto"  => "./assets/images/institutos/",
             "noticia"    => "./assets/images/noticias/",
             "exposicion" => "./assets/images/exposiciones/",
-            "coleccion"  => "./assets/images/colecciones/"
+            "coleccion"  => "./assets/images/colecciones/",
+            "obra"       => "./assets/images/obras/"
         ];
 
         $config['upload_path']   = $upload_path[$u_path];
@@ -458,5 +460,104 @@ class Admin extends CI_Controller {
         $this->colecciones_model->delete($collection_id);
 
         redirect(site_url('admin/colecciones/'), 'refresh');
+    }
+
+    /*List of obras and edit individual obra*/
+
+    public function obras($obra_id = null)
+    {
+        if ($obra_id == null) {
+            $data['obra'] = $this->obras_model->get(null, null);
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/obras/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit obra*/
+
+            $data['obra'] = $this->obras_model->get($obra_id, null);
+            $data['obra']['description'] = strip_tags($data['obra']['description'],'<a><em><strong><p><br>');
+
+            $data['collections'] = $this->colecciones_model->get(null, null);
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/obras/edit_obra', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function nueva_obra () 
+    {
+        $data['collections'] = $this->colecciones_model->get(null, null);
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/obras/new_obra', $data);
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function set_obra()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_image('obra');
+
+        /*Update obra*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('id_coleccion', 'id_coleccion', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'          => $this->input->post('titulo'),
+                'description'    => $this->input->post('descripcion'),
+                'collection_id'  => $this->input->post('id_coleccion'),
+                'modified_date'  => time(),
+                'status'         => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $obra_id = $this->input->post('id');
+
+            if ($obra_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->obras_model->set($array);
+                redirect(site_url('admin/obras/'), 'refresh');
+
+            } else {
+                $this->obras_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/obras/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /* Handle delete permisology*/
+    public function eliminar_obra ($obra_id) 
+    {
+        $this->obras_model->delete($obra_id);
+
+        redirect(site_url('admin/obras/'), 'refresh');
     }
 }
