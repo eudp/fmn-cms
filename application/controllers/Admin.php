@@ -11,6 +11,7 @@ class Admin extends CI_Controller {
         $this->load->model('exposiciones_model');
         $this->load->model('colecciones_model');
         $this->load->model('obras_model');
+        $this->load->model('contacto_model');
     }
 
     public function index()
@@ -559,5 +560,29 @@ class Admin extends CI_Controller {
         $this->obras_model->delete($obra_id);
 
         redirect(site_url('admin/obras/'), 'refresh');
+    }
+
+    /*List of contact and individual contact*/
+
+    public function contactenos($id = null)
+    {
+        if ($id == null){
+
+            $data['messages'] = $this->contacto_model->get();
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/contactenos/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+            $data['messages'] = $this->contacto_model->get($id);
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/contactenos/view', $data);
+            $this->load->view('includes/footer_admin');
+        } 
     }
 }
