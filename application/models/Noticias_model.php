@@ -6,7 +6,7 @@ class Noticias_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($news_id = null, $status=1)
+    public function get($news_id = null, $status = 1)
     {
         if ($news_id === null)
         {
@@ -14,7 +14,7 @@ class Noticias_model extends CI_Model {
             $this->db->from('noticias as n');
             $this->db->join('archivos as a', 'a.file_id = n.image_id', 'left');
             if ($status != null) {
-                $this->db->where('status' , $status );
+                $this->db->where('status' , $status);
             }
             $this->db->order_by('publication_date', 'DESC');
             $query = $this->db->get();
@@ -24,7 +24,7 @@ class Noticias_model extends CI_Model {
         $this->db->select('n.title, a.path, n.description, n.publication_date, n.excerpt, a.file_name, n.status, n.news_id');
         $this->db->from('noticias as n');
         $this->db->join('archivos as a', 'a.file_id = n.image_id', 'left');
-        $this->db->where(array('news_id' => $news_id ));
+        $this->db->where(array('news_id' => $news_id));
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -47,7 +47,7 @@ class Noticias_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function set ($array, $news_id = null)
+    public function set($array, $news_id = null)
     {
         if ($news_id != null) {
             $this->db->set($array);
@@ -61,7 +61,7 @@ class Noticias_model extends CI_Model {
         }  
     }
 
-    public function delete ($news_id)
+    public function delete($news_id)
     {
         $this->db->delete('noticias', array('news_id' => $news_id));   
     }
