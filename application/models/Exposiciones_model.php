@@ -60,7 +60,7 @@ class Exposiciones_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function set ($array, $exposition_id = null)
+    public function set($array, $exposition_id = null)
     {
         if ($exposition_id != null) {
             $this->db->set($array);
@@ -74,7 +74,7 @@ class Exposiciones_model extends CI_Model {
         }  
     }
 
-    public function delete ($exposition_id)
+    public function delete($exposition_id)
     {
         $this->db->delete('exposiciones', array('exposition_id' => $exposition_id));   
     }

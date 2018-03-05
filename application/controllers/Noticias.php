@@ -29,10 +29,6 @@ class Noticias extends CI_Controller {
         $data['news_item']['description'] = strip_tags($data['news_item']['description'],'<a><em><strong><p><br>');
         $data['news_item']['path'] = str_replace('public:/', '', $data['news_item']['path']);
 
-        if (empty($data['news_item'])) {
-            show_404();
-        }
-
         $h_data['title'] = 'Noticias | Fundación Museos Nacionales';
         $h_data['active'] = 'noticias';
 

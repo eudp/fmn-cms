@@ -46,7 +46,7 @@ class Colecciones_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function set ($array, $collection_id = null)
+    public function set($array, $collection_id = null)
     {
         if ($collection_id != null) {
             $this->db->set($array);
@@ -60,7 +60,7 @@ class Colecciones_model extends CI_Model {
         }  
     }
 
-    public function delete ($collection_id)
+    public function delete($collection_id)
     {
         $this->db->delete('colecciones', array('collection_id' => $collection_id));   
     }

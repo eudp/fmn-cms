@@ -28,7 +28,7 @@ class obras_model extends CI_Model {
         $query = $this->db->get();
         return $query->row_array();
     }
-    public function set ($array, $obra_id = null)
+    public function set($array, $obra_id = null)
     {
         if ($obra_id != null) {
             $this->db->set($array);
@@ -42,7 +42,7 @@ class obras_model extends CI_Model {
         }  
     }
 
-    public function delete ($obra_id)
+    public function delete($obra_id)
     {
         $this->db->delete('obras', array('obra_id' => $obra_id));   
     }

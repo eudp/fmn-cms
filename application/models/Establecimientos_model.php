@@ -6,7 +6,7 @@ class Establecimientos_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($type = null, $establishment_id = null, $status=1)
+    public function get($type = null, $establishment_id = null, $status = 1)
     {
         if ($establishment_id === null)
         {
@@ -48,7 +48,7 @@ class Establecimientos_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function set ($array, $establishment_id = null)
+    public function set($array, $establishment_id = null)
     {
         if ($establishment_id != null) {
             $this->db->set($array);
@@ -62,7 +62,7 @@ class Establecimientos_model extends CI_Model {
         }  
     }
 
-    public function delete ($establishment_id)
+    public function delete($establishment_id)
     {
         $this->db->delete('establecimientos', array('establishment_id' => $establishment_id));   
     }

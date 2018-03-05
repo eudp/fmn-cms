@@ -28,10 +28,6 @@ class Multimedia extends CI_Controller {
         $data['multimedia_item']['description'] = strip_tags($data['multimedia_item']['description'],'<a><em><strong><p><br>');
         $data['multimedia_item']['path'] = str_replace('public:/', '', $data['multimedia_item']['path']);
 
-        if (empty($data['multimedia_item'])) {
-            show_404();
-        }
-
         $h_data['title'] = 'Multimedias | Fundación Museos Nacionales';
         $h_data['active'] = 'multimedia';
 

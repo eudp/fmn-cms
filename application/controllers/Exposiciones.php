@@ -28,10 +28,6 @@ class Exposiciones extends CI_Controller {
         $data['exposition_item']['description'] = strip_tags($data['exposition_item']['description'],'<a><em><strong><p><br>');
         $data['exposition_carousel'] = $this->exposiciones_model->get_carousel($exposition_id);
 
-        if (empty($data['exposition_item'])) {
-            show_404();
-        }
-
         $h_data['title'] = 'Exposiciones | Fundación Museos Nacionales';
         $h_data['active'] = 'exposiciones';
 
