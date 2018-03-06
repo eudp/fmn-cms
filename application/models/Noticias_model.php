@@ -12,7 +12,7 @@ class Noticias_model extends CI_Model {
         {
             $this->db->select('n.title, a.path, n.news_id, n.excerpt, n.publication_date, n.creation_date, n.modified_date, n.status');
             $this->db->from('noticias' . $museos . ' as n');
-            $this->db->join('archivos as a', 'a.file_id = n.image_id', 'left');
+            $this->db->join('archivos' . $museos . ' as a', 'a.file_id = n.image_id', 'left');
 
             if ($status != null) {
                 $this->db->where('status' , $status);
@@ -32,8 +32,8 @@ class Noticias_model extends CI_Model {
 
         $this->db->select('n.title, a.path, n.description, n.publication_date, n.excerpt, a.file_name, n.status, n.news_id');
         $this->db->from('noticias' . $museos . ' as n');
-        $this->db->join('archivos as a', 'a.file_id = n.image_id', 'left');
-        $this->db->where(array('news_id' => $news_id));
+        $this->db->join('archivos' . $museos . ' as a', 'a.file_id = n.image_id', 'left');
+        $this->db->where('news_id', $news_id);
         $query = $this->db->get();
         return $query->row_array();
     }
