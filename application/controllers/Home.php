@@ -12,7 +12,7 @@ class Home extends CI_Controller {
 
     public function index()
     {
-        $data['news'] = $this->noticias_model->get_news();
+        $data['news'] = $this->noticias_model->get(null,null,4);
         $h_data['title'] = 'Fundación Museos Nacionales';
         $h_data['active'] = 'home';
 
@@ -29,7 +29,8 @@ class Home extends CI_Controller {
 
     	if ($this->form_validation->run()) {
 
-	        $data['news'] = $this->noticias_model->get_news(4, $this->input->post('search'));
+	        $data['news'] = $this->noticias_model->get(null,1,4,$this->input->post('search'));
+            $data['news_museums'] = $this->noticias_model->get(null,1,4,$this->input->post('search'),'_museos');
 	        $data['multimedia'] = $this->multimedia_model->get_multimedia(4, $this->input->post('search'));
 	        $data['diary'] = $this->agenda_model->get_diary(4, $this->input->post('search'));
 	        $data['expositions'] = $this->exposiciones_model->get_expositions(4, $this->input->post('search'));

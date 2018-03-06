@@ -183,7 +183,7 @@ class Admin extends CI_Controller {
 
             /* Edit news*/
 
-            $data['news'] = $this->noticias_model->get($news_id, null);
+            $data['news'] = $this->noticias_model->get($news_id);
             $data['news']['description'] = strip_tags($data['news']['description'],'<a><em><strong><p><br>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';

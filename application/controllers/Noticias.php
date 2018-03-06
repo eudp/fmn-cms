@@ -21,6 +21,8 @@ class Noticias extends CI_Controller {
     public function view($news_id)
     {
         $data['news_item'] = $this->noticias_model->get($news_id);
+        $data['news_item'] = (empty($data['news_item']) ? $this->noticias_model->get($news_id,null,null,null,'_museos') : $data['news_item'] );
+
         if (empty($data['news_item'])){
             show_404();
         }

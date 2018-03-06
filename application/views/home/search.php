@@ -13,6 +13,18 @@
     
     </div>
     <div class="row">
+        <div class="col-12"><h5>Noticias Museos</h5></div>
+        <?php foreach ($news_museums as $news_item): ?>
+            
+            <div class="col-3">
+                <span><?= date('j \d\e F, Y', $news_item['publication_date']); ?></span>
+                <a href="<?= site_url('noticias/'. $news_item['news_id']);?>"><h5><?= $news_item['title']; ?></h5></a>
+            </div>
+
+        <?php endforeach; ?>
+    
+    </div>
+    <div class="row">
         <div class="col-12"><h5>Multimedia</h5></div>
         <?php foreach ($multimedia as $multimedia_item): ?>
             
