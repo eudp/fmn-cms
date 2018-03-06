@@ -32,7 +32,8 @@ class Home extends CI_Controller {
 	        $data['news'] = $this->noticias_model->get(null,1,4,$this->input->post('search'));
             $data['news_museums'] = $this->noticias_model->get(null,1,4,$this->input->post('search'),'_museos');
 	        $data['multimedia'] = $this->multimedia_model->get_multimedia(4, $this->input->post('search'));
-	        $data['diary'] = $this->agenda_model->get_diary(4, $this->input->post('search'));
+	        $data['diary'] = $this->agenda_model->get(null,1,4, $this->input->post('search'));
+            $data['diary_museums'] = $this->agenda_model->get(null,1,4,$this->input->post('search'),'_museos');
 	        $data['expositions'] = $this->exposiciones_model->get_expositions(4, $this->input->post('search'));
 
 	        $h_data['title'] = 'Buscar | Fundación Museos Nacionales';

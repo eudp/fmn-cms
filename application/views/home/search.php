@@ -49,6 +49,18 @@
     
     </div>
     <div class="row">
+        <div class="col-12"><h5>Agenda Museos</h5></div>
+        <?php foreach ($diary_museums as $diary_item): ?>
+            
+            <div class="col-3">
+                <span><?= date('j \d\e F, Y', $diary_item['publication_date']); ?></span>
+                <a href="<?= site_url('agenda/'. $diary_item['diary_id']);?>"><h5><?= $diary_item['title']; ?></h5></a>
+            </div>
+
+        <?php endforeach; ?>
+    
+    </div>
+    <div class="row">
         <div class="col-12"><h5>Exposiciones</h5></div>
         <?php foreach ($expositions as $expositions_item): ?>
             
