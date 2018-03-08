@@ -33,7 +33,7 @@ class Agenda_model extends CI_Model {
         $this->db->select('d.title, d.description, a.path, d.diary_id, e.title as e_title');
         $this->db->from('agenda' . $museos . ' as d');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = d.image_id', 'left');
-        $this->db->join('establecimientos' . ' as e', 'e.establishment_id = d.establishment_id');
+        $this->db->join('establecimientos' . ' as e', 'e.establishment_id = d.establishment_id', 'left');
         $this->db->where('d.diary_id', $diary_id);
         $query = $this->db->get();
         return $query->row_array();
