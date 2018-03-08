@@ -21,12 +21,18 @@ class Exposiciones extends CI_Controller {
 
     public function view($exposition_id)
     {
+        $museos = '';
         $data['exposition_item'] = $this->exposiciones_model->get(1,$exposition_id);
+        if (empty($data['exposition_item'])){
+            $museos = '_museos';
+            $data['exposition_item'] = $this->exposiciones_model->get(1, $exposition_id, null, null, null, '_museos');
+        }
+
         if (empty($data['exposition_item'])){
             show_404();
         }
         $data['exposition_item']['description'] = strip_tags($data['exposition_item']['description'],'<a><em><strong><p><br>');
-        $data['exposition_carousel'] = $this->exposiciones_model->get_carousel($exposition_id);
+        $data['exposition_carousel'] = $this->exposiciones_model->get_carousel($exposition_id, $museos);
 
         $h_data['title'] = 'Exposiciones | Fundación Museos Nacionales';
         $h_data['active'] = 'exposiciones';
