@@ -30,8 +30,9 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/tests/
 /tests/results/
 
-# Assets images
+# Assets
 assets/images
+assets/files
 
 # user_guide folder
 user_guide
