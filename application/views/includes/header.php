@@ -50,6 +50,9 @@
 					<a class="nav-link" href="<?= site_url('multimedia');?>">Multimedia</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('agenda');?>">Agenda</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('enlaces');?>">Enlaces</a>
 				</li>
 				<li class="nav-item">

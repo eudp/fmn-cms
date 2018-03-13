@@ -6,11 +6,11 @@ class Agenda_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($diary_id = null, $status = 1, $limit = 4, $search = null, $museos = '')
+    public function get($diary_id = null, $status = 1, $limit = null, $search = null, $museos = '')
     {
         if ($diary_id == null)
         {
-            $this->db->select('d.title, d.publication_date, d.diary_id');
+            $this->db->select('d.title, d.publication_date, d.diary_id, d.creation_date, d.modified_date, d.status');
             $this->db->from('agenda' . $museos . ' as d');
 
             if ($status != null) {
@@ -30,7 +30,7 @@ class Agenda_model extends CI_Model {
         }
 
         //duda con establecimiento en entrada de agendas de museos
-        $this->db->select('d.title, d.description, a.path, d.diary_id, e.title as e_title');
+        $this->db->select('d.title, d.description, a.path, d.diary_id, e.title as e_title, d.status, d.establishment_id, a.file_name');
         $this->db->from('agenda' . $museos . ' as d');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = d.image_id', 'left');
         $this->db->join('establecimientos' . ' as e', 'e.establishment_id = d.establishment_id', 'left');
@@ -47,5 +47,23 @@ class Agenda_model extends CI_Model {
         $this->db->where('d.diary_id', $diary_id);
         $query = $this->db->get();
         return $query->result_array();
+    }
+    public function set($array, $diary_id = null)
+    {
+        if ($diary_id != null) {
+            $this->db->set($array);
+            $this->db->where('diary_id', $diary_id);
+            $this->db->update('agenda');
+        }
+        else {
+            $this->db->insert('agenda', $array);
+
+            return $this->db->insert_id();
+        }  
+    }
+
+    public function delete($diary_id)
+    {
+        $this->db->delete('agenda', array('diary_id' => $diary_id));   
     }
 }

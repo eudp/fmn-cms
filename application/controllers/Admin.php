@@ -12,6 +12,8 @@ class Admin extends CI_Controller {
         $this->load->model('colecciones_model');
         $this->load->model('obras_model');
         $this->load->model('contacto_model');
+        $this->load->model('agenda_model');
+        $this->load->model('multimedia_model');
     }
 
     public function index()
@@ -66,7 +68,7 @@ class Admin extends CI_Controller {
     public function set_establecimiento($u_path)
     {
     	/* Upload image*/
-        $image_id = $this->upload_image($u_path);
+        $image_id = $this->upload_file($u_path);
 
     	/*Update establishment*/
 
@@ -128,25 +130,35 @@ class Admin extends CI_Controller {
 		redirect(site_url('admin/establecimientos/'), 'refresh');
     }
 
-    public function upload_image ($u_path)
+    public function upload_file ($u_path, $featured_image = true)
     {
+        // Select input field
+        $file = 'userfile';
+        $config['allowed_types'] = 'jpg|gif|jpeg|png';
+        if (!$featured_image) {
+            $file = 'multimediafile';
+            $config['allowed_types'] = 'mp3|pdf';
+        }
 
         $upload_path = [
-            "museo"      => "./assets/images/museos/",
-            "instituto"  => "./assets/images/institutos/",
-            "noticia"    => "./assets/images/noticias/",
-            "exposicion" => "./assets/images/exposiciones/",
-            "coleccion"  => "./assets/images/colecciones/",
-            "obra"       => "./assets/images/obras/"
+            "museo"           => "./assets/images/museos/",
+            "instituto"       => "./assets/images/institutos/",
+            "noticia"         => "./assets/images/noticias/",
+            "exposicion"      => "./assets/images/exposiciones/",
+            "coleccion"       => "./assets/images/colecciones/",
+            "obra"            => "./assets/images/obras/",
+            "agenda"          => "./assets/images/agenda/",
+            "multimedia"      => "./assets/images/multimedias/",
+            "multimedia_file" => "./assets/files/multimedias/"
         ];
 
         $config['upload_path']   = $upload_path[$u_path];
-        $config['allowed_types'] = 'gif|jpg|png';
 
         $this->load->library('upload', $config);
-        $_FILES['userfile']['name'] = time() . '-' .  convert_accented_characters($_FILES['userfile']['name']) ;
+        $this->upload->initialize($config);
+        $_FILES[$file]['name'] = time() . '-' .  convert_accented_characters($_FILES[$file]['name']) ;
 
-        if ( ! $this->upload->do_upload('userfile'))
+        if ( ! $this->upload->do_upload($file))
         {
             return null;            
             /* Handling this error*/
@@ -154,13 +166,19 @@ class Admin extends CI_Controller {
         else
         {
             $data = array('upload_data' => $this->upload->data());
+
+            if ($data['upload_data']['file_type'] == 'image/jpeg' || $data['upload_data']['file_type'] == 'image/png' || $data['upload_data']['file_type'] == 'image/gif') {
+                $path = str_replace('./assets/images', '', $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']);
+            } else {
+                $path = str_replace('./assets/files', '', $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']);
+            }
             $array = array(
                 'user_id'       => 66,
                 'creation_date' => time(),
                 'modified_date' => time(),
                 'filemime'      => $data['upload_data']['file_type'],
-                'path'          => str_replace('./assets/images', "", $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']),
-                'file_size'     => $_FILES['userfile']['size'],
+                'path'          => $path,
+                'file_size'     => $_FILES[$file]['size'],
                 'file_name'     => $data['upload_data']['file_name']
             );
 
@@ -208,7 +226,7 @@ class Admin extends CI_Controller {
     public function set_noticia()
     {
         /* Upload image*/
-        $image_id = $this->upload_image('noticia');
+        $image_id = $this->upload_file('noticia');
 
         /*Update news*/
 
@@ -307,7 +325,7 @@ class Admin extends CI_Controller {
     public function set_exposicion()
     {
         /* Upload image*/
-        $image_id = $this->upload_image('exposicion');
+        $image_id = $this->upload_file('exposicion');
 
         /*Update exposition*/
 
@@ -409,7 +427,7 @@ class Admin extends CI_Controller {
     public function set_coleccion()
     {
         /* Upload image*/
-        $image_id = $this->upload_image('coleccion');
+        $image_id = $this->upload_file('coleccion');
 
         /*Update collection*/
 
@@ -507,7 +525,7 @@ class Admin extends CI_Controller {
     public function set_obra()
     {
         /* Upload image*/
-        $image_id = $this->upload_image('obra');
+        $image_id = $this->upload_file('obra');
 
         /*Update obra*/
 
@@ -585,4 +603,207 @@ class Admin extends CI_Controller {
             $this->load->view('includes/footer_admin');
         } 
     }
+
+    /*List of diarys and edit individual diary*/
+
+    public function agenda($diary_id = null)
+    {
+        if ($diary_id == null) {
+            $data['diary'] = $this->agenda_model->get(null, null);
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/agenda/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit diary*/
+
+            $data['diary'] = $this->agenda_model->get($diary_id);
+            $data['diary']['description'] = strip_tags($data['diary']['description'],'<a><em><strong><p><br>');
+
+            $data['establishments'] = $this->establecimientos_model->get(null, null);
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/agenda/edit_agenda', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function nueva_agenda () 
+    {
+        $data['establishments'] = $this->establecimientos_model->get(null, null);
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/agenda/new_agenda', $data);
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function set_agenda()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_file('agenda');
+
+        /*Update diary*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'            => $this->input->post('titulo'),
+                'description'      => $this->input->post('descripcion'),
+                'establishment_id' => $this->input->post('id_establecimiento'),
+                'modified_date'    => time(),
+                'publication_date' => time(),
+                'status'           => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $diary_id = $this->input->post('id');
+
+            if ($diary_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->agenda_model->set($array);
+                redirect(site_url('admin/agenda/'), 'refresh');
+
+            } else {
+                $this->agenda_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/agenda/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+    /* Handle delete permisology*/
+    public function eliminar_agenda ($diary_id) 
+    {
+        $this->agenda_model->delete($diary_id);
+
+        redirect(site_url('admin/agenda/'), 'refresh');
+    }
+
+    /*List of multimedias and edit individual multimedia*/
+
+    public function multimedia($multimedia_id = null)
+    {
+        if ($multimedia_id == null) {
+            $data['multimedia'] = $this->multimedia_model->get(null, null, null);
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/multimedia/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit multimedia*/
+
+            $data['multimedia'] = $this->multimedia_model->get(null, $multimedia_id);
+            $data['multimedia']['description'] = strip_tags($data['multimedia']['description'],'<a><em><strong><p><br>');
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/multimedia/edit_multimedia', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function nueva_multimedia () 
+    {
+        $data['establishments'] = $this->establecimientos_model->get(null, null);
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/multimedia/new_multimedia', $data);
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function set_multimedia()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_file('multimedia');
+
+        /* Upload multimedia file*/
+        $multimedia_file_id = $this->upload_file('multimedia_file', false);
+
+        /*Update multimedia*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'         => $this->input->post('titulo'),
+                'description'   => $this->input->post('descripcion'),
+                'modified_date' => time(),
+                'type'          => ($this->input->post('tipo') == '0'? 52 : 54),
+                'status'        => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+            if ($multimedia_file_id != null) {
+
+                $array += ['multimedia_file_id' => $multimedia_file_id];
+            }
+
+            $multimedia_id = $this->input->post('id');
+
+            if ($multimedia_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->multimedia_model->set($array);
+                redirect(site_url('admin/multimedia/'), 'refresh');
+
+            } else {
+                $this->multimedia_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/multimedia/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+    /* Handle delete permisology*/
+    public function eliminar_multimedia ($multimedia_id) 
+    {
+        $this->multimedia_model->delete($multimedia_id);
+
+        redirect(site_url('admin/multimedia/'), 'refresh');
+    }
+
 }
