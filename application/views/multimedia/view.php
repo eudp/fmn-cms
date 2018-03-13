@@ -12,7 +12,7 @@
 
                 <p>Click para descargar:</p>
 
-                <a href="<?= $multimedia_item['multimedia_path']; ?>"><?= $multimedia_item['file_name']; ?></a>
+                <a href="<?= site_url('assets/files') . str_replace('public:/', '', $multimedia_item['multimedia_path']); ?>"><?= $multimedia_item['multimedia_name']; ?></a>
 
             <?php endif; ?>
 
