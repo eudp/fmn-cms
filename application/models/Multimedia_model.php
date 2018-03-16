@@ -49,15 +49,15 @@ class Multimedia_model extends CI_Model {
         return $query->row_array();
     }
 
-    public function set($array, $multimedia_id = null)
+    public function set($array, $multimedia_id = null, $museos = '')
     {
         if ($multimedia_id != null) {
             $this->db->set($array);
             $this->db->where('multimedia_id', $multimedia_id);
-            $this->db->update('multimedia');
+            $this->db->update('multimedia' . $museos);
         }
         else {
-            $this->db->insert('multimedia', $array);
+            $this->db->insert('multimedia' . $museos, $array);
 
             return $this->db->insert_id();
         }  

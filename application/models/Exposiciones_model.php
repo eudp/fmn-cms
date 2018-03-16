@@ -52,15 +52,15 @@ class Exposiciones_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function set($array, $exposition_id = null)
+    public function set($array, $exposition_id = null, $museos = '')
     {
         if ($exposition_id != null) {
             $this->db->set($array);
             $this->db->where('exposition_id', $exposition_id);
-            $this->db->update('exposiciones');
+            $this->db->update('exposiciones' . $museos);
         }
         else {
-            $this->db->insert('exposiciones', $array);
+            $this->db->insert('exposiciones' . $museos, $array);
 
             return $this->db->insert_id();
         }  

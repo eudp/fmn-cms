@@ -38,15 +38,15 @@ class Noticias_model extends CI_Model {
         return $query->row_array();
     }
 
-    public function set($array, $news_id = null)
+    public function set($array, $news_id = null, $museos = '')
     {
         if ($news_id != null) {
             $this->db->set($array);
             $this->db->where('news_id', $news_id);
-            $this->db->update('noticias');
+            $this->db->update('noticias' . $museos);
         }
         else {
-            $this->db->insert('noticias', $array);
+            $this->db->insert('noticias' . $museos, $array);
 
             return $this->db->insert_id();
         }  

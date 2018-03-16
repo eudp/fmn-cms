@@ -141,15 +141,20 @@ class Admin extends CI_Controller {
         }
 
         $upload_path = [
-            "museo"           => "./assets/images/museos/",
-            "instituto"       => "./assets/images/institutos/",
-            "noticia"         => "./assets/images/noticias/",
-            "exposicion"      => "./assets/images/exposiciones/",
-            "coleccion"       => "./assets/images/colecciones/",
-            "obra"            => "./assets/images/obras/",
-            "agenda"          => "./assets/images/agenda/",
-            "multimedia"      => "./assets/images/multimedias/",
-            "multimedia_file" => "./assets/files/multimedias/"
+            "museo"                  => "./assets/images/museos/",
+            "instituto"              => "./assets/images/institutos/",
+            "noticia"                => "./assets/images/noticias/",
+            "exposicion"             => "./assets/images/exposiciones/",
+            "coleccion"              => "./assets/images/colecciones/",
+            "obra"                   => "./assets/images/obras/",
+            "agenda"                 => "./assets/images/agenda/",
+            "multimedia"             => "./assets/images/multimedias/",
+            "multimedia_file"        => "./assets/files/multimedias/",
+            "agenda_museos"          => "./assets/images/agenda_museos/",
+            "exposicion_museos"      => "./assets/images/exposicion_museos/",
+            "multimedia_museos"      => "./assets/images/multimedias_museos/",
+            "multimedia_file_museos" => "./assets/files/multimedias_museos/",
+            "noticia_museos"         => "./assets/images/noticias_museos/"
         ];
 
         $config['upload_path']   = $upload_path[$u_path];
@@ -806,4 +811,331 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/multimedia/'), 'refresh');
     }
 
+    /*List of diarys and edit individual diary*/
+
+    public function agenda_museos($diary_id = null)
+    {
+        if ($diary_id == null) {
+            $data['diary'] = $this->agenda_model->get(null, null, null, null, '_museos');
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/agenda_museos/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit diary*/
+
+            $data['diary'] = $this->agenda_model->get($diary_id, null, null, null, '_museos');
+            $data['diary']['description'] = strip_tags($data['diary']['description'],'<a><em><strong><p><br>');
+
+            //$data['establishments'] = $this->establecimientos_model->get(null, null);
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/agenda_museos/edit_agenda_museos', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function set_agenda_museos()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_file('agenda_museos');
+
+        /*Update diary*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        //$this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'            => $this->input->post('titulo'),
+                'description'      => $this->input->post('descripcion'),
+                //'establishment_id' => $this->input->post('id_establecimiento'),
+                'modified_date'    => time(),
+                'publication_date' => time(),
+                'status'           => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $diary_id = $this->input->post('id');
+
+            if ($diary_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->agenda_model->set($array, null, '_museos');
+                redirect(site_url('admin/agenda_museos/'), 'refresh');
+
+            } else {
+                $this->agenda_model->set($array, $this->input->post('id'), '_museos');
+
+                redirect(site_url('admin/agenda_museos/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /*List of expositions and edit individual exposition*/
+
+    public function exposiciones_museos($exposition_id = null)
+    {
+        if ($exposition_id == null) {
+            $data['exposition'] = $this->exposiciones_model->get(null, null, null, null, null, '_museos');
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/exposiciones_museos/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit exposition*/
+
+            $data['exposition'] = $this->exposiciones_model->get(null, $exposition_id, null, null, null, '_museos');
+            $data['exposition']['description'] = strip_tags($data['exposition']['description'],'<a><em><strong><p><br>');
+
+            //$data['establishments'] = $this->establecimientos_model->get(null, null);
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/exposiciones_museos/edit_exposicion_museos', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+
+    public function set_exposicion_museos()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_file('exposicion_museos');
+
+        /*Update exposition*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $actual = $this->input->post('actual');
+            $actual = (!isset($actual)? 0 : 1);
+
+            $array = array(
+                'title'            => $this->input->post('titulo'),
+                'description'      => $this->input->post('descripcion'),
+                'exhibition_place' => $this->input->post('lugar_exhibicion'),
+                'schedule'         => $this->input->post('horario'),
+                'modified_date'    => time(),
+                'actual'           => $actual,
+                'status'           => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $exposition_id = $this->input->post('id');
+
+            if ($exposition_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->exposiciones_->set($array, null, '_museos');
+                redirect(site_url('admin/exposiciones_museos/'), 'refresh');
+
+            } else {
+                $this->exposiciones_model->set($array, $this->input->post('id'), '_museos');
+
+                redirect(site_url('admin/exposiciones_museos/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /*List of multimedia_museoss and edit individual multimedia_museos*/
+
+    public function multimedia_museos($multimedia_id = null)
+    {
+        if ($multimedia_id == null) {
+            $data['multimedia'] = $this->multimedia_model->get(null, null, null, null, null, '_museos');
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/multimedia_museos/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit multimedia_museos*/
+
+            $data['multimedia'] = $this->multimedia_model->get(null, $multimedia_id, null, null, null, '_museos');
+            $data['multimedia']['description'] = strip_tags($data['multimedia']['description'],'<a><em><strong><p><br>');
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/multimedia_museos/edit_multimedia_museos', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function set_multimedia_museos()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_file('multimedia_museos');
+
+        /* Upload multimedia_museos file*/
+        $multimedia_file_id = $this->upload_file('multimedia_file_museos', false);
+
+        /*Update multimedia_museos*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'         => $this->input->post('titulo'),
+                'description'   => $this->input->post('descripcion'),
+                'modified_date' => time(),
+                'type'          => ($this->input->post('tipo') == '0'? 52 : 54),
+                'status'        => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+            if ($multimedia_file_id != null) {
+
+                $array += ['multimedia_file_id' => $multimedia_file_id];
+            }
+
+            $multimedia_id = $this->input->post('id');
+
+            if ($multimedia_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->multimedia_model->set($array, null, '_museos');
+                redirect(site_url('admin/multimedia_museos/'), 'refresh');
+
+            } else {
+                $this->multimedia_model->set($array, $this->input->post('id'), '_museos');
+
+                redirect(site_url('admin/multimedia_museos/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /*List of news and edit individual news*/
+
+    public function noticias_museos($news_id = null)
+    {
+        if ($news_id == null) {
+            $data['news'] = $this->noticias_model->get(null, null, null, null, '_museos');
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/noticias_museos/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit news*/
+
+            $data['news'] = $this->noticias_model->get($news_id, null, null, null, '_museos');
+            $data['news']['description'] = strip_tags($data['news']['description'],'<a><em><strong><p><br>');
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/noticias_museos/edit_noticia_museos', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+    public function set_noticia_museos()
+    {
+        /* Upload image*/
+        $image_id = $this->upload_file('noticia_museos');
+
+        /*Update news*/
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->index();
+        }
+        else
+        {
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'            => $this->input->post('titulo'),
+                'description'      => $this->input->post('descripcion'),
+                'excerpt'          => $this->input->post('excerpt'),
+                'publication_date' => strtotime($this->input->post('fecha-publicacion')),
+                'modified_date'    => time(),
+                'status'           => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $news_id = $this->input->post('id');
+
+            if ($news_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->noticias_model->set($array, null, '_museos');
+                redirect(site_url('admin/noticias_museos/'), 'refresh');
+
+            } else {
+                $this->noticias_model->set($array, $this->input->post('id'), '_museos');
+
+                redirect(site_url('admin/noticias_museos/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
 }

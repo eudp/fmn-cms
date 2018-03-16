@@ -48,15 +48,15 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function set($array, $diary_id = null)
+    public function set($array, $diary_id = null, $museos = '')
     {
         if ($diary_id != null) {
             $this->db->set($array);
             $this->db->where('diary_id', $diary_id);
-            $this->db->update('agenda');
+            $this->db->update('agenda' . $museos);
         }
         else {
-            $this->db->insert('agenda', $array);
+            $this->db->insert('agenda' . $museos, $array);
 
             return $this->db->insert_id();
         }  

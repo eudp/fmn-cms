@@ -52,6 +52,18 @@
 				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('admin/contactenos');?>">Contacto</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('admin/agenda_museos');?>">Agenda Museos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('admin/exposiciones_museos');?>">Exposiciones Museos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('admin/multimedia_museos');?>">Multimedia Museos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('admin/noticias_museos');?>">Noticias Museos</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
