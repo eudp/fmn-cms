@@ -26,8 +26,10 @@ class Multimedia_model extends CI_Model {
                 $this->db->where('status' , $status);
             }
             if ($search != null){
+                $this->db->group_start();
                 $this->db->like('LOWER(description)', strtolower($search));
                 $this->db->or_like('LOWER(title)', strtolower($search));
+                $this->db->group_end();
             }
             if ($limit != null){
                 $this->db->limit($limit);
