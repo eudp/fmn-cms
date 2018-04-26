@@ -19,14 +19,9 @@ class Exposiciones extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
-    public function view($exposition_id)
+    public function view($exposition_id, $museos = '')
     {
-        $museos = '';
-        $data['exposition_item'] = $this->exposiciones_model->get(1,$exposition_id);
-        if (empty($data['exposition_item'])){
-            $museos = '_museos';
-            $data['exposition_item'] = $this->exposiciones_model->get(1, $exposition_id, null, null, null, '_museos');
-        }
+        $data['exposition_item'] = $this->exposiciones_model->get(1, $exposition_id, 1, null, null, $museos);
 
         if (empty($data['exposition_item'])){
             show_404();

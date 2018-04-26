@@ -18,14 +18,9 @@ class Agenda extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
-    public function view($diary_id)
+    public function view($diary_id, $museos = '')
     {
-        $museos = '';
-        $data['diary_item'] = $this->agenda_model->get($diary_id);
-        if (empty($data['diary_item'])){
-            $museos = '_museos';
-            $data['diary_item'] = $this->agenda_model->get($diary_id,null,null,null,$museos);
-        }
+        $data['diary_item'] = $this->agenda_model->get($diary_id,1,null,null,$museos);
 
         if (empty($data['diary_item'])){
             show_404();

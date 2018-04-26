@@ -71,6 +71,14 @@ $route['fmn'] = 'home/fmn';
 $route['educacion'] = 'home/educacion';
 $route['home'] = 'home';
 
+
+/* URLS for searching inside museums tables */
+
+$route['noticias-museos/(:any)'] = 'noticias/view/$1/_museos';
+$route['exposiciones-museos/(:any)'] = 'exposiciones/view/$1/_museos';
+$route['multimedia-museos/(:any)'] = 'multimedia/view/$1/_museos';
+$route['agenda-museos/(:any)'] = 'agenda/view/$1/_museos';
+
 /* admin routes*/
 
 
