@@ -10,6 +10,7 @@
 					<th scope="col">Fecha de creación</th>
 					<th scope="col">Fecha de última modificación</th>
 					<th scope="col">Status</th>
+					<th scope="col">Museo</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -21,6 +22,7 @@
 							<td><?= date('j \d\e F, Y', $exposition_item['creation_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$exposition_item['modified_date']); ?></td>
 							<td><?= ($exposition_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
+							<td><?= domain_museum($exposition_item['museums']); ?></td>
 						</tr>
 
 					<?php endforeach; ?>

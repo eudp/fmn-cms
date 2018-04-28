@@ -10,7 +10,10 @@ class Exposiciones_model extends CI_Model {
     {
         if ($exposition_id == null)
         {
-            $this->db->select('e.title, a.path, e.description, e.exposition_id, e.creation_date, e.modified_date, e.status');
+
+            $museums =  ($museos != '' ? ', e.museums': '');
+
+            $this->db->select('e.title, a.path, e.description, e.exposition_id, e.creation_date, e.modified_date, e.status' . $museums);
             $this->db->from('exposiciones' . $museos . ' as e');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = e.image_id', 'left');
 

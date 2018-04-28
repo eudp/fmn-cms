@@ -10,7 +10,10 @@ class Multimedia_model extends CI_Model {
     {
         if ($multimedia_id == null)
         {
-            $this->db->select('m.title, a.path, m.multimedia_id, m.creation_date, m.modified_date, m.status');
+
+            $museums =  ($museos != '' ? ', m.museums': '');
+
+            $this->db->select('m.title, a.path, m.multimedia_id, m.creation_date, m.modified_date, m.status' . $museums);
             $this->db->from('multimedia' . $museos . ' as m');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = m.image_id', 'left');
 

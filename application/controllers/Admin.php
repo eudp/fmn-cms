@@ -14,6 +14,8 @@ class Admin extends CI_Controller {
         $this->load->model('contacto_model');
         $this->load->model('agenda_model');
         $this->load->model('multimedia_model');
+
+        $this->load->helper('domain_museum');
     }
 
     public function index()

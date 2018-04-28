@@ -41,7 +41,7 @@
         <?php foreach ($multimedia_museums as $multimedia_item): ?>
             
             <div class="col-3">
-                <span><?= date('j \d\e F, Y', $multimedia_item['creation_date']); ?></span>
+                <span><?= date('j \d\e F, Y', $multimedia_item['creation_date']); ?> - <?= domain_museum($multimedia['museums']) ?></span>
                 <a href="<?= site_url('multimedia-museos/'. $multimedia_item['multimedia_id']);?>"><h5><?= $multimedia_item['title']; ?></h5></a>
             </div>
 
@@ -65,7 +65,7 @@
         <?php foreach ($diary_museums as $diary_item): ?>
             
             <div class="col-3">
-                <span><?= date('j \d\e F, Y', $diary_item['publication_date']); ?></span>
+                <span><?= date('j \d\e F, Y', $diary_item['publication_date']); ?> - <?= domain_museum($diary_item['museums']) ?></span>
                 <a href="<?= site_url('agenda-museos/'. $diary_item['diary_id']);?>"><h5><?= $diary_item['title']; ?></h5></a>
             </div>
 
@@ -89,7 +89,7 @@
         <?php foreach ($expositions_museums as $expositions_item): ?>
             
             <div class="col-3">
-                <span><?= date('j \d\e F, Y', $expositions_item['creation_date']); ?></span>
+                <span><?= date('j \d\e F, Y', $expositions_item['creation_date']); ?> - <?= domain_museum($expositions_item['museums']) ?></span>
                 <a href="<?= site_url('exposiciones-museos/'. $expositions_item['exposition_id']);?>"><h5><?= $expositions_item['title']; ?></h5></a>
             </div>
 

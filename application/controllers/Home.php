@@ -8,6 +8,8 @@ class Home extends CI_Controller {
         $this->load->model('multimedia_model');
         $this->load->model('agenda_model');
         $this->load->model('exposiciones_model');
+
+        $this->load->helper('domain_museum');
     }
 
     public function index()

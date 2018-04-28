@@ -10,7 +10,10 @@ class Agenda_model extends CI_Model {
     {
         if ($diary_id == null)
         {
-            $this->db->select('d.title, d.publication_date, d.diary_id, d.creation_date, d.modified_date, d.status');
+
+            $museums =  ($museos != '' ? ', d.museums': '');
+
+            $this->db->select('d.title, d.publication_date, d.diary_id, d.creation_date, d.modified_date, d.status' . $museums);
             $this->db->from('agenda' . $museos . ' as d');
 
             if ($status != null) {

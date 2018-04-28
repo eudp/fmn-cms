@@ -10,7 +10,10 @@ class Noticias_model extends CI_Model {
     {
         if ($news_id == null)
         {
-            $this->db->select('n.title, a.path, n.news_id, n.excerpt, n.publication_date, n.creation_date, n.modified_date, n.status');
+
+            $museums =  ($museos != '' ? ', n.museums': '');
+
+            $this->db->select('n.title, a.path, n.news_id, n.excerpt, n.publication_date, n.creation_date, n.modified_date, n.status' . $museums);
             $this->db->from('noticias' . $museos . ' as n');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = n.image_id', 'left');
 

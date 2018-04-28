@@ -11,6 +11,7 @@
 					<th scope="col">Fecha de última modificación</th>
 					<th scope="col">Fecha de publicación</th>
 					<th scope="col">Status</th>
+					<th scope="col">Museo</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,6 +24,7 @@
 							<td><?= date('j \d\e F, Y',$news_item['modified_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$news_item['publication_date']); ?></td>
 							<td><?= ($news_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
+							<td><?= domain_museum($news_item['museums'], true); ?></td>
 						</tr>
 
 					<?php endforeach; ?>
