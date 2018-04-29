@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-12">
                     <h4>Servicios</h4>
-                    <?= $establishment_item['services']?>
+                    <?= ($establishment_item['services'] != null ? servicios_translate($establishment_item['services']) : ''); ?>
                 </div>
             </div>
         </div>

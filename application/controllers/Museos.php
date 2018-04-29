@@ -5,6 +5,8 @@ class Museos extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('establecimientos_model');
+
+        $this->load->helper('servicios');
     }
 
     public function index()
