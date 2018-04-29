@@ -10,9 +10,12 @@ class Contacto_model extends CI_Model {
     {
         if ($id == null) {
 
-            $this->db->select('id, data');
+            $this->db->select('c.id, c.data, s.date');
             $this->db->from('contact_data as c');
-            $this->db->group_by('id');
+            $this->db->join('contact_submissions as s', 's.id = c.id');
+            $this->db->where('c.cid', 3);
+            $this->db->group_by('c.id');
+            $this->db->order_by('s.date', 'DESC');
             $query = $this->db->get();
             return $query->result_array();
 
