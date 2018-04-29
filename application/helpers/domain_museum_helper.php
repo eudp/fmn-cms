@@ -1,7 +1,5 @@
 <?php
 
-
-
 function domain_museum($museums, $arr = false)
 {
 	$domain = array(
@@ -17,29 +15,31 @@ function domain_museum($museums, $arr = false)
                 10 => 'MUCA',
                 11 => 'MUBARQ',
                 12 => 'MUCOR',
-                13 => 'MUNAP',
+                13 => 'MULLA',
                 14 => 'MUNAP',
                 15 => 'MAO',
                 18 => 'CNCRP',
             );
 
 	if (!$arr){
-		echo $domain[$museums];
+		return $domain[$museums];
 	} else {
 
 		$mus_arr = explode(",", $museums);
 
 		$i = 0;
 		$len = count($mus_arr);
-
+		$out = '';
 		foreach ($mus_arr as $key => $value) {
 
 			if ($i == $len - 1) {
-				echo $domain[$value];
+				$out =. $domain[$value];
 			} else {
-				echo $domain[$value] . '-';
+				$out =. $domain[$value] . '-';
 			}
 			$i++;
 		}
+
+		return $out;
 	}
 }
