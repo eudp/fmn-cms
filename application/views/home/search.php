@@ -41,7 +41,7 @@
         <?php foreach ($multimedia_museums as $multimedia_item): ?>
             
             <div class="col-3">
-                <span><?= date('j \d\e F, Y', $multimedia_item['creation_date']); ?> - <?= domain_museum($multimedia['museums']) ?></span>
+                <span><?= date('j \d\e F, Y', $multimedia_item['creation_date']); ?> - <?= domain_museum($multimedia_item['museums']) ?></span>
                 <a href="<?= site_url('multimedia-museos/'. $multimedia_item['multimedia_id']);?>"><h5><?= $multimedia_item['title']; ?></h5></a>
             </div>
 
