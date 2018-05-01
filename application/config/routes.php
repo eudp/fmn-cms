@@ -52,35 +52,108 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;*/
 
-$route['museos/(:any)'] = 'museos/view/$1';
-$route['museos'] = 'museos';
-$route['centros/(:any)'] = 'centros/view/$1';
-$route['centros'] = 'centros';
-$route['colecciones/(:any)'] = 'colecciones/view/$1';
-$route['colecciones'] = 'colecciones';
-$route['exposiciones/(:any)'] = 'exposiciones/view/$1';
-$route['exposiciones'] = 'exposiciones';
-$route['noticias/(:any)'] = 'noticias/view/$1';
-$route['noticias'] = 'noticias';
-$route['multimedia/(:any)'] = 'multimedia/view/$1';
-$route['multimedia'] = 'multimedia';
-$route['agenda/(:any)'] = 'agenda/view/$1';
-$route['agenda'] = 'agenda';
-$route['search'] = 'home/search';
-$route['fmn'] = 'home/fmn';
-$route['educacion'] = 'home/educacion';
-$route['home'] = 'home';
-
+$route['museos/(:any)']['get'] = 'museos/view/$1';
+$route['museos']['get'] = 'museos';
+$route['centros/(:any)']['get'] = 'centros/view/$1';
+$route['centros']['get'] = 'centros';
+$route['colecciones/(:any)']['get'] = 'colecciones/view/$1';
+$route['colecciones']['get'] = 'colecciones';
+$route['exposiciones/(:any)']['get'] = 'exposiciones/view/$1';
+$route['exposiciones']['get'] = 'exposiciones';
+$route['noticias/(:any)']['get'] = 'noticias/view/$1';
+$route['noticias']['get'] = 'noticias';
+$route['multimedia/(:any)']['get'] = 'multimedia/view/$1';
+$route['multimedia']['get'] = 'multimedia';
+$route['agenda/(:any)']['get'] = 'agenda/view/$1';
+$route['agenda']['get'] = 'agenda';
+$route['search']['post'] = 'home/search';
+$route['fmn']['get'] = 'home/fmn';
+$route['educacion']['get'] = 'home/educacion';
+$route['contactenos']['get'] = 'contactenos';
+$route['home']['get'] = 'home';
 
 /* URLS for searching inside museums tables */
 
-$route['noticias-museos/(:any)'] = 'noticias/view/$1/_museos';
-$route['exposiciones-museos/(:any)'] = 'exposiciones/view/$1/_museos';
-$route['multimedia-museos/(:any)'] = 'multimedia/view/$1/_museos';
-$route['agenda-museos/(:any)'] = 'agenda/view/$1/_museos';
+$route['noticias-museos/(:any)']['get'] = 'noticias/view/$1/_museos';
+$route['exposiciones-museos/(:any)']['get'] = 'exposiciones/view/$1/_museos';
+$route['multimedia-museos/(:any)']['get'] = 'multimedia/view/$1/_museos';
+$route['agenda-museos/(:any)']['get'] = 'agenda/view/$1/_museos';
 
-/* admin routes*/
+/* Routes for administration */
 
+$route['admin/noticias']['get'] = 'admin/noticias';
+$route['admin/noticias/new']['get'] = 'admin/nueva_noticia';
+$route['admin/noticias/(:num)']['get'] = 'admin/noticias/$1';
+$route['admin/noticias']['post'] = 'admin/set_noticia';
+$route['admin/noticias/(:num)/destroy']['post'] = 'admin/eliminar_noticia/$1';
+
+$route['admin/obras']['get'] = 'admin/obras';
+$route['admin/obras/new']['get'] = 'admin/nueva_obra';
+$route['admin/obras/(:num)']['get'] = 'admin/obras/$1';
+$route['admin/obras']['post'] = 'admin/set_obra';
+$route['admin/obras/(:num)/destroy']['post'] = 'admin/eliminar_obra/$1';
+
+$route['admin/exposiciones']['get'] = 'admin/exposiciones';
+$route['admin/exposiciones/new']['get'] = 'admin/nueva_exposicion';
+$route['admin/exposiciones/(:num)']['get'] = 'admin/exposiciones/$1';
+$route['admin/exposiciones']['post'] = 'admin/set_exposicion';
+$route['admin/exposiciones/(:num)/destroy']['post'] = 'admin/eliminar_exposicion/$1';
+
+$route['admin/colecciones']['get'] = 'admin/colecciones';
+$route['admin/colecciones/new']['get'] = 'admin/nueva_coleccion';
+$route['admin/colecciones/(:num)']['get'] = 'admin/colecciones/$1';
+$route['admin/colecciones']['post'] = 'admin/set_coleccion';
+$route['admin/colecciones/(:num)/destroy']['post'] = 'admin/eliminar_coleccion/$1';
+
+$route['admin/multimedia']['get'] = 'admin/multimedia';
+$route['admin/multimedia/new']['get'] = 'admin/nueva_multimedia';
+$route['admin/multimedia/(:num)']['get'] = 'admin/multimedia/$1';
+$route['admin/multimedia']['post'] = 'admin/set_multimedia';
+$route['admin/multimedia/(:num)/destroy']['post'] = 'admin/eliminar_multimedia/$1';
+
+$route['admin/establecimientos']['get'] = 'admin/establecimientos';
+$route['admin/museos/new']['get'] = 'admin/nuevo_establecimiento/museo';
+$route['admin/instituto/new']['get'] = 'admin/nuevo_establecimiento/instituto';
+$route['admin/establecimientos/(:num)']['get'] = 'admin/establecimientos/$1';
+$route['admin/establecimientos/museo']['post'] = 'admin/set_establecimiento/museo';
+$route['admin/establecimientos/instituto']['post'] = 'admin/set_establecimiento/instituto';
+$route['admin/establecimientos/(:num)/destroy']['post'] = 'admin/eliminar_museo/$1';//should be establecimiento
+
+$route['admin/agenda']['get'] = 'admin/agenda';
+$route['admin/agenda/new']['get'] = 'admin/nueva_agenda';
+$route['admin/agenda/(:num)']['get'] = 'admin/agenda/$1';
+$route['admin/agenda']['post'] = 'admin/set_agenda';
+$route['admin/agenda/(:num)/destroy']['post'] = 'admin/eliminar_agenda/$1';
+
+$route['admin/fechas-agenda']['get'] = 'admin/fechas_agenda';
+$route['admin/fechas-agenda/new']['get'] = 'admin/nueva_fechas_agenda';
+$route['admin/fechas-agenda/(:num)']['get'] = 'admin/fechas_agenda/$1';
+$route['admin/fechas-agenda']['post'] = 'admin/set_fechas_agenda';
+$route['admin/fechas-agenda/(:num)/destroy']['post'] = 'admin/eliminar_fechas_agenda/$1';
+
+$route['admin/contactenos']['get'] = 'admin/contactenos';
+$route['admin/contactenos/(:num)']['get'] = 'admin/contactenos/$1';
+
+
+$route['admin/noticias-museos']['get'] = 'admin/noticias_museos';
+$route['admin/noticias-museos/(:num)']['get'] = 'admin/noticias_museos/$1';
+$route['admin/noticias-museos']['post'] = 'admin/set_noticia_museos';
+
+$route['admin/agenda-museos']['get'] = 'admin/agenda_museos';
+$route['admin/agenda-museos/(:num)']['get'] = 'admin/agenda_museos/$1';
+$route['admin/agenda-museos']['post'] = 'admin/set_agenda_museos';
+
+$route['admin/exposiciones-museos']['get'] = 'admin/exposiciones_museos';
+$route['admin/exposiciones-museos/(:num)']['get'] = 'admin/exposiciones_museos/$1';
+$route['admin/exposiciones-museos']['post'] = 'admin/set_exposicion_museos';
+
+$route['admin/multimedia-museos']['get'] = 'admin/multimedia_museos';
+$route['admin/multimedia-museos/(:num)']['get'] = 'admin/multimedia_museos/$1';
+$route['admin/multimedia-museos']['post'] = 'admin/set_multimedia_museos';
 
 
 $route['default_controller'] = 'home';
+
+$route['(:any)'] = ''; //send to error page
+$route['(:any)/(:any)'] = ''; //send to erro page
+$route['(:any)/(:any)/(:any)'] = ''; //send to erro page
