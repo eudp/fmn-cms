@@ -13,8 +13,8 @@ class Home extends CI_Controller {
     }
 
     public function index()
-    {
-        $data['news'] = $this->noticias_model->get(null,null,4);
+    {                                         
+        $data['news'] = $this->noticias_model->get(null,1,4);
         $h_data['title'] = 'Fundación Museos Nacionales';
         $h_data['active'] = 'home';
 
