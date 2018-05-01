@@ -33,9 +33,9 @@ function domain_museum($museums, $arr = false)
 		foreach ($mus_arr as $key => $value) {
 
 			if ($i == $len - 1) {
-				$out =. $domain[$value];
+				$out .= $domain[$value];
 			} else {
-				$out =. $domain[$value] . '-';
+				$out .= $domain[$value] . '-';
 			}
 			$i++;
 		}
