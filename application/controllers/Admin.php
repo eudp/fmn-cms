@@ -69,11 +69,6 @@ class Admin extends CI_Controller {
 
     public function set_establecimiento($u_path)
     {
-    	/* Upload image*/
-        $image_id = $this->upload_file($u_path);
-
-    	/*Update establishment*/
-
     	$this->load->library('form_validation');
     	$this->form_validation->set_rules('titulo', 'titulo', 'required');
     	if ($this->form_validation->run() == FALSE)
@@ -82,6 +77,10 @@ class Admin extends CI_Controller {
         }
         else
         {
+            /* Upload image*/
+            $image_id = $this->upload_file($u_path);
+
+            /*Update establishment*/
             $status = $this->input->post('status');
 			$status = (!isset($status)? 0 : 1);
 
@@ -231,12 +230,7 @@ class Admin extends CI_Controller {
     }
 
     public function set_noticia()
-    {
-        /* Upload image*/
-        $image_id = $this->upload_file('noticia');
-
-        /*Update news*/
-
+    {        
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         if ($this->form_validation->run() == FALSE)
@@ -245,6 +239,11 @@ class Admin extends CI_Controller {
         }
         else
         {
+            /* Upload image*/
+            $image_id = $this->upload_file('noticia');
+
+            /*Update news*/
+            
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
@@ -331,11 +330,6 @@ class Admin extends CI_Controller {
 
     public function set_exposicion()
     {
-        /* Upload image*/
-        $image_id = $this->upload_file('exposicion');
-
-        /*Update exposition*/
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         $this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
@@ -345,6 +339,10 @@ class Admin extends CI_Controller {
         }
         else
         {
+            /* Upload image*/
+            $image_id = $this->upload_file('exposicion');
+
+            /*Update exposition*/
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
@@ -433,10 +431,9 @@ class Admin extends CI_Controller {
 
     public function set_coleccion()
     {
-        /* Upload image*/
-        $image_id = $this->upload_file('coleccion');
 
-        /*Update collection*/
+
+        
 
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
@@ -447,6 +444,11 @@ class Admin extends CI_Controller {
         }
         else
         {
+            /* Upload image*/
+            $image_id = $this->upload_file('coleccion');
+
+            /*Update collection*/
+
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
@@ -531,11 +533,6 @@ class Admin extends CI_Controller {
 
     public function set_obra()
     {
-        /* Upload image*/
-        $image_id = $this->upload_file('obra');
-
-        /*Update obra*/
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         $this->form_validation->set_rules('id_coleccion', 'id_coleccion', 'required');
@@ -545,6 +542,12 @@ class Admin extends CI_Controller {
         }
         else
         {
+
+            /* Upload image*/
+            $image_id = $this->upload_file('obra');
+
+            /*Update obra*/
+
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
@@ -654,11 +657,6 @@ class Admin extends CI_Controller {
 
     public function set_agenda()
     {
-        /* Upload image*/
-        $image_id = $this->upload_file('agenda');
-
-        /*Update diary*/
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         $this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
@@ -668,6 +666,12 @@ class Admin extends CI_Controller {
         }
         else
         {
+
+            /* Upload image*/
+            $image_id = $this->upload_file('agenda');
+
+            /*Update diary*/
+
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
@@ -751,14 +755,6 @@ class Admin extends CI_Controller {
 
     public function set_multimedia()
     {
-        /* Upload image*/
-        $image_id = $this->upload_file('multimedia');
-
-        /* Upload multimedia file*/
-        $multimedia_file_id = $this->upload_file('multimedia_file', false);
-
-        /*Update multimedia*/
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
 
@@ -768,6 +764,15 @@ class Admin extends CI_Controller {
         }
         else
         {
+
+            /* Upload image*/
+            $image_id = $this->upload_file('multimedia');
+
+            /* Upload multimedia file*/
+            $multimedia_file_id = $this->upload_file('multimedia_file', false);
+
+            /*Update multimedia*/
+
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
@@ -845,11 +850,6 @@ class Admin extends CI_Controller {
 
     public function set_agenda_museos()
     {
-        /* Upload image*/
-        $image_id = $this->upload_file('agenda_museos');
-
-        /*Update diary*/
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         //$this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
@@ -859,6 +859,12 @@ class Admin extends CI_Controller {
         }
         else
         {
+
+            /* Upload image*/
+            $image_id = $this->upload_file('agenda_museos');
+
+            /*Update diary*/
+
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
@@ -927,11 +933,6 @@ class Admin extends CI_Controller {
 
     public function set_exposicion_museos()
     {
-        /* Upload image*/
-        $image_id = $this->upload_file('exposicion_museos');
-
-        /*Update exposition*/
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         if ($this->form_validation->run() == FALSE)
@@ -940,6 +941,12 @@ class Admin extends CI_Controller {
         }
         else
         {
+
+            /* Upload image*/
+            $image_id = $this->upload_file('exposicion_museos');
+
+            /*Update exposition*/
+
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
@@ -1009,14 +1016,6 @@ class Admin extends CI_Controller {
 
     public function set_multimedia_museos()
     {
-        /* Upload image*/
-        $image_id = $this->upload_file('multimedia_museos');
-
-        /* Upload multimedia_museos file*/
-        $multimedia_file_id = $this->upload_file('multimedia_file_museos', false);
-
-        /*Update multimedia_museos*/
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
 
@@ -1026,6 +1025,14 @@ class Admin extends CI_Controller {
         }
         else
         {
+            /* Upload image*/
+            $image_id = $this->upload_file('multimedia_museos');
+
+            /* Upload multimedia_museos file*/
+            $multimedia_file_id = $this->upload_file('multimedia_file_museos', false);
+
+            /*Update multimedia_museos*/
+
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
@@ -1093,11 +1100,6 @@ class Admin extends CI_Controller {
     }
     public function set_noticia_museos()
     {
-        /* Upload image*/
-        $image_id = $this->upload_file('noticia_museos');
-
-        /*Update news*/
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         if ($this->form_validation->run() == FALSE)
@@ -1106,6 +1108,12 @@ class Admin extends CI_Controller {
         }
         else
         {
+
+            /* Upload image*/
+            $image_id = $this->upload_file('noticia_museos');
+
+            /*Update news*/
+
             $status = $this->input->post('status');
             $status = (!isset($status)? 0 : 1);
 
