@@ -197,7 +197,7 @@ class Admin extends CI_Controller {
     public function noticias($news_id = null)
     {
         if ($news_id == null) {
-            $data['news'] = $this->noticias_model->get(null, null);
+            $data['news'] = $this->noticias_model->get(null, null, null, null, '', false);
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
 
@@ -1069,7 +1069,7 @@ class Admin extends CI_Controller {
     public function noticias_museos($news_id = null)
     {
         if ($news_id == null) {
-            $data['news'] = $this->noticias_model->get(null, null, null, null, '_museos');
+            $data['news'] = $this->noticias_model->get(null, null, null, null, '_museos', false);
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
 

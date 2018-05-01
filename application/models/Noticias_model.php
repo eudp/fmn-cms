@@ -6,7 +6,7 @@ class Noticias_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($news_id = null, $status = 1, $limit = null, $search = null, $museos = '')
+    public function get($news_id = null, $status = 1, $limit = null, $search = null, $museos = '', $actual = true)
     {
         if ($news_id == null)
         {
@@ -29,6 +29,10 @@ class Noticias_model extends CI_Model {
             }
             if ($limit != null){
                 $this->db->limit($limit);
+            }
+
+            if ($actual == true) {
+                $this->db->where('publication_date <=' , time());
             }
 
             $this->db->order_by('publication_date', 'DESC');
