@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-12"></div>
 		<div class="col-12">
-			<a href="<?= site_url('admin/nueva_obra');?>"><button type="button" class="btn btn-success">Agregar obra</button></a>
+			<a href="<?= site_url('admin/obras/new');?>"><button type="button" class="btn btn-success">Agregar obra</button></a>
 		</div>
 		<div class="col-12">
 			<table class="table">
@@ -28,7 +28,11 @@
 							<td><?= date('j \d\e F, Y',$obra_item['modified_date']); ?></td>
 							<td><?= ($obra_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
 							<!-- Handle delete permisology -->
-							<td><a href="<?= site_url('admin/eliminar_obra/'. $obra_item['obra_id']);?>"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+							<td>
+								<form method="post" action="<?= site_url('admin/obras/'. $obra_item['obra_id'] . '/destroy');?>">
+									<button type="submit" class="btn btn-danger">Eliminar</button>
+								</form>
+							</td>
 						</tr>
 
 					<?php endforeach; ?>

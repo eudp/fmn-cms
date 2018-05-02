@@ -4,7 +4,7 @@
 			<h3>Agrega un nuevo <?= $type; ?></h3>
 		</div>
 		<div class="col-12">
-			<?php echo form_open_multipart('admin/set_establecimiento/' . $type ); ?>
+			<?php echo form_open_multipart('admin/establecimientos/' . $type ); ?>
 				<div class="form-group">
 					<label for="acronimo">Acrónimo</label>
 					<input type="text" class="form-control"  placeholder="" name="acronimo" >

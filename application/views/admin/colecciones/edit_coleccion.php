@@ -4,7 +4,7 @@
 			<h3>Actualizar "<?= $collection['title'];?>"</h3>
 		</div>
 		<div class="col-12">
-			<?php echo form_open_multipart('admin/set_coleccion/'); ?>
+			<?php echo form_open_multipart('admin/colecciones/'); ?>
 			<div class="form-group">
 				<label for="titulo">Título</label>
 				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $collection['title'];?>">

@@ -1,5 +1,12 @@
 <div class="container">
 	<div class="row">
+		<div class="col-6">
+			<a href="<?= site_url('admin/museo/new');?>"><button type="button" class="btn btn-success">Agregar museo</button></a>
+		</div>
+		<div class="col-6">
+			<a href="<?= site_url('admin/instituto/new');?>"><button type="button" class="btn btn-success">Agregar instituto</button></a>
+		</div>
+
 		<div class="col-12">
 			<table class="table">
 				<thead>
@@ -24,18 +31,16 @@
 							<td><?= date('j \d\e F, Y',$establishment_item['modified_date']); ?></td>
 							<td><?= ($establishment_item['status'] == 1 ? 'activo' : 'inactivo'); ?></td>
 							<!-- Handle delete permisology -->
-							<td><a href="<?= site_url('admin/eliminar_museo/'. $establishment_item['establishment_id']);?>"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+							<td>
+								<form method="post" action="<?= site_url('admin/establecimientos/'. $establishment_item['establishment_id'] . '/destroy');?>">
+									<button type="submit" class="btn btn-danger">Eliminar</button>
+								</form>
+							</td>
 						</tr>
 
 					<?php endforeach; ?>
 				</tbody>
 			</table>
-		</div>
-		<div class="col-3">
-			<a href="<?= site_url('admin/nuevo_establecimiento/museo');?>"><button type="button" class="btn btn-success">Agregar museo</button></a>
-		</div>
-		<div class="col-3">
-			<a href="<?= site_url('admin/nuevo_establecimiento/instituto');?>"><button type="button" class="btn btn-success">Agregar instituto</button></a>
 		</div>
 	</div>
 </div>

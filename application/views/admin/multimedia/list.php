@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-12"></div>
 		<div class="col-12">
-			<a href="<?= site_url('admin/nueva_multimedia');?>"><button type="button" class="btn btn-success">Agregar multimedia</button></a>
+			<a href="<?= site_url('admin/multimedia/new');?>"><button type="button" class="btn btn-success">Agregar multimedia</button></a>
 		</div>
 		<div class="col-12">
 			<table class="table">
@@ -26,7 +26,11 @@
 							<td><?= date('j \d\e F, Y',$multimedia_item['modified_date']); ?></td>
 							<td><?= ($multimedia_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
 							<!-- Handle delete permisology -->
-							<td><a href="<?= site_url('admin/eliminar_multimedia/'. $multimedia_item['multimedia_id']);?>"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+							<td>
+								<form method="post" action="<?= site_url('admin/multimedia/'. $multimedia_item['multimedia_id'] . '/destroy');?>">
+									<button type="submit" class="btn btn-danger">Eliminar</button>
+								</form>
+							</td>
 						</tr>
 
 					<?php endforeach; ?>

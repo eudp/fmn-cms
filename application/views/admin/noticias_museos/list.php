@@ -19,7 +19,7 @@
 
 						<tr>
 							<th scope="row"><?= $news_item['news_id']; ?></th>
-							<td><a href="<?= site_url('admin/noticias_museos/'. $news_item['news_id']);?>"><?= $news_item['title']; ?></a></td>
+							<td><a href="<?= site_url('admin/noticias-museos/'. $news_item['news_id']);?>"><?= $news_item['title']; ?></a></td>
 							<td><?= date('j \d\e F, Y', $news_item['creation_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$news_item['modified_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$news_item['publication_date']); ?></td>

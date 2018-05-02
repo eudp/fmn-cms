@@ -4,7 +4,7 @@
 			<h3>Actualizar "<?= $establishment['title'];?>"</h3>
 		</div>
 		<div class="col-12">
-			<?php echo form_open_multipart('admin/set_establecimiento/' . $establishment['type']); ?>
+			<?php echo form_open_multipart('admin/establecimientos/' . $establishment['type']); ?>
 			<div class="form-group">
 				<label for="acronimo">Acrónimo</label>
 				<input type="text" class="form-control"  placeholder="" name="acronimo" value="<?= $establishment['acronym'];?>">

@@ -4,7 +4,7 @@
 			<h3>Actualizar "<?= $obra['title'];?>"</h3>
 		</div>
 		<div class="col-12">
-			<?php echo form_open_multipart('admin/set_obra/'); ?>
+			<?php echo form_open_multipart('admin/obras/'); ?>
 			<div class="form-group">
 				<label for="titulo">Título</label>
 				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $obra['title'];?>">

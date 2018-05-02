@@ -18,7 +18,7 @@
 
 						<tr>
 							<th scope="row"><?= $exposition_item['exposition_id']; ?></th>
-							<td><a href="<?= site_url('admin/exposiciones_museos/'. $exposition_item['exposition_id']);?>"><?= $exposition_item['title']; ?></a></td>
+							<td><a href="<?= site_url('admin/exposiciones-museos/'. $exposition_item['exposition_id']);?>"><?= $exposition_item['title']; ?></a></td>
 							<td><?= date('j \d\e F, Y', $exposition_item['creation_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$exposition_item['modified_date']); ?></td>
 							<td><?= ($exposition_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
