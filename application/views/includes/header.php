@@ -22,8 +22,8 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="<?= site_url('');?>">Inicio <span class="sr-only">(actual)</span></a>
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('');?>">Inicio</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('fmn');?>">FMN</a>

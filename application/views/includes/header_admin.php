@@ -25,8 +25,8 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="<?= site_url('admin/');?>">Admin <span class="sr-only">(actual)</span></a>
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('admin/');?>">Admin </a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('admin/establecimientos');?>">Establecimientos</a>
@@ -53,16 +53,16 @@
 					<a class="nav-link" href="<?= site_url('admin/contactenos');?>">Contacto</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?= site_url('admin/agenda_museos');?>">Agenda Museos</a>
+					<a class="nav-link" href="<?= site_url('admin/agenda-museos');?>">Agenda Museos</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?= site_url('admin/exposiciones_museos');?>">Exposiciones Museos</a>
+					<a class="nav-link" href="<?= site_url('admin/exposiciones-museos');?>">Exposiciones Museos</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?= site_url('admin/multimedia_museos');?>">Multimedia Museos</a>
+					<a class="nav-link" href="<?= site_url('admin/multimedia-museos');?>">Multimedia Museos</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?= site_url('admin/noticias_museos');?>">Noticias Museos</a>
+					<a class="nav-link" href="<?= site_url('admin/noticias-museos');?>">Noticias Museos</a>
 				</li>
 			</ul>
 		</div>
