@@ -112,7 +112,7 @@ $route['admin/multimedia']['post'] = 'admin/set_multimedia';
 $route['admin/multimedia/(:num)/destroy']['post'] = 'admin/eliminar_multimedia/$1';
 
 $route['admin/establecimientos']['get'] = 'admin/establecimientos';
-$route['admin/museos/new']['get'] = 'admin/nuevo_establecimiento/museo';
+$route['admin/museo/new']['get'] = 'admin/nuevo_establecimiento/museo';
 $route['admin/instituto/new']['get'] = 'admin/nuevo_establecimiento/instituto';
 $route['admin/establecimientos/(:num)']['get'] = 'admin/establecimientos/$1';
 $route['admin/establecimientos/museo']['post'] = 'admin/set_establecimiento/museo';
@@ -143,6 +143,10 @@ $route['admin/agenda-museos']['get'] = 'admin/agenda_museos';
 $route['admin/agenda-museos/(:num)']['get'] = 'admin/agenda_museos/$1';
 $route['admin/agenda-museos']['post'] = 'admin/set_agenda_museos';
 
+$route['admin/fechas-agenda-museos']['get'] = 'admin/fechas_agenda_museos';
+$route['admin/fechas-agenda-museos/(:num)']['get'] = 'admin/fechas_agenda_museos/$1';
+$route['admin/fechas-agenda-museos']['post'] = 'admin/set_fechas_agenda_museos';
+
 $route['admin/exposiciones-museos']['get'] = 'admin/exposiciones_museos';
 $route['admin/exposiciones-museos/(:num)']['get'] = 'admin/exposiciones_museos/$1';
 $route['admin/exposiciones-museos']['post'] = 'admin/set_exposicion_museos';
@@ -155,5 +159,5 @@ $route['admin/multimedia-museos']['post'] = 'admin/set_multimedia_museos';
 $route['default_controller'] = 'home';
 
 $route['(:any)'] = ''; //send to error page
-$route['(:any)/(:any)'] = ''; //send to erro page
-$route['(:any)/(:any)/(:any)'] = ''; //send to erro page
+$route['(:any)/(:any)'] = ''; //send to error page
+$route['(:any)/(:any)/(:any)'] = ''; //send to error page
