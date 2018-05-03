@@ -46,6 +46,9 @@
 			</button> -->
 
 			<input type="hidden" name="id" value="<?= $obra['obra_id'];?>">
+
+			<?php $this->load->view('includes/errors'); ?>
+			
 			<button type="submit" class="btn btn-primary">Actualizar</button>
 			</form>
 		</div>

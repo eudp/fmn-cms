@@ -40,6 +40,9 @@
 				</button> -->
 				<input type="hidden" name="actual" value="1">
 				<input type="hidden" name="id" >
+
+				<?php $this->load->view('includes/errors'); ?>
+
 				<button type="submit" class="btn btn-primary">Crear</button>
 			</form>
 		</div>

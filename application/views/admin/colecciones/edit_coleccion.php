@@ -32,6 +32,9 @@
 			</button> -->
 
 			<input type="hidden" name="id" value="<?= $collection['collection_id'];?>">
+
+			<?php $this->load->view('includes/errors'); ?>
+			
 			<button type="submit" class="btn btn-primary">Actualizar</button>
 			</form>
 		</div>

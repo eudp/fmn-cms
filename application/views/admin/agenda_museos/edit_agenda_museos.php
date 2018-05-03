@@ -36,6 +36,9 @@
 			</button> -->
 
 			<input type="hidden" name="id" value="<?= $diary['diary_id'];?>">
+
+			<?php $this->load->view('includes/errors'); ?>
+			
 			<button type="submit" class="btn btn-primary">Actualizar</button>
 			</form>
 		</div>

@@ -73,7 +73,10 @@ class Admin extends CI_Controller {
     	$this->form_validation->set_rules('titulo', 'titulo', 'required');
     	if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/establecimientos/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/' . $u_path . '/new'), 'refresh'));
         }
         else
         {
@@ -235,7 +238,9 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/noticias/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/noticias/new'), 'refresh'));
         }
         else
         {
@@ -335,7 +340,9 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/exposiciones/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/exposiciones/new'), 'refresh'));
         }
         else
         {
@@ -431,16 +438,14 @@ class Admin extends CI_Controller {
 
     public function set_coleccion()
     {
-
-
-        
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/colecciones/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/colecciones/new'), 'refresh'));
         }
         else
         {
@@ -538,7 +543,9 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('id_coleccion', 'id_coleccion', 'required');
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/obras/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/obras/new'), 'refresh'));
         }
         else
         {
@@ -662,7 +669,9 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/agenda/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/agenda/new'), 'refresh'));
         }
         else
         {
@@ -760,7 +769,9 @@ class Admin extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/multimedia/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/multimedia/new'), 'refresh'));
         }
         else
         {
@@ -855,7 +866,9 @@ class Admin extends CI_Controller {
         //$this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            redirect(site_url('admin/agenda-museos/'. $this->input->post('id')), 'refresh');
         }
         else
         {
@@ -937,7 +950,9 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            redirect(site_url('admin/exposiciones-museos/'. $this->input->post('id')), 'refresh');
         }
         else
         {
@@ -1021,7 +1036,9 @@ class Admin extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            redirect(site_url('admin/multimedia-museos/'. $this->input->post('id')), 'refresh');
         }
         else
         {
@@ -1104,7 +1121,9 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
         if ($this->form_validation->run() == FALSE)
         {
-            $this->index();
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            redirect(site_url('admin/noticias-museos/'. $this->input->post('id')), 'refresh');
         }
         else
         {

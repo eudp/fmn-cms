@@ -27,7 +27,7 @@ class Home extends CI_Controller {
     {
     	$this->load->library('form_validation');
 
-    	$this->form_validation->set_rules('search', 'Search', 'required');
+    	$this->form_validation->set_rules('search', 'Search', 'required|xss_clean');
 
     	if ($this->form_validation->run()) {
 
@@ -48,7 +48,7 @@ class Home extends CI_Controller {
 	        $this->load->view('includes/footer');
 
     	} else {
-    		redirect($this->index());
+    		redirect(site_url());
     	}
     }
 

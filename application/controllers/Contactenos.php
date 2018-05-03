@@ -20,18 +20,20 @@ class Contactenos extends CI_Controller {
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nombre', 'nombre', 'required', array('required' => 'Debes llenar el campo nombre'));
-        $this->form_validation->set_rules('apellido', 'Apellido', 'required', array('required' => 'Debes llenar el campo apellido'));
-        $this->form_validation->set_rules('email', 'Correo', 'required|valid_email', array('required' => 'Debes llenar el campo correo'));
-        $this->form_validation->set_rules('asunto', 'Asunto', 'required', array('required' => 'Debes llenar este campo el campo asunto'));
-        $this->form_validation->set_rules('mensaje', 'Mensaje', 'required', array('required' => 'Debes llenar este campo el campo mensaje'));
+        $this->form_validation->set_rules('nombre', 'nombre', 'required');
+        $this->form_validation->set_rules('apellido', 'Apellido', 'required');
+        $this->form_validation->set_rules('email', 'Correo', 'required|valid_email');
+        $this->form_validation->set_rules('asunto', 'Asunto', 'required');
+        $this->form_validation->set_rules('mensaje', 'Mensaje', 'required');
 
-        if ($this->form_validation->run()) {
+        if ($this->form_validation->run() == FALSE) {
 
-            
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            redirect(site_url('contactenos'), 'refresh');
 
         } else {
-            $this->index();
+
         }
     }
 }

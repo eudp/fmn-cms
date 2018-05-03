@@ -3,7 +3,7 @@
 <div class="col-12">
 	
 
-<?php echo form_open('contactenos/send'); ?>
+<?php echo form_open('contactenos'); ?>
   <div class="form-group">
     <label for="nombre">Nombre</label>
     <input type="text" class="form-control"  placeholder="" name="nombre">
@@ -25,9 +25,9 @@
     <textarea name="mensaje"  class="form-control" rows="3" ></textarea>
   </div>
 
+  <?php $this->load->view('includes/errors'); ?>
+
   <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 </div>
-<div class="col-12">
-	<?php echo validation_errors(); ?>
-</div></div></div>
+<</div></div>
