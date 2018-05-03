@@ -1171,4 +1171,73 @@ class Admin extends CI_Controller {
             }
         }
     }
+
+    /*List of news and add individual fechas agenda*/
+
+    public function fechas_agenda($diary_id)
+    {
+
+        $data['diary_dates'] = $this->agenda_model->get_fechas_agenda($diary_id);
+        $data['diary_id'] = $diary_id;
+
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/agenda/fechas_agenda', $data);
+        $this->load->view('includes/footer_admin');
+        
+    }
+
+    public function set_fechas_agenda()
+    {        
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('diary_date', 'fecha de agenda', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            redirect(site_url('admin/fechas-agenda/'. $this->input->post('id')), 'refresh');
+        }
+        else
+        {
+            /*Update diary date*/
+            $date = str_replace("T"," ",$this->input->post('diary_date')) . ':00';
+
+            $array = array(
+                'date'     => $date,
+                'diary_id' => $this->input->post('id')
+            );
+
+            $this->agenda_model->set_fechas_agenda($array);
+            redirect(site_url('admin/fechas-agenda/' . $this->input->post('id')), 'refresh');
+        }
+    }
+
+    /* Handle delete permisology */
+    public function eliminar_fechas_agenda ($diary_date_id) 
+    {
+        $diary_id = $this->input->post('id');
+
+        $this->agenda_model->delete_fechas_agenda($diary_date_id);
+
+        redirect(site_url('admin/fechas-agenda/' . $diary_id), 'refresh');
+    }
+
+
+    public function fechas_agenda_museos($diary_id)
+    {
+
+        $data['diary_dates'] = $this->agenda_model->get_fechas_agenda($diary_id, '_museos');
+        $data['diary_id'] = $diary_id;
+
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/agenda_museos/fechas_agenda_museos', $data);
+        $this->load->view('includes/footer_admin');
+    }
 }

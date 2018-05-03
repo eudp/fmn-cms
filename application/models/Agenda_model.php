@@ -46,7 +46,7 @@ class Agenda_model extends CI_Model {
 
     public function get_fechas_agenda($diary_id, $museos = '') {
 
-        $this->db->select('f.date');
+        $this->db->select('f.date, f.diary_date_id');
         $this->db->from('agenda' . $museos . ' as d');
         $this->db->join('fechas_agenda' . $museos . ' as f', 'f.diary_id = d.diary_id');
         $this->db->where('d.diary_id', $diary_id);
@@ -66,9 +66,21 @@ class Agenda_model extends CI_Model {
             return $this->db->insert_id();
         }  
     }
+    public function set_fechas_agenda($array)
+    {
+
+        $this->db->insert('fechas_agenda', $array);
+
+        return $this->db->insert_id();
+    }
 
     public function delete($diary_id)
     {
         $this->db->delete('agenda', array('diary_id' => $diary_id));   
+    }
+
+    public function delete_fechas_agenda($diary_date_id)
+    {
+        $this->db->delete('fechas_agenda', array('diary_date_id' => $diary_date_id));   
     }
 }

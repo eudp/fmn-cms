@@ -126,10 +126,8 @@ $route['admin/agenda/(:num)']['get'] = 'admin/agenda/$1';
 $route['admin/agenda']['post'] = 'admin/set_agenda';
 $route['admin/agenda/(:num)/destroy']['post'] = 'admin/eliminar_agenda/$1';
 
-$route['admin/fechas-agenda']['get'] = 'admin/fechas_agenda';
-$route['admin/fechas-agenda/new']['get'] = 'admin/nueva_fechas_agenda';
 $route['admin/fechas-agenda/(:num)']['get'] = 'admin/fechas_agenda/$1';
-$route['admin/fechas-agenda']['post'] = 'admin/set_fechas_agenda';
+$route['admin/fechas-agenda/(:num)']['post'] = 'admin/set_fechas_agenda';
 $route['admin/fechas-agenda/(:num)/destroy']['post'] = 'admin/eliminar_fechas_agenda/$1';
 
 $route['admin/contactenos']['get'] = 'admin/contactenos';
@@ -146,7 +144,6 @@ $route['admin/agenda-museos']['post'] = 'admin/set_agenda_museos';
 
 $route['admin/fechas-agenda-museos']['get'] = 'admin/fechas_agenda_museos';
 $route['admin/fechas-agenda-museos/(:num)']['get'] = 'admin/fechas_agenda_museos/$1';
-$route['admin/fechas-agenda-museos']['post'] = 'admin/set_fechas_agenda_museos';
 
 $route['admin/exposiciones-museos']['get'] = 'admin/exposiciones_museos';
 $route['admin/exposiciones-museos/(:num)']['get'] = 'admin/exposiciones_museos/$1';
