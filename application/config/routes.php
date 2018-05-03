@@ -70,6 +70,7 @@ $route['search']['post'] = 'home/search';
 $route['fmn']['get'] = 'home/fmn';
 $route['educacion']['get'] = 'home/educacion';
 $route['contactenos']['get'] = 'contactenos';
+$route['contactenos']['post'] = 'contactenos/send';
 $route['home']['get'] = 'home';
 
 /* URLS for searching inside museums tables */
