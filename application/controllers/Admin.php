@@ -16,6 +16,7 @@ class Admin extends CI_Controller {
         $this->load->model('multimedia_model');
 
         $this->load->helper('domain_museum');
+        $this->load->helper('servicios');
     }
 
     public function index()
@@ -46,6 +47,8 @@ class Admin extends CI_Controller {
 
     		$data['establishment'] = $this->establecimientos_model->get(null, $establishment_id, null);
     		$data['establishment']['description'] = strip_tags($data['establishment']['description'],'<a><em><strong><p><br>');
+
+            $data['services'] = ($data['establishment']['type'] == 'museo' ? servicios_translate_edit($data['establishment']['services']) : $data['establishment']['services']);
 
 	    	$h_data['title'] = 'Admin | Fundación Museos Nacionales';
 	        $h_data['active'] = 'admin';
@@ -100,6 +103,7 @@ class Admin extends CI_Controller {
 			    'site_url' 		=> $this->input->post('url'),
 			    'schedule' 		=> $this->input->post('horario'),
 			    'modified_date' => time(),
+                'services'      => ($u_path == 'museo' ? servicios_form_post($this->input->post()) : $this->input->post('servicio')),
                 'type'          => $u_path,
 			    'status'        => $status
 			);

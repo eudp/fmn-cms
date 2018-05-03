@@ -47,14 +47,85 @@
 					<input type="text" class="form-control"  placeholder="" name="url">
 				</div>
 				<div class="form-group">
-					<label for="url">Horario</label>
+					<label for="horario">Horario</label>
 					<input type="text" class="form-control"  placeholder="" name="horario">
 				</div>
+				
+				<?php if ($type == 'museo') :?>
+					
+					<p>Servicios</p>
+
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_1" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_1">Información</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_2" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_2">Cafetín</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_3" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_3">Teléfono</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_4" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_4">Estacionamiento</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_5" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_5">Baño</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_6" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_6">Tienda</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_7" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_7">WIFI</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_8" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_8">Ascensor</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_9" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_9">Escaleras</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_10" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_10">Cine</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_11" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_11">Multimedia</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_12" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_12">Primeros auxilios</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_13" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_13">Silla de ruedas</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" name="ser_14" type="checkbox" value="1">
+						<label class="form-check-label" for="ser_14">Biblioteca</label>
+					</div>
+
+				<?php else : ?>
+
+					<div class="form-group">
+						<label for="servicio">Servicio</label>
+						<input type="text" class="form-control"  placeholder="" name="servicio">
+					</div>
+
+				<?php endif ?>
+
 				<div class="form-group">
 					<input  type="file" class="form-control-file" name="userfile" size="20" />
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" name='status' type="checkbox" value="1">
+					<input class="form-check-input" name="status" type="checkbox" value="1">
 					<label class="form-check-label" for="status">
 						Activo
 					</label>

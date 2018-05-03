@@ -50,6 +50,77 @@
 				<label for="horario">Horario</label>
 				<input type="text" class="form-control"  placeholder="" name="horario" value="<?= $establishment['schedule'];?>">
 			</div>
+
+			<?php if ($establishment['type'] == 'museo') :?>
+
+				<p>Servicios</p>
+
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_1" type="checkbox" value="1" <?= $services[0];?>>
+					<label class="form-check-label" for="ser_1">Información</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_2" type="checkbox" value="1" <?= $services[1];?>>
+					<label class="form-check-label" for="ser_2">Cafetín</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_3" type="checkbox" value="1" <?= $services[2];?>>
+					<label class="form-check-label" for="ser_3">Teléfono</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_4" type="checkbox" value="1" <?= $services[3];?>>
+					<label class="form-check-label" for="ser_4">Estacionamiento</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_5" type="checkbox" value="1" <?= $services[4];?>>
+					<label class="form-check-label" for="ser_5">Baño</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_6" type="checkbox" value="1" <?= $services[5];?>>
+					<label class="form-check-label" for="ser_6">Tienda</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_7" type="checkbox" value="1" <?= $services[6];?>>
+					<label class="form-check-label" for="ser_7">WIFI</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_8" type="checkbox" value="1" <?= $services[7];?>>
+					<label class="form-check-label" for="ser_8">Ascensor</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_9" type="checkbox" value="1" <?= $services[8];?>>
+					<label class="form-check-label" for="ser_9">Escaleras</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_10" type="checkbox" value="1" <?= $services[9];?>>
+					<label class="form-check-label" for="ser_10">Cine</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_11" type="checkbox" value="1" <?= $services[10];?>>
+					<label class="form-check-label" for="ser_11">Multimedia</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_12" type="checkbox" value="1" <?= $services[11];?>>
+					<label class="form-check-label" for="ser_12">Primeros auxilios</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_13" type="checkbox" value="1" <?= $services[12];?>>
+					<label class="form-check-label" for="ser_13">Silla de ruedas</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="ser_14" type="checkbox" value="1" <?= $services[13];?>>
+					<label class="form-check-label" for="ser_14">Biblioteca</label>
+				</div>
+
+			<?php else : ?>
+
+				<div class="form-group">
+					<label for="servicio">Servicio</label>
+					<input type="text" class="form-control"  placeholder="" name="servicio"  value="<?= $establishment['services'];?>">
+				</div>
+
+			<?php endif ?>
+
 			<div class="form-group">
 				<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $establishment['path']); ?>"><?= $establishment['file_name'];?></a></p>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
