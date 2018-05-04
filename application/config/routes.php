@@ -153,9 +153,8 @@ $route['admin/multimedia-museos']['get'] = 'admin/multimedia_museos';
 $route['admin/multimedia-museos/(:num)']['get'] = 'admin/multimedia_museos/$1';
 $route['admin/multimedia-museos']['post'] = 'admin/set_multimedia_museos';
 
-
 $route['default_controller'] = 'home';
 
-$route['(:any)'] = ''; //send to error page
-$route['(:any)/(:any)'] = ''; //send to error page
-$route['(:any)/(:any)/(:any)'] = ''; //send to error page
+$route['(:any)'] = $route['(:any)/(:any)'] = $route['(:any)/(:any)/(:any)'] = function () {
+	show_404(); 
+ };
