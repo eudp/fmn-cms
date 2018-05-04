@@ -6,7 +6,7 @@
             
             <div class="col-3">
                 <a href="<?= site_url('agenda/'. $diary_item['diary_id']);?>"><?= $diary_item['title']; ?></a>
-                <p><?= date('j \d\e F, Y', $diary_item['publication_date']); ?></p>
+                <p><?= date('d/m/Y', strtotime($diary_item['date'])); ?></p>
             </div>
 
         <?php endforeach; ?>

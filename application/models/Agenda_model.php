@@ -44,6 +44,24 @@ class Agenda_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function get_calendar($month = null)
+    {
+    
+        $this->db->select('d.title, d.diary_id, f.date');
+        $this->db->from('agenda as d');
+
+        $this->db->where('status' , 1);
+        
+        $this->db->join('fechas_agenda as f', 'f.diary_id = d.diary_id', 'left');
+
+        $this->db->order_by('f.date', 'DESC');
+        
+        $query = $this->db->get();
+
+        return $query->result_array();
+        
+    }
+
     public function get_fechas_agenda($diary_id, $museos = '') {
 
         $this->db->select('f.date, f.diary_date_id');

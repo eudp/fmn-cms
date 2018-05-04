@@ -9,7 +9,7 @@ class Agenda extends CI_Controller {
 
     public function index()
     {
-        $data['diary'] = $this->agenda_model->get();
+        $data['diary'] = $this->agenda_model->get_calendar();
         $h_data['title'] = 'Agenda | Fundación Museos Nacionales';
         $h_data['active'] = 'agenda';
 
