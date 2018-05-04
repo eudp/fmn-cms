@@ -53,7 +53,7 @@
         <?php foreach ($diary as $diary_item): ?>
             
             <div class="col-3">
-                <span><?= date('j \d\e F, Y', $diary_item['publication_date']); ?></span>
+                <!-- <span><?= date('j \d\e F, Y', $diary_item['publication_date']); ?></span> -->
                 <a href="<?= site_url('agenda/'. $diary_item['diary_id']);?>"><h5><?= $diary_item['title']; ?></h5></a>
             </div>
 
@@ -65,7 +65,7 @@
         <?php foreach ($diary_museums as $diary_item): ?>
             
             <div class="col-3">
-                <span><?= date('j \d\e F, Y', $diary_item['publication_date']); ?> - <?= domain_museum($diary_item['museums']) ?></span>
+                <!-- <span><?= date('j \d\e F, Y', $diary_item['publication_date']); ?> - <?= domain_museum($diary_item['museums']) ?></span> -->
                 <a href="<?= site_url('agenda-museos/'. $diary_item['diary_id']);?>"><h5><?= $diary_item['title']; ?></h5></a>
             </div>
 
