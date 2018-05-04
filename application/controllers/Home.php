@@ -27,7 +27,7 @@ class Home extends CI_Controller {
     {
     	$this->load->library('form_validation');
 
-    	$this->form_validation->set_rules('search', 'Search', 'required|xss_clean');
+    	$this->form_validation->set_rules('search', 'Search', 'required');
 
     	if ($this->form_validation->run()) {
 
