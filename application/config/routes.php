@@ -133,6 +133,11 @@ $route['admin/fechas-agenda/(:num)/destroy']['post'] = 'admin/eliminar_fechas_ag
 $route['admin/contactenos']['get'] = 'admin/contactenos';
 $route['admin/contactenos/(:num)']['get'] = 'admin/contactenos/$1';
 
+$route['admin/carrusel/(:any)/(:num)']['get'] = 'admin/listar_carrusel/$1/$2';
+$route['admin/carrusel/(:any)/(:num)/new']['get'] = 'admin/nuevo_carrusel/$1/$2';
+$route['admin/carrusel/(:num)']['get'] = 'admin/carrusel/$1';
+$route['admin/carrusel']['post'] = 'admin/set_carrusel';
+$route['admin/carrusel/(:num)/destroy']['post'] = 'admin/eliminar_carrusel/$1';
 
 $route['admin/noticias-museos']['get'] = 'admin/noticias_museos';
 $route['admin/noticias-museos/(:num)']['get'] = 'admin/noticias_museos/$1';

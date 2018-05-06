@@ -14,6 +14,7 @@ class Admin extends CI_Controller {
         $this->load->model('contacto_model');
         $this->load->model('agenda_model');
         $this->load->model('multimedia_model');
+        $this->load->model('carrusel_model');
 
         $this->load->helper('domain_museum');
         $this->load->helper('servicios');
@@ -162,7 +163,11 @@ class Admin extends CI_Controller {
             "exposicion_museos"      => "./assets/images/exposicion_museos/",
             "multimedia_museos"      => "./assets/images/multimedias_museos/",
             "multimedia_file_museos" => "./assets/files/multimedias_museos/",
-            "noticia_museos"         => "./assets/images/noticias_museos/"
+            "noticia_museos"         => "./assets/images/noticias_museos/",
+            "carrusel_museo"         => "./assets/images/museos/carrusel/",
+            "carrusel_instituto"     => "./assets/images/institutos/carrusel/",
+            "carrusel_coleccion"     => "./assets/images/colecciones/carrusel/",
+            "carrusel_exposicion"    => "./assets/images/exposiciones/carrusel/"
         ];
 
         $config['upload_path']   = $upload_path[$u_path];
@@ -1239,5 +1244,98 @@ class Admin extends CI_Controller {
         $this->load->view('includes/header_admin',$h_data);
         $this->load->view('admin/agenda_museos/fechas_agenda_museos', $data);
         $this->load->view('includes/footer_admin');
+    }
+
+    public function listar_carrusel ($type, $element_id)
+    {
+
+        $data['carousel'] = $this->carrusel_model->get($element_id, $type);
+        $data['element_id'] = $element_id;
+        $data['type'] = $type;
+
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/carrusel/list', $data);
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function carrusel ($carousel_id)
+    {
+        $data['carousel'] = $this->carrusel_model->get(null, null, $carousel_id);
+
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/carrusel/edit_carrusel', $data);
+        $this->load->view('includes/footer_admin');
+        
+    }
+
+    public function nuevo_carrusel ($type, $element_id) 
+    {
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+        $data['element_id'] = $element_id;
+        $data['type'] = $type;
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/carrusel/new_carrusel', $data);
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function set_carrusel()
+    {        
+        //$this->load->library('form_validation');
+
+        //if ($this->form_validation->run() == FALSE)
+        if ($this->input->post('id') == null && empty($_FILES['userfile']['name']))
+        {
+            //$this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/carrusel/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/carrusel/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id') .'/new'), 'refresh'));
+        }
+        else
+        {
+            /* Upload image*/
+            $image_id = $this->upload_file('carrusel_' . $this->input->post('tipo'));
+
+            $array = array(
+                'title'        => $this->input->post('titulo'),
+                'description'  => $this->input->post('descripcion'),
+                'url'          => $this->input->post('link'),
+                'element_id'   => $this->input->post('elemento_id'),
+                'type'         => $this->input->post('tipo')
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $carousel_id = $this->input->post('id');
+
+            if ($carousel_id == null) {
+
+                $this->carrusel_model->set($array);
+                redirect(site_url('admin/carrusel/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id')), 'refresh');
+
+            } else {
+                $this->carrusel_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/carrusel/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /* Handle delete permisology */
+    public function eliminar_carrusel ($carousel_id) 
+    {
+
+        $this->carrusel_model->delete($carousel_id);
+
+        redirect(site_url('admin/carrusel/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id')), 'refresh');
     }
 }
