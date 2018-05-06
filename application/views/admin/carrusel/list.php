@@ -42,22 +42,5 @@
 				</tbody>
 			</table>
 		</div>
-
-<!-- 		<div class="col-md-12" style="margin-top: 50px">
-			<h4>Asigna una fecha y hora</h4>
-			<?php echo form_open('admin/fechas-agenda/' . $diary_id ); ?>
-			
- 		 		<input type="datetime-local" class="form-control" id="diary_date" name="diary_date">
-
- 		 		<input type="hidden" name="id" value="<?= $diary_id;?>">
- 		 		<small>(La hora está en formato 24 horas e.g. 18:35)</small><br>
-
- 		 		<?php $this->load->view('includes/errors'); ?>
-	
-				<button type="submit" class="btn btn-primary">Agregar fecha</button>
-
-			</form>
-		</div> -->
-
 	</div>
 </div>
