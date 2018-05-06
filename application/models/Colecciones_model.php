@@ -12,7 +12,7 @@ class Colecciones_model extends CI_Model {
         {
             $this->db->select('c.title, a.path, c.collection_id, c.status,c.creation_date, c.modified_date');
             $this->db->from('colecciones as c');
-            $this->db->join('archivos as a', 'a.file_id = c.image_id');
+            $this->db->join('archivos as a', 'a.file_id = c.image_id', 'left');
             if ($status != null) {
                 $this->db->where('status', $status);
             }
