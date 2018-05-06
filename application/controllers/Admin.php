@@ -201,6 +201,11 @@ class Admin extends CI_Controller {
                 'file_name'     => $data['upload_data']['file_name']
             );
 
+            if ($data['upload_data']['is_image'] == 1) {
+                $array += ['height' => $data['upload_data']['image_height']];
+                $array += ['width'  => $data['upload_data']['image_width']];
+            }
+
             return $this->archivos_model->set($array);
         }
     }
