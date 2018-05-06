@@ -64,6 +64,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('admin/noticias-museos');?>">Noticias Museos</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('admin/colecciones-museos');?>">Colecciones Museos</a>
+				</li>
 			</ul>
 		</div>
 	</nav>

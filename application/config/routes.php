@@ -158,6 +158,10 @@ $route['admin/multimedia-museos']['get'] = 'admin/multimedia_museos';
 $route['admin/multimedia-museos/(:num)']['get'] = 'admin/multimedia_museos/$1';
 $route['admin/multimedia-museos']['post'] = 'admin/set_multimedia_museos';
 
+$route['admin/colecciones-museos']['get'] = 'admin/colecciones_museos';
+$route['admin/colecciones-museos/(:num)']['get'] = 'admin/colecciones_museos/$1';
+$route['admin/colecciones-museos']['post'] = 'admin/set_coleccion_museos';
+
 $route['admin/carrusel-museos/(:any)/(:num)']['get'] = 'admin/listar_carrusel_museos/$1/$2';
 $route['admin/carrusel-museos/(:num)']['get'] = 'admin/carrusel_museos/$1';
 $route['admin/carrusel-museos']['post'] = 'admin/set_carrusel_museos';

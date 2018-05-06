@@ -160,6 +160,7 @@ class Admin extends CI_Controller {
             "multimedia"             => "./assets/images/multimedias/",
             "multimedia_file"        => "./assets/files/multimedias/",
             "agenda_museos"          => "./assets/images/agenda_museos/",
+            "coleccion_museos"       => "./assets/images/colecciones_museos/",
             "exposicion_museos"      => "./assets/images/exposicion_museos/",
             "multimedia_museos"      => "./assets/images/multimedias_museos/",
             "multimedia_file_museos" => "./assets/files/multimedias_museos/",
@@ -1407,6 +1408,85 @@ class Admin extends CI_Controller {
                 $this->carrusel_model->set($array, $this->input->post('id'));
 
                 redirect(site_url('admin/carrusel_museos/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /*List of collections and edit individual collection*/
+
+    public function colecciones_museos($collection_id = null)
+    {
+        if ($collection_id == null) {
+            $data['collection'] = $this->colecciones_model->get(null, null, '_museos');
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/colecciones_museos/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit collection*/
+
+            $data['collection'] = $this->colecciones_model->get($collection_id, null, '_museos');
+            $data['collection']['description'] = strip_tags($data['collection']['description'],'<a><em><strong><p><br>');
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/colecciones_museos/edit_coleccion', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function set_coleccion_museos()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/colecciones_museos/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/colecciones_museos/new'), 'refresh'));
+        }
+        else
+        {
+            /* Upload image*/
+            $image_id = $this->upload_file('coleccion_museos');
+
+            /*Update collection*/
+
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'            => $this->input->post('titulo'),
+                'description'      => $this->input->post('descripcion'),
+                'modified_date'    => time(),
+                'status'           => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $collection_id = $this->input->post('id');
+
+            if ($collection_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->colecciones_model->set($array);
+                redirect(site_url('admin/colecciones_museos/'), 'refresh');
+
+            } else {
+                $this->colecciones_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/colecciones_museos/'. $this->input->post('id')), 'refresh');
             }
         }
     }
