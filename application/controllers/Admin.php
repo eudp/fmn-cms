@@ -1338,4 +1338,76 @@ class Admin extends CI_Controller {
 
         redirect(site_url('admin/carrusel/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id')), 'refresh');
     }
+
+    public function listar_carrusel_museos ($type, $element_id)
+    {
+
+        $data['carousel'] = $this->carrusel_model->get($element_id, $type, null, '_museos');
+        $data['element_id'] = $element_id;
+        $data['type'] = $type;
+
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/carrusel_museos/list', $data);
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function carrusel_museos ($carousel_id)
+    {
+        $data['carousel'] = $this->carrusel_model->get(null, null, $carousel_id, '_museos');
+
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/carrusel_museos/edit_carrusel_museos', $data);
+        $this->load->view('includes/footer_admin');
+        
+    }
+
+    public function set_carrusel_museos()
+    {        
+        //$this->load->library('form_validation');
+
+        //if ($this->form_validation->run() == FALSE)
+        if ($this->input->post('id') == null && empty($_FILES['userfile']['name']))
+        {
+            //$this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/carrusel_museos/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/carrusel_museos/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id') .'/new'), 'refresh'));
+        }
+        else
+        {
+            /* Upload image*/
+            $image_id = $this->upload_file('carrusel_' . $this->input->post('tipo'));
+
+            $array = array(
+                'title'        => $this->input->post('titulo'),
+                'description'  => $this->input->post('descripcion'),
+                'url'          => $this->input->post('link'),
+                'element_id'   => $this->input->post('elemento_id'),
+                'type'         => $this->input->post('tipo')
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $carousel_id = $this->input->post('id');
+
+            if ($carousel_id == null) {
+
+                $this->carrusel_model->set($array);
+                redirect(site_url('admin/carrusel_museos/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id')), 'refresh');
+
+            } else {
+                $this->carrusel_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/carrusel_museos/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
 }

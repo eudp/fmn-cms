@@ -9,6 +9,7 @@ class Carrusel_model extends CI_Model {
     public function get($element_id, $type, $carousel_id = null, $museos = '')
     {
         if ($carousel_id == null) {
+
             $this->db->select('d.title, d.description, d.type, d.element_id, d.url, d.carousel_id, a.path, a.file_name');
             $this->db->from('carrusel' . $museos . ' as d');
             $this->db->where(array('d.element_id' => $element_id, 'd.type' => $type));
