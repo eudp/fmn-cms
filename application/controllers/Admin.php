@@ -139,7 +139,7 @@ class Admin extends CI_Controller {
 		redirect(site_url('admin/establecimientos/'), 'refresh');
     }
 
-    public function upload_file ($u_path, $featured_image = true)
+    public function upload_file ($u_path, $featured_image = true, $museos = '')
     {
         // Select input field
         $file = 'userfile';
@@ -194,7 +194,7 @@ class Admin extends CI_Controller {
                 $path = str_replace('./assets/files', '', $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']);
             }
             $array = array(
-                'user_id'       => 66,
+                'user_id'       => ($museos == '' ? 66 : 83),
                 'creation_date' => time(),
                 'modified_date' => time(),
                 'filemime'      => $data['upload_data']['file_type'],
@@ -208,7 +208,7 @@ class Admin extends CI_Controller {
                 $array += ['width'  => $data['upload_data']['image_width']];
             }
 
-            return $this->archivos_model->set($array);
+            return $this->archivos_model->set($array, $museos);
         }
     }
     /*List of news and edit individual news*/
@@ -891,7 +891,7 @@ class Admin extends CI_Controller {
         {
 
             /* Upload image*/
-            $image_id = $this->upload_file('agenda_museos');
+            $image_id = $this->upload_file('agenda_museos', true, '_museos');
 
             /*Update diary*/
 
@@ -912,21 +912,11 @@ class Admin extends CI_Controller {
                 $array += ['image_id' => $image_id];
             }
 
-            $diary_id = $this->input->post('id');
 
-            if ($diary_id == null) {
+            $this->agenda_model->set($array, $this->input->post('id'), '_museos');
 
-                $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
-
-                $this->agenda_model->set($array, null, '_museos');
-                redirect(site_url('admin/agenda-museos/'), 'refresh');
-
-            } else {
-                $this->agenda_model->set($array, $this->input->post('id'), '_museos');
-
-                redirect(site_url('admin/agenda-museos/'. $this->input->post('id')), 'refresh');
-            }
+            redirect(site_url('admin/agenda-museos/'. $this->input->post('id')), 'refresh');
+            
         }
     }
 
@@ -975,7 +965,7 @@ class Admin extends CI_Controller {
         {
 
             /* Upload image*/
-            $image_id = $this->upload_file('exposicion_museos');
+            $image_id = $this->upload_file('exposicion_museos', true, '_museos');
 
             /*Update exposition*/
 
@@ -1000,21 +990,10 @@ class Admin extends CI_Controller {
                 $array += ['image_id' => $image_id];
             }
 
-            $exposition_id = $this->input->post('id');
+            $this->exposiciones_model->set($array, $this->input->post('id'), '_museos');
 
-            if ($exposition_id == null) {
-
-                $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
-
-                $this->exposiciones_->set($array, null, '_museos');
-                redirect(site_url('admin/exposiciones-museos/'), 'refresh');
-
-            } else {
-                $this->exposiciones_model->set($array, $this->input->post('id'), '_museos');
-
-                redirect(site_url('admin/exposiciones-museos/'. $this->input->post('id')), 'refresh');
-            }
+            redirect(site_url('admin/exposiciones-museos/'. $this->input->post('id')), 'refresh');
+            
         }
     }
 
@@ -1060,10 +1039,10 @@ class Admin extends CI_Controller {
         else
         {
             /* Upload image*/
-            $image_id = $this->upload_file('multimedia_museos');
+            $image_id = $this->upload_file('multimedia_museos', true, '_museos');
 
             /* Upload multimedia_museos file*/
-            $multimedia_file_id = $this->upload_file('multimedia_file_museos', false);
+            $multimedia_file_id = $this->upload_file('multimedia_file_museos', false, '_museos');
 
             /*Update multimedia_museos*/
 
@@ -1087,20 +1066,10 @@ class Admin extends CI_Controller {
                 $array += ['multimedia_file_id' => $multimedia_file_id];
             }
 
-            $multimedia_id = $this->input->post('id');
+            
+            $this->multimedia_model->set($array, $this->input->post('id'), '_museos');
 
-            if ($multimedia_id == null) {
-
-                $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
-
-                $this->multimedia_model->set($array, null, '_museos');
-                redirect(site_url('admin/multimedia-museos/'), 'refresh');
-
-            } else {
-                $this->multimedia_model->set($array, $this->input->post('id'), '_museos');
-
-                redirect(site_url('admin/multimedia-museos/'. $this->input->post('id')), 'refresh');
+            redirect(site_url('admin/multimedia-museos/'. $this->input->post('id')), 'refresh');
             }
         }
     }
@@ -1146,7 +1115,7 @@ class Admin extends CI_Controller {
         {
 
             /* Upload image*/
-            $image_id = $this->upload_file('noticia_museos');
+            $image_id = $this->upload_file('noticia_museos', true, '_museos');
 
             /*Update news*/
 
@@ -1167,21 +1136,10 @@ class Admin extends CI_Controller {
                 $array += ['image_id' => $image_id];
             }
 
-            $news_id = $this->input->post('id');
+            $this->noticias_model->set($array, $this->input->post('id'), '_museos');
 
-            if ($news_id == null) {
-
-                $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
-
-                $this->noticias_model->set($array, null, '_museos');
-                redirect(site_url('admin/noticias-museos/'), 'refresh');
-
-            } else {
-                $this->noticias_model->set($array, $this->input->post('id'), '_museos');
-
-                redirect(site_url('admin/noticias-museos/'. $this->input->post('id')), 'refresh');
-            }
+            redirect(site_url('admin/noticias-museos/'. $this->input->post('id')), 'refresh');
+            
         }
     }
 
@@ -1389,7 +1347,7 @@ class Admin extends CI_Controller {
         else
         {
             /* Upload image*/
-            $image_id = $this->upload_file('carrusel_' . $this->input->post('tipo') . '_museos');
+            $image_id = $this->upload_file('carrusel_' . $this->input->post('tipo') . '_museos', true, '_museos');
 
             $array = array(
                 'title'        => $this->input->post('titulo'),
@@ -1403,19 +1361,11 @@ class Admin extends CI_Controller {
 
                 $array += ['image_id' => $image_id];
             }
+            
+            $this->carrusel_model->set($array, $this->input->post('id'));
 
-            $carousel_id = $this->input->post('id');
-
-            if ($carousel_id == null) {
-
-                $this->carrusel_model->set($array);
-                redirect(site_url('admin/carrusel-museos/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id')), 'refresh');
-
-            } else {
-                $this->carrusel_model->set($array, $this->input->post('id'));
-
-                redirect(site_url('admin/carrusel-museos/'. $this->input->post('id')), 'refresh');
-            }
+            redirect(site_url('admin/carrusel-museos/'. $this->input->post('id')), 'refresh');
+            
         }
     }
 
@@ -1461,7 +1411,7 @@ class Admin extends CI_Controller {
         else
         {
             /* Upload image*/
-            $image_id = $this->upload_file('coleccion_museos');
+            $image_id = $this->upload_file('coleccion_museos', true, '_museos');
 
             /*Update collection*/
 
@@ -1480,21 +1430,11 @@ class Admin extends CI_Controller {
                 $array += ['image_id' => $image_id];
             }
 
-            $collection_id = $this->input->post('id');
+            
+            $this->colecciones_model->set($array, $this->input->post('id'));
 
-            if ($collection_id == null) {
-
-                $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
-
-                $this->colecciones_model->set($array);
-                redirect(site_url('admin/colecciones-museos/'), 'refresh');
-
-            } else {
-                $this->colecciones_model->set($array, $this->input->post('id'));
-
-                redirect(site_url('admin/colecciones-museos/'. $this->input->post('id')), 'refresh');
-            }
+            redirect(site_url('admin/colecciones-museos/'. $this->input->post('id')), 'refresh');
+            
         }
     }
 }
