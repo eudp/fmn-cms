@@ -26,7 +26,7 @@ class Museos extends CI_Controller {
         if (empty($data['establishment_item'])){
             show_404();
         }
-        $data['establishment_item']['description'] = strip_tags($data['establishment_item']['description'],'<a><em><strong><p><br>');
+        $data['establishment_item']['description'] = strip_tags($data['establishment_item']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
         $data['establishment_carousel'] = $this->establecimientos_model->get_carousel($establishment_id);
 
         $h_data['title'] = $data['establishment_item']['title'] . ' | Fundación Museos Nacionales';
