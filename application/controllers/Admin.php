@@ -1070,7 +1070,7 @@ class Admin extends CI_Controller {
             $this->multimedia_model->set($array, $this->input->post('id'), '_museos');
 
             redirect(site_url('admin/multimedia-museos/'. $this->input->post('id')), 'refresh');
-            }
+            
         }
     }
 
