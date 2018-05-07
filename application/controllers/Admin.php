@@ -150,25 +150,27 @@ class Admin extends CI_Controller {
         }
 
         $upload_path = [
-            "museo"                  => "./assets/images/museos/",
-            "instituto"              => "./assets/images/institutos/",
-            "noticia"                => "./assets/images/noticias/",
-            "exposicion"             => "./assets/images/exposiciones/",
-            "coleccion"              => "./assets/images/colecciones/",
-            "obra"                   => "./assets/images/obras/",
-            "agenda"                 => "./assets/images/agenda/",
-            "multimedia"             => "./assets/images/multimedias/",
-            "multimedia_file"        => "./assets/files/multimedias/",
-            "agenda_museos"          => "./assets/images/agenda_museos/",
-            "coleccion_museos"       => "./assets/images/colecciones_museos/",
-            "exposicion_museos"      => "./assets/images/exposicion_museos/",
-            "multimedia_museos"      => "./assets/images/multimedias_museos/",
-            "multimedia_file_museos" => "./assets/files/multimedias_museos/",
-            "noticia_museos"         => "./assets/images/noticias_museos/",
-            "carrusel_museo"         => "./assets/images/museos/carrusel/",
-            "carrusel_instituto"     => "./assets/images/institutos/carrusel/",
-            "carrusel_coleccion"     => "./assets/images/colecciones/carrusel/",
-            "carrusel_exposicion"    => "./assets/images/exposiciones/carrusel/"
+            "museo"                      => "./assets/images/museos/",
+            "instituto"                  => "./assets/images/institutos/",
+            "noticia"                    => "./assets/images/noticias/",
+            "exposicion"                 => "./assets/images/exposiciones/",
+            "coleccion"                  => "./assets/images/colecciones/",
+            "obra"                       => "./assets/images/obras/",
+            "agenda"                     => "./assets/images/agenda/",
+            "multimedia"                 => "./assets/images/multimedias/",
+            "multimedia_file"            => "./assets/files/multimedias/",
+            "agenda_museos"              => "./assets/images/agenda_museos/",
+            "coleccion_museos"           => "./assets/images/colecciones_museos/",
+            "exposicion_museos"          => "./assets/images/exposicion_museos/",
+            "multimedia_museos"          => "./assets/images/multimedias_museos/",
+            "multimedia_file_museos"     => "./assets/files/multimedias_museos/",
+            "noticia_museos"             => "./assets/images/noticias_museos/",
+            "carrusel_museo"             => "./assets/images/museos/carrusel/",
+            "carrusel_instituto"         => "./assets/images/institutos/carrusel/",
+            "carrusel_coleccion"         => "./assets/images/colecciones/carrusel/",
+            "carrusel_exposicion"        => "./assets/images/exposiciones/carrusel/",
+            "carrusel_coleccion_museos"  => "./assets/images/colecciones/carrusel/",
+            "carrusel_exposicion_museos" => "./assets/images/exposiciones/carrusel/"
         ];
 
         $config['upload_path']   = $upload_path[$u_path];
@@ -918,12 +920,12 @@ class Admin extends CI_Controller {
                 $array += ['user_id' => 66];
 
                 $this->agenda_model->set($array, null, '_museos');
-                redirect(site_url('admin/agenda_museos/'), 'refresh');
+                redirect(site_url('admin/agenda-museos/'), 'refresh');
 
             } else {
                 $this->agenda_model->set($array, $this->input->post('id'), '_museos');
 
-                redirect(site_url('admin/agenda_museos/'. $this->input->post('id')), 'refresh');
+                redirect(site_url('admin/agenda-museos/'. $this->input->post('id')), 'refresh');
             }
         }
     }
@@ -1006,12 +1008,12 @@ class Admin extends CI_Controller {
                 $array += ['user_id' => 66];
 
                 $this->exposiciones_->set($array, null, '_museos');
-                redirect(site_url('admin/exposiciones_museos/'), 'refresh');
+                redirect(site_url('admin/exposiciones-museos/'), 'refresh');
 
             } else {
                 $this->exposiciones_model->set($array, $this->input->post('id'), '_museos');
 
-                redirect(site_url('admin/exposiciones_museos/'. $this->input->post('id')), 'refresh');
+                redirect(site_url('admin/exposiciones-museos/'. $this->input->post('id')), 'refresh');
             }
         }
     }
@@ -1093,12 +1095,12 @@ class Admin extends CI_Controller {
                 $array += ['user_id' => 66];
 
                 $this->multimedia_model->set($array, null, '_museos');
-                redirect(site_url('admin/multimedia_museos/'), 'refresh');
+                redirect(site_url('admin/multimedia-museos/'), 'refresh');
 
             } else {
                 $this->multimedia_model->set($array, $this->input->post('id'), '_museos');
 
-                redirect(site_url('admin/multimedia_museos/'. $this->input->post('id')), 'refresh');
+                redirect(site_url('admin/multimedia-museos/'. $this->input->post('id')), 'refresh');
             }
         }
     }
@@ -1173,12 +1175,12 @@ class Admin extends CI_Controller {
                 $array += ['user_id' => 66];
 
                 $this->noticias_model->set($array, null, '_museos');
-                redirect(site_url('admin/noticias_museos/'), 'refresh');
+                redirect(site_url('admin/noticias-museos/'), 'refresh');
 
             } else {
                 $this->noticias_model->set($array, $this->input->post('id'), '_museos');
 
-                redirect(site_url('admin/noticias_museos/'. $this->input->post('id')), 'refresh');
+                redirect(site_url('admin/noticias-museos/'. $this->input->post('id')), 'refresh');
             }
         }
     }
@@ -1382,12 +1384,12 @@ class Admin extends CI_Controller {
         {
             //$this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
 
-            ($this->input->post('id') != null ? redirect(site_url('admin/carrusel_museos/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/carrusel_museos/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id') .'/new'), 'refresh'));
+            ($this->input->post('id') != null ? redirect(site_url('admin/carrusel-museos/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/carrusel-museos/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id') .'/new'), 'refresh'));
         }
         else
         {
             /* Upload image*/
-            $image_id = $this->upload_file('carrusel_' . $this->input->post('tipo'));
+            $image_id = $this->upload_file('carrusel_' . $this->input->post('tipo') . '_museos');
 
             $array = array(
                 'title'        => $this->input->post('titulo'),
@@ -1407,12 +1409,12 @@ class Admin extends CI_Controller {
             if ($carousel_id == null) {
 
                 $this->carrusel_model->set($array);
-                redirect(site_url('admin/carrusel_museos/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id')), 'refresh');
+                redirect(site_url('admin/carrusel-museos/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id')), 'refresh');
 
             } else {
                 $this->carrusel_model->set($array, $this->input->post('id'));
 
-                redirect(site_url('admin/carrusel_museos/'. $this->input->post('id')), 'refresh');
+                redirect(site_url('admin/carrusel-museos/'. $this->input->post('id')), 'refresh');
             }
         }
     }
@@ -1454,7 +1456,7 @@ class Admin extends CI_Controller {
         {
             $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
 
-            ($this->input->post('id') != null ? redirect(site_url('admin/colecciones_museos/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/colecciones_museos/new'), 'refresh'));
+            ($this->input->post('id') != null ? redirect(site_url('admin/colecciones-museos/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/colecciones-museos/new'), 'refresh'));
         }
         else
         {
@@ -1486,12 +1488,12 @@ class Admin extends CI_Controller {
                 $array += ['user_id' => 66];
 
                 $this->colecciones_model->set($array);
-                redirect(site_url('admin/colecciones_museos/'), 'refresh');
+                redirect(site_url('admin/colecciones-museos/'), 'refresh');
 
             } else {
                 $this->colecciones_model->set($array, $this->input->post('id'));
 
-                redirect(site_url('admin/colecciones_museos/'. $this->input->post('id')), 'refresh');
+                redirect(site_url('admin/colecciones-museos/'. $this->input->post('id')), 'refresh');
             }
         }
     }
