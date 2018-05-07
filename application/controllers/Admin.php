@@ -47,6 +47,11 @@ class Admin extends CI_Controller {
     		/* Edit establishment*/
 
     		$data['establishment'] = $this->establecimientos_model->get(null, $establishment_id, null);
+
+            if (empty($data['establishment'])) {
+                show_404();
+            }
+
     		$data['establishment']['description'] = strip_tags($data['establishment']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $data['services'] = ($data['establishment']['type'] == 'museo' ? servicios_translate_edit($data['establishment']['services']) : $data['establishment']['services']);
@@ -228,6 +233,11 @@ class Admin extends CI_Controller {
             /* Edit news*/
 
             $data['news'] = $this->noticias_model->get($news_id);
+
+            if (empty($data['news'])) {
+                show_404();
+            }
+
             $data['news']['description'] = strip_tags($data['news']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
@@ -326,6 +336,11 @@ class Admin extends CI_Controller {
             /* Edit exposition*/
 
             $data['exposition'] = $this->exposiciones_model->get(null, $exposition_id, null);
+
+            if (empty($data['exposition'])) {
+                show_404();
+            }
+
             $data['exposition']['description'] = strip_tags($data['exposition']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $data['establishments'] = $this->establecimientos_model->get(null, null);
@@ -432,6 +447,11 @@ class Admin extends CI_Controller {
             /* Edit collection*/
 
             $data['collection'] = $this->colecciones_model->get($collection_id, null);
+
+            if (empty($data['collection'])) {
+                show_404();
+            }
+
             $data['collection']['description'] = strip_tags($data['collection']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
@@ -529,6 +549,11 @@ class Admin extends CI_Controller {
             /* Edit obra*/
 
             $data['obra'] = $this->obras_model->get($obra_id, null);
+
+            if (empty($data['obra'])) {
+                show_404();
+            }
+
             $data['obra']['description'] = strip_tags($data['obra']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $data['collections'] = $this->colecciones_model->get(null, null);
@@ -629,6 +654,11 @@ class Admin extends CI_Controller {
             $this->load->view('includes/footer_admin');
         } else {
             $data['messages'] = $this->contacto_model->get($id);
+
+            if (empty($data['messages'])) {
+                show_404();
+            }
+
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
 
@@ -655,6 +685,11 @@ class Admin extends CI_Controller {
             /* Edit diary*/
 
             $data['diary'] = $this->agenda_model->get($diary_id);
+
+            if (empty($data['diary'])) {
+                show_404();
+            }
+
             $data['diary']['description'] = strip_tags($data['diary']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $data['establishments'] = $this->establecimientos_model->get(null, null);
@@ -757,6 +792,11 @@ class Admin extends CI_Controller {
             /* Edit multimedia*/
 
             $data['multimedia'] = $this->multimedia_model->get(null, $multimedia_id);
+
+            if (empty($data['multimedia'])) {
+                show_404();
+            }
+
             $data['multimedia']['description'] = strip_tags($data['multimedia']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
@@ -863,6 +903,11 @@ class Admin extends CI_Controller {
             /* Edit diary*/
 
             $data['diary'] = $this->agenda_model->get($diary_id, null, null, null, '_museos');
+
+            if (empty($data['diary'])) {
+                show_404();
+            }
+
             $data['diary']['description'] = strip_tags($data['diary']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             //$data['establishments'] = $this->establecimientos_model->get(null, null);
@@ -937,6 +982,11 @@ class Admin extends CI_Controller {
             /* Edit exposition*/
 
             $data['exposition'] = $this->exposiciones_model->get(null, $exposition_id, null, null, null, '_museos');
+
+            if (empty($data['exposition'])) {
+                show_404();
+            }
+
             $data['exposition']['description'] = strip_tags($data['exposition']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             //$data['establishments'] = $this->establecimientos_model->get(null, null);
@@ -1014,6 +1064,11 @@ class Admin extends CI_Controller {
             /* Edit multimedia_museos*/
 
             $data['multimedia'] = $this->multimedia_model->get(null, $multimedia_id, null, null, null, '_museos');
+
+            if (empty($data['multimedia'])) {
+                show_404();
+            }
+
             $data['multimedia']['description'] = strip_tags($data['multimedia']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
@@ -1091,6 +1146,11 @@ class Admin extends CI_Controller {
             /* Edit news*/
 
             $data['news'] = $this->noticias_model->get($news_id, null, null, null, '_museos');
+ 
+            if (empty($data['news'])) {
+                show_404();
+            }
+
             $data['news']['description'] = strip_tags($data['news']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
@@ -1386,6 +1446,11 @@ class Admin extends CI_Controller {
             /* Edit collection*/
 
             $data['collection'] = $this->colecciones_model->get($collection_id, null, '_museos');
+
+            if (empty($data['collection'])) {
+                show_404();
+            }
+
             $data['collection']['description'] = strip_tags($data['collection']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
