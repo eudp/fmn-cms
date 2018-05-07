@@ -15,10 +15,6 @@
 					<input type="hidden" id="descripcion-oculta" name="descripcion-oculta">
 				</div>
 				<div class="form-group">
-					<label for="horario">Fechas agenda</label>
-					<input type="text" class="form-control"  placeholder="" name="fechas" >
-				</div>
-				<div class="form-group">
 					<label for="id_establecimiento">Selecciona un establecimiento:</label>
 					<select class="form-control" id="id_establecimiento" name="id_establecimiento">
 						<?php foreach ($establishments as $establishment_item): ?>

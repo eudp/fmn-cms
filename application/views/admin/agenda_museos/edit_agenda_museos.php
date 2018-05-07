@@ -15,10 +15,6 @@
 				<input type="hidden" id="descripcion-oculta" name="descripcion-oculta" value='<?= $diary["description"];?>'>
 			</div>
 			<div class="form-group">
-				<label for="horario">Fechas Agenda</label>
-				<input type="text" class="form-control"  placeholder="" name="fechas" value="">
-			</div>
-			<div class="form-group">
 				<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $diary['path']); ?>"><?= $diary['file_name'];?></a></p>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
 			</div>

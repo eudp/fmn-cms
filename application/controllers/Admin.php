@@ -946,7 +946,6 @@ class Admin extends CI_Controller {
             $array = array(
                 'title'            => $this->input->post('titulo'),
                 'description'      => $this->input->post('descripcion'),
-                //'establishment_id' => $this->input->post('id_establecimiento'),
                 'modified_date'    => time(),
                 'publication_date' => time(),
                 'status'           => $status
