@@ -88,6 +88,10 @@ $route['admin/noticias/(:num)']['get'] = 'admin/noticias/$1';
 $route['admin/noticias']['post'] = 'admin/set_noticia';
 $route['admin/noticias/(:num)/destroy']['post'] = 'admin/eliminar_noticia/$1';
 
+$route['admin/galeria-fotos/(:num)']['get'] = 'admin/galeria_fotos/$1';
+$route['admin/galeria-fotos/(:num)']['post'] = 'admin/set_galeria_fotos';
+$route['admin/galeria-fotos/(:num)/destroy']['post'] = 'admin/eliminar_galeria_fotos/$1';
+
 $route['admin/obras']['get'] = 'admin/obras';
 $route['admin/obras/new']['get'] = 'admin/nueva_obra';
 $route['admin/obras/(:num)']['get'] = 'admin/obras/$1';
@@ -142,6 +146,8 @@ $route['admin/carrusel/(:num)/destroy']['post'] = 'admin/eliminar_carrusel/$1';
 $route['admin/noticias-museos']['get'] = 'admin/noticias_museos';
 $route['admin/noticias-museos/(:num)']['get'] = 'admin/noticias_museos/$1';
 $route['admin/noticias-museos']['post'] = 'admin/set_noticia_museos';
+
+$route['admin/galeria-fotos-museos/(:num)']['get'] = 'admin/galeria_fotos_museos/$1';
 
 $route['admin/agenda-museos']['get'] = 'admin/agenda_museos';
 $route['admin/agenda-museos/(:num)']['get'] = 'admin/agenda_museos/$1';
