@@ -23,7 +23,7 @@
 					<?php foreach ($carousel as $carousel_item): ?>
 
 						<tr>
-							<td><?= $carousel_item['file_name']; ?></td>
+							<td><a href="<?= site_url('assets/images') . str_replace('public:/', '', $carousel_item['path']); ?>"><?= $carousel_item['file_name'];?></a></td>
 							<td><?= $carousel_item['title']; ?></td>
 							<td><?= $carousel_item['description']; ?></td>
 							<td><a href="<?= $carousel_item['url']; ?>"><?= $carousel_item['url']; ?></a></td>
