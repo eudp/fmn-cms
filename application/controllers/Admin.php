@@ -15,7 +15,6 @@ class Admin extends CI_Controller {
         $this->load->model('agenda_model');
         $this->load->model('multimedia_model');
         $this->load->model('carrusel_model');
-        $this->load->model('galeria_fotos_model');
 
         $this->load->helper('domain_museum');
         $this->load->helper('servicios');
@@ -1509,7 +1508,7 @@ class Admin extends CI_Controller {
 
     public function galeria_fotos($news_id)
     {
-        $data['photo_gallery'] = $this->galeria_fotos_model->get($news_id);
+        $data['photo_gallery'] = $this->noticias_model->get_galeria_fotos($news_id);
         $data['news_id'] = $news_id;
 
         $h_data['title'] = 'Admin | Fundación Museos Nacionales';
@@ -1542,7 +1541,7 @@ class Admin extends CI_Controller {
                 'image_id' => $image_id
             );
             
-            $this->galeria_fotos_model->set($array);
+            $this->noticias_model->set_galeria_fotos($array);
 
             redirect(site_url('admin/galeria-fotos/'. $this->input->post('noticia_id')), 'refresh');
             
@@ -1554,7 +1553,7 @@ class Admin extends CI_Controller {
     {
         $news_id = $this->input->post('noticia_id');
 
-        $this->galeria_fotos_model->delete($photo_gallery_id);
+        $this->noticias_model->delete_galeria_fotos($photo_gallery_id);
 
         redirect(site_url('admin/galeria-fotos/' . $news_id), 'refresh');
     }
@@ -1563,7 +1562,7 @@ class Admin extends CI_Controller {
 
     public function galeria_fotos_museos($news_id)
     {
-        $data['photo_gallery'] = $this->galeria_fotos_model->get($news_id, '_museos');
+        $data['photo_gallery'] = $this->noticias_model->get_galeria_fotos($news_id, '_museos');
         $data['news_id'] = $news_id;
 
         $h_data['title'] = 'Admin | Fundación Museos Nacionales';

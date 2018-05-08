@@ -67,4 +67,30 @@ class Noticias_model extends CI_Model {
         $this->db->delete('noticias', array('news_id' => $news_id));   
     }
 
+    public function get_galeria_fotos($news_id, $museos = '')
+    {
+
+        $this->db->select('d.photo_gallery_id, a.path, a.file_name, a.width, a.height');
+        $this->db->from('noticias_galeria_fotos' . $museos . ' as d');
+        $this->db->join('archivos' . $museos . ' as a', 'a.file_id = d.image_id', 'left');
+        $this->db->where('d.news_id', $news_id);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function set_galeria_fotos($array)
+    {
+
+        $this->db->insert('noticias_galeria_fotos', $array);
+
+        return $this->db->insert_id();
+         
+    }
+
+    public function delete_galeria_fotos($photo_gallery_id)
+    {
+        $this->db->delete('noticias_galeria_fotos', array('photo_gallery_id' => $photo_gallery_id));   
+    }
+
 }
