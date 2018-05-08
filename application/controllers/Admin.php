@@ -52,7 +52,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-    		$data['establishment']['description'] = strip_tags($data['establishment']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+    		$data['establishment']['description'] = strip_tags($data['establishment']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $data['services'] = ($data['establishment']['type'] == 'museo' ? servicios_translate_edit($data['establishment']['services']) : $data['establishment']['services']);
 
@@ -240,7 +240,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['news']['description'] = strip_tags($data['news']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['news']['description'] = strip_tags($data['news']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
@@ -343,7 +343,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['exposition']['description'] = strip_tags($data['exposition']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['exposition']['description'] = strip_tags($data['exposition']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $data['establishments'] = $this->establecimientos_model->get(null, null);
 
@@ -454,7 +454,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['collection']['description'] = strip_tags($data['collection']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['collection']['description'] = strip_tags($data['collection']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
@@ -556,7 +556,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['obra']['description'] = strip_tags($data['obra']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['obra']['description'] = strip_tags($data['obra']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $data['collections'] = $this->colecciones_model->get(null, null);
 
@@ -692,7 +692,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['diary']['description'] = strip_tags($data['diary']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['diary']['description'] = strip_tags($data['diary']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $data['establishments'] = $this->establecimientos_model->get(null, null);
 
@@ -799,7 +799,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['multimedia']['description'] = strip_tags($data['multimedia']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['multimedia']['description'] = strip_tags($data['multimedia']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
@@ -910,7 +910,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['diary']['description'] = strip_tags($data['diary']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['diary']['description'] = strip_tags($data['diary']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             //$data['establishments'] = $this->establecimientos_model->get(null, null);
 
@@ -988,7 +988,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['exposition']['description'] = strip_tags($data['exposition']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['exposition']['description'] = strip_tags($data['exposition']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             //$data['establishments'] = $this->establecimientos_model->get(null, null);
 
@@ -1070,7 +1070,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['multimedia']['description'] = strip_tags($data['multimedia']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['multimedia']['description'] = strip_tags($data['multimedia']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
@@ -1152,7 +1152,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['news']['description'] = strip_tags($data['news']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['news']['description'] = strip_tags($data['news']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
@@ -1452,7 +1452,7 @@ class Admin extends CI_Controller {
                 show_404();
             }
 
-            $data['collection']['description'] = strip_tags($data['collection']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+            $data['collection']['description'] = strip_tags($data['collection']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
