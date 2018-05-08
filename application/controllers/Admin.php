@@ -15,6 +15,7 @@ class Admin extends CI_Controller {
         $this->load->model('agenda_model');
         $this->load->model('multimedia_model');
         $this->load->model('carrusel_model');
+        $this->load->model('galeria_fotos_model');
 
         $this->load->helper('domain_museum');
         $this->load->helper('servicios');
@@ -164,12 +165,14 @@ class Admin extends CI_Controller {
             "agenda"                     => "./assets/images/agenda/",
             "multimedia"                 => "./assets/images/multimedias/",
             "multimedia_file"            => "./assets/files/multimedias/",
+            "galeria"                    => "./assets/images/galeria/",
             "agenda_museos"              => "./assets/images/agenda_museos/",
             "coleccion_museos"           => "./assets/images/colecciones_museos/",
             "exposicion_museos"          => "./assets/images/exposicion_museos/",
             "multimedia_museos"          => "./assets/images/multimedias_museos/",
             "multimedia_file_museos"     => "./assets/files/multimedias_museos/",
             "noticia_museos"             => "./assets/images/noticias_museos/",
+            "galeria_museos"             => "./assets/images/galeria_museos/",
             "carrusel_museo"             => "./assets/images/museos/carrusel/",
             "carrusel_instituto"         => "./assets/images/institutos/carrusel/",
             "carrusel_coleccion"         => "./assets/images/colecciones/carrusel/",
@@ -1316,7 +1319,7 @@ class Admin extends CI_Controller {
         //$this->load->library('form_validation');
 
         //if ($this->form_validation->run() == FALSE)
-        if ($this->input->post('id') == null && empty($_FILES['userfile']['name']))
+        if (empty($_FILES['userfile']['name']))
         {
             //$this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
 
@@ -1397,7 +1400,7 @@ class Admin extends CI_Controller {
         //$this->load->library('form_validation');
 
         //if ($this->form_validation->run() == FALSE)
-        if ($this->input->post('id') == null && empty($_FILES['userfile']['name']))
+        if (empty($_FILES['userfile']['name']))
         {
             //$this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
 
@@ -1500,5 +1503,75 @@ class Admin extends CI_Controller {
             redirect(site_url('admin/colecciones-museos/'. $this->input->post('id')), 'refresh');
             
         }
+    }
+
+    /*List of news and add individual fechas agenda*/
+
+    public function galeria_fotos($news_id)
+    {
+        $data['photo_gallery'] = $this->galeria_fotos_model->get($news_id);
+        $data['news_id'] = $news_id;
+
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/noticias/galeria_fotos', $data);
+        $this->load->view('includes/footer_admin');
+        
+    }
+
+     public function set_galeria_fotos()
+    {        
+        //$this->load->library('form_validation');
+
+        //if ($this->form_validation->run() == FALSE)
+        if (empty($_FILES['userfile']['name']))
+        {
+            //$this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            redirect(site_url('admin/galeria-fotos/'. $this->input->post('noticia_id')), 'refresh');
+        }
+        else
+        {
+            /* Upload image*/
+            $image_id = $this->upload_file('galeria');
+
+            $array = array(
+                'news_id'  => $this->input->post('noticia_id'),
+                'image_id' => $image_id
+            );
+            
+            $this->galeria_fotos_model->set($array);
+
+            redirect(site_url('admin/galeria-fotos/'. $this->input->post('noticia_id')), 'refresh');
+            
+        }
+    }
+
+    /* Handle delete permisology */
+    public function eliminar_galeria_fotos ($photo_gallery_id) 
+    {
+        $news_id = $this->input->post('noticia_id');
+
+        $this->galeria_fotos_model->delete($photo_gallery_id);
+
+        redirect(site_url('admin/galeria-fotos/' . $news_id), 'refresh');
+    }
+
+    /*List of news and add individual fechas agenda*/
+
+    public function galeria_fotos_museos($news_id)
+    {
+        $data['photo_gallery'] = $this->galeria_fotos_model->get($news_id, '_museos');
+        $data['news_id'] = $news_id;
+
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/noticias/galeria_fotos', $data);
+        $this->load->view('includes/footer_admin');
+        
     }
 }
