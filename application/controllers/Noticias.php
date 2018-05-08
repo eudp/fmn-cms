@@ -21,6 +21,7 @@ class Noticias extends CI_Controller {
     public function view($news_id, $museos = '')
     {
         $data['news_item'] = $this->noticias_model->get($news_id, 1, null, null, $museos);
+        $data['photo_gallery'] = $this->noticias_model->get_galeria_fotos($news_id);
 
         if (empty($data['news_item'])){
             show_404();

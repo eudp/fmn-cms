@@ -12,5 +12,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-12">
+            <div class="row">
+                <?php foreach ($photo_gallery as $photo_gallery_item): ?>
+            
+                    <div class="col-3">
+                        <img src="<?= site_url('assets/images') . str_replace('public:/', '', $photo_gallery_item['path']); ?>" alt="">
+                    </div>
+
+                <?php endforeach; ?>
+            </div>
+        </div>
+
     </div>
 </div>
