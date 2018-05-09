@@ -134,6 +134,12 @@ $route['admin/fechas-agenda/(:num)']['get'] = 'admin/fechas_agenda/$1';
 $route['admin/fechas-agenda/(:num)']['post'] = 'admin/set_fechas_agenda';
 $route['admin/fechas-agenda/(:num)/destroy']['post'] = 'admin/eliminar_fechas_agenda/$1';
 
+$route['admin/enlaces']['get'] = 'admin/enlaces';
+$route['admin/enlaces/new']['get'] = 'admin/nuevo_enlace';
+$route['admin/enlaces/(:num)']['get'] = 'admin/enlaces/$1';
+$route['admin/enlaces']['post'] = 'admin/set_enlace';
+$route['admin/enlaces/(:num)/destroy']['post'] = 'admin/eliminar_enlace/$1';
+
 $route['admin/contactenos']['get'] = 'admin/contactenos';
 $route['admin/contactenos/(:num)']['get'] = 'admin/contactenos/$1';
 

@@ -15,6 +15,7 @@ class Admin extends CI_Controller {
         $this->load->model('agenda_model');
         $this->load->model('multimedia_model');
         $this->load->model('carrusel_model');
+        $this->load->model('enlaces_model');
 
         $this->load->helper('domain_museum');
         $this->load->helper('servicios');
@@ -164,6 +165,7 @@ class Admin extends CI_Controller {
             "agenda"                     => "./assets/images/agenda/",
             "multimedia"                 => "./assets/images/multimedias/",
             "multimedia_file"            => "./assets/files/multimedias/",
+            "enlace"                     => "./assets/images/enlaces/",
             "galeria"                    => "./assets/images/galeria/",
             "agenda_museos"              => "./assets/images/agenda_museos/",
             "coleccion_museos"           => "./assets/images/colecciones_museos/",
@@ -1572,5 +1574,104 @@ class Admin extends CI_Controller {
         $this->load->view('admin/noticias/galeria_fotos', $data);
         $this->load->view('includes/footer_admin');
         
+    }
+
+    /*List of link and edit individual link*/
+
+    public function enlaces($link_id = null)
+    {
+        if ($link_id == null) {
+            $data['link'] = $this->enlaces_model->get(null, null);
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/enlaces/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+
+            /* Edit link*/
+
+            $data['link'] = $this->enlaces_model->get($link_id);
+
+            if (empty($data['link'])) {
+                show_404();
+            }
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/enlaces/edit_enlace', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function nuevo_enlace () 
+    {
+        $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+        $h_data['active'] = 'admin';
+
+        $this->load->view('includes/header_admin',$h_data);
+        $this->load->view('admin/enlaces/new_enlace');
+        $this->load->view('includes/footer_admin');
+    }
+
+    public function set_enlace()
+    {        
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
+
+            ($this->input->post('id') != null ? redirect(site_url('admin/enlaces/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/enlaces/new'), 'refresh'));
+        }
+        else
+        {
+            /* Upload image*/
+            $image_id = $this->upload_file('enlace');
+
+            /*Update link*/
+            
+            $status = $this->input->post('status');
+            $status = (!isset($status)? 0 : 1);
+
+            $array = array(
+                'title'         => $this->input->post('titulo'),
+                'url'           => $this->input->post('url'),
+                'modified_date' => time(),
+                'status'        => $status
+            );
+
+            if ($image_id != null) {
+
+                $array += ['image_id' => $image_id];
+            }
+
+            $link_id = $this->input->post('id');
+
+            if ($link_id == null) {
+
+                $array += ['creation_date' => time()];
+                $array += ['user_id' => 66];
+
+                $this->enlaces_model->set($array);
+                redirect(site_url('admin/enlaces/'), 'refresh');
+
+            } else {
+                $this->enlaces_model->set($array, $this->input->post('id'));
+
+                redirect(site_url('admin/enlaces/'. $this->input->post('id')), 'refresh');
+            }
+        }
+    }
+
+    /* Handle delete permisology*/
+    public function eliminar_enlace ($link_id) 
+    {
+        $this->enlaces_model->delete($link_id);
+
+        redirect(site_url('admin/enlaces/'), 'refresh');
     }
 }

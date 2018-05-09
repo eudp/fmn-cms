@@ -50,6 +50,9 @@
 					<a class="nav-link" href="<?= site_url('admin/multimedia');?>">Multimedia</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('admin/enlaces');?>">Enlaces</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="<?= site_url('admin/contactenos');?>">Contacto</a>
 				</li>
 				<li class="nav-item">
