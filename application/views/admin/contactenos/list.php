@@ -5,8 +5,10 @@
 				<thead>
 					<tr>
 					<th scope="col">ID</th>
-					<th scope="col">Correo</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Asunto</th>
 					<th scope="col">Fecha</th>
+					<th scope="col">Dirección IP</th>
 					<th scope="col"></th>
 					</tr>
 				</thead>
@@ -14,10 +16,12 @@
 					<?php foreach ($messages as $messages_item): ?>
 
 						<tr>
-							<th scope="row"><?= $messages_item['id']; ?></th>
-							<td><?= $messages_item['data']; ?></td>
+							<th scope="row"><?= $messages_item['contact_id']; ?></th>
+							<td><?= $messages_item['name']; ?></td>
+							<td><?= $messages_item['subject']; ?></td>
 							<td><?= date('j \d\e F, Y', $messages_item['date']); ?></td>
-							<td><a href="<?= site_url('admin/contactenos/'. $messages_item['id']);?>"><button type="button" class="btn btn-success">Vista completa</button></a></td>
+							<td><?= $messages_item['remote_address']; ?></td>
+							<td><a href="<?= site_url('admin/contactenos/'. $messages_item['contact_id']);?>"><button type="button" class="btn btn-success">Vista completa</button></a></td>
 						</tr>
 
 					<?php endforeach; ?>
