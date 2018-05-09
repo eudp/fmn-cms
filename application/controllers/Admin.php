@@ -16,6 +16,7 @@ class Admin extends CI_Controller {
         $this->load->model('multimedia_model');
         $this->load->model('carrusel_model');
         $this->load->model('enlaces_model');
+        $this->load->model('destacados_model');
 
         $this->load->helper('domain_museum');
         $this->load->helper('servicios');
@@ -1673,5 +1674,79 @@ class Admin extends CI_Controller {
         $this->enlaces_model->delete($link_id);
 
         redirect(site_url('admin/enlaces/'), 'refresh');
+    }
+
+    public function destacados($type = null)
+    {
+        if ($type == null) {
+            $data['highlights'] = $this->destacados_model->get();
+
+            foreach ($data['highlights'] as $key => $value) {
+
+                if ($value['type'] == 'agenda'){
+                    $element = $this->agenda_model->get($value['element_id']);
+                } else if ($value['type'] == 'noticias'){
+                    $element = $this->noticias_model->get($value['element_id']);
+                } else if ($value['type'] == 'multimedia') {
+                    $element = $this->multimedia_model->get(false, $value['element_id']);
+                } else if ($value['type'] == 'enlaces') {
+                    $element = $this->enlaces_model->get($value['element_id']);
+                } 
+
+                $data['highlights'][$key] += ['title' => $element['title']];
+            }
+
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/destacados/list', $data);
+            $this->load->view('includes/footer_admin');
+        } else {
+    
+            if ($type == 'agenda'){
+                $data['element'] = $this->agenda_model->get();
+                $data['table'] = 'agenda';
+            } else if ($type == 'noticia'){
+                $data['element'] = $this->noticias_model->get();
+                $data['table'] = 'noticias';
+            } else if ($type == 'multimedia') {
+                $data['element'] = $this->multimedia_model->get();
+                $data['table'] = 'multimedia';
+            } else if ($type == 'enlace') {
+                $data['element'] = $this->enlaces_model->get();
+                $data['table'] = 'enlaces';
+            } else {
+                show_404();
+            }
+
+            
+            $h_data['title'] = 'Admin | Fundación Museos Nacionales';
+            $h_data['active'] = 'admin';
+
+            $this->load->view('includes/header_admin',$h_data);
+            $this->load->view('admin/destacados/add', $data);
+            $this->load->view('includes/footer_admin');
+        }
+    }
+
+    public function set_destacado($table)
+    {        
+        $array = array(
+            'element_id' => $this->input->post('id'),
+            'type'       => $table,
+            'user_id'    => 66
+        );
+
+        $this->destacados_model->set($array);
+        redirect(site_url('admin'), 'refresh');
+    }
+
+    /* Handle delete permisology*/
+    public function eliminar_destacado ($highlight_id) 
+    {
+        $this->destacados_model->delete($highlight_id);
+
+        redirect(site_url('admin'), 'refresh');
     }
 }

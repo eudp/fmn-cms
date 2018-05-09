@@ -66,6 +66,7 @@ $route['multimedia/(:any)']['get'] = 'multimedia/view/$1';
 $route['multimedia']['get'] = 'multimedia';
 $route['agenda/(:any)']['get'] = 'agenda/view/$1';
 $route['agenda']['get'] = 'agenda';
+$route['enlaces']['get'] = 'enlaces';
 $route['search']['post'] = 'home/search';
 $route['fmn']['get'] = 'home/fmn';
 $route['educacion']['get'] = 'home/educacion';
@@ -87,6 +88,11 @@ $route['admin/noticias/new']['get'] = 'admin/nueva_noticia';
 $route['admin/noticias/(:num)']['get'] = 'admin/noticias/$1';
 $route['admin/noticias']['post'] = 'admin/set_noticia';
 $route['admin/noticias/(:num)/destroy']['post'] = 'admin/eliminar_noticia/$1';
+
+$route['admin']['get'] = 'admin/destacados';
+$route['admin/destacados/(:any)']['get'] = 'admin/destacados/$1';
+$route['admin/destacados/(:any)']['post'] = 'admin/set_destacado/$1';
+$route['admin/destacados/(:num)/destroy']['post'] = 'admin/eliminar_destacado/$1';
 
 $route['admin/galeria-fotos/(:num)']['get'] = 'admin/galeria_fotos/$1';
 $route['admin/galeria-fotos/(:num)']['post'] = 'admin/set_galeria_fotos';
