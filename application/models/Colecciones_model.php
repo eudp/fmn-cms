@@ -66,4 +66,20 @@ class Colecciones_model extends CI_Model {
     {
         $this->db->delete('colecciones', array('collection_id' => $collection_id));   
     }
+
+    public function set_slug($collection_id, $slug, $museos = '')
+    {
+        $this->db->set('slug', $slug);
+        $this->db->where('collection_id', $collection_id);
+        return $this->db->update('colecciones' . $museos);
+    }
+
+    public function check_slug($slug, $museos = '')
+    {
+        $this->db->select('collection_id');
+        $this->db->from('colecciones' . $museos);
+        $this->db->where('slug', $slug);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }
