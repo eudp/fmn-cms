@@ -75,4 +75,20 @@ class Exposiciones_model extends CI_Model {
     {
         $this->db->delete('exposiciones', array('exposition_id' => $exposition_id));   
     }
+
+    public function set_slug($exposition_id, $slug, $museos = '')
+    {
+        $this->db->set('slug', $slug);
+        $this->db->where('exposition_id', $exposition_id);
+        return $this->db->update('exposiciones' . $museos);
+    }
+
+    public function check_slug($slug, $museos = '')
+    {
+        $this->db->select('exposition_id');
+        $this->db->from('exposiciones' . $museos);
+        $this->db->where('slug', $slug);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

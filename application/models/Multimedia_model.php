@@ -73,4 +73,20 @@ class Multimedia_model extends CI_Model {
         $this->db->delete('multimedia', array('multimedia_id' => $multimedia_id));   
     }
 
+    public function set_slug($multimedia_id, $slug, $museos = '')
+    {
+        $this->db->set('slug', $slug);
+        $this->db->where('multimedia_id', $multimedia_id);
+        return $this->db->update('multimedia' . $museos);
+    }
+
+    public function check_slug($slug, $museos = '')
+    {
+        $this->db->select('multimedia_id');
+        $this->db->from('multimedia' . $museos);
+        $this->db->where('slug', $slug);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
 }

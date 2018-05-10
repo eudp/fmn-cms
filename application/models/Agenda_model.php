@@ -101,4 +101,20 @@ class Agenda_model extends CI_Model {
     {
         $this->db->delete('fechas_agenda', array('diary_date_id' => $diary_date_id));   
     }
+
+    public function set_slug($diary_id, $slug, $museos = '')
+    {
+        $this->db->set('slug', $slug);
+        $this->db->where('diary_id', $diary_id);
+        return $this->db->update('agenda' . $museos);
+    }
+
+    public function check_slug($slug, $museos = '')
+    {
+        $this->db->select('diary_id');
+        $this->db->from('agenda' . $museos);
+        $this->db->where('slug', $slug);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

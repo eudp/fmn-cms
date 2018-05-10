@@ -66,4 +66,20 @@ class Establecimientos_model extends CI_Model {
     {
         $this->db->delete('establecimientos', array('establishment_id' => $establishment_id));   
     }
+
+    public function set_slug($establishment_id, $slug)
+    {
+        $this->db->set('slug', $slug);
+        $this->db->where('establishment_id', $establishment_id);
+        return $this->db->update('establecimientos');
+    }
+
+    public function check_slug($slug)
+    {
+        $this->db->select('establishment_id');
+        $this->db->from('establecimientos');
+        $this->db->where('slug', $slug);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

@@ -93,4 +93,20 @@ class Noticias_model extends CI_Model {
         $this->db->delete('noticias_galeria_fotos', array('photo_gallery_id' => $photo_gallery_id));   
     }
 
+    public function set_slug($news_id, $slug, $museos = '')
+    {
+        $this->db->set('slug', $slug);
+        $this->db->where('news_id', $news_id);
+        return $this->db->update('noticias' . $museos);
+    }
+
+    public function check_slug($slug, $museos = '')
+    {
+        $this->db->select('news_id');
+        $this->db->from('noticias' . $museos);
+        $this->db->where('slug', $slug);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
 }
