@@ -6,13 +6,13 @@ class Colecciones_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($collection_id = null, $status = 1, $museos = '')
+    public function get($entry = null, $status = 1, $museos = '', $slug = false)
     {
-        if ($collection_id === null)
+        if ($entry === null)
         {
             $museums =  ($museos != '' ? ', c.museums': '');
 
-            $this->db->select('c.title, a.path, c.collection_id, c.status,c.creation_date, c.modified_date' . $museums);
+            $this->db->select('c.slug, c.title, a.path, c.collection_id, c.status,c.creation_date, c.modified_date' . $museums);
             $this->db->from('colecciones' . $museos . ' as c');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = c.image_id', 'left');
             if ($status != null) {
@@ -25,7 +25,12 @@ class Colecciones_model extends CI_Model {
         $this->db->select('c.title, c.description, a.path, a.file_name, c.status, c.collection_id');
         $this->db->from('colecciones' . $museos . ' as c');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = c.image_id', 'left');
-        $this->db->where('collection_id', $collection_id );
+
+        if (!$slug) {
+            $this->db->where('collection_id', $entry );
+        } else {
+            $this->db->where('slug', $entry );
+        }
         $query = $this->db->get();
         return $query->row_array();
     }

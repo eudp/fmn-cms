@@ -6,14 +6,14 @@ class Agenda_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($diary_id = null, $status = 1, $limit = null, $search = null, $museos = '')
+    public function get($entry = null, $status = 1, $limit = null, $search = null, $museos = '', $slug = false)
     {
-        if ($diary_id == null)
+        if ($entry == null)
         {
 
             $museums =  ($museos != '' ? ', d.museums': '');
 
-            $this->db->select('d.title, d.publication_date, d.diary_id, d.creation_date, d.modified_date, d.status' . $museums);
+            $this->db->select('d.slug, d.title, d.publication_date, d.diary_id, d.creation_date, d.modified_date, d.status' . $museums);
             $this->db->from('agenda' . $museos . ' as d');
 
             if ($status != null) {
@@ -39,7 +39,11 @@ class Agenda_model extends CI_Model {
         $this->db->from('agenda' . $museos . ' as d');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = d.image_id', 'left');
         $this->db->join('establecimientos' . ' as e', 'e.establishment_id = d.establishment_id', 'left');
-        $this->db->where('d.diary_id', $diary_id);
+        if (!$slug){
+            $this->db->where('d.diary_id', $entry);
+        } else {
+            $this->db->where('d.slug', $entry);
+        }
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -47,7 +51,7 @@ class Agenda_model extends CI_Model {
     public function get_calendar($month = null)
     {
     
-        $this->db->select('d.title, d.diary_id, f.date');
+        $this->db->select('d.title, d.diary_id, f.date, d.slug');
         $this->db->from('agenda as d');
 
         $this->db->where('status' , 1);

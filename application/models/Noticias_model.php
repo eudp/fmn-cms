@@ -6,14 +6,14 @@ class Noticias_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($news_id = null, $status = 1, $limit = null, $search = null, $museos = '', $actual = true)
+    public function get($entry = null, $status = 1, $limit = null, $search = null, $museos = '', $actual = true, $slug = false)
     {
-        if ($news_id == null)
+        if ($entry == null)
         {
 
             $museums =  ($museos != '' ? ', n.museums': '');
 
-            $this->db->select('n.title, a.path, n.news_id, n.excerpt, n.publication_date, n.creation_date, n.modified_date, n.status' . $museums);
+            $this->db->select('n.slug, n.title, a.path, n.news_id, n.excerpt, n.publication_date, n.creation_date, n.modified_date, n.status' . $museums);
             $this->db->from('noticias' . $museos . ' as n');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = n.image_id', 'left');
 
@@ -43,7 +43,12 @@ class Noticias_model extends CI_Model {
         $this->db->select('n.title, a.path, n.description, n.publication_date, n.excerpt, a.file_name, n.status, n.news_id');
         $this->db->from('noticias' . $museos . ' as n');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = n.image_id', 'left');
-        $this->db->where('news_id', $news_id);
+
+        if (!$slug){
+            $this->db->where('n.news_id', $entry);
+        } else {
+            $this->db->where('n.slug', $entry);
+        }
         $query = $this->db->get();
         return $query->row_array();
     }

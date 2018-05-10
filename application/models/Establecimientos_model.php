@@ -6,11 +6,11 @@ class Establecimientos_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($type = null, $establishment_id = null, $status = 1)
+    public function get($type = null, $entry = null, $status = 1, $slug = false)
     {
-        if ($establishment_id === null)
+        if ($entry === null)
         {
-            $this->db->select('e.acronym, e.title, a.path, e.establishment_id, e.creation_date, e.modified_date, e.status, e.type');
+            $this->db->select('e.slug, e.acronym, e.title, a.path, e.establishment_id, e.creation_date, e.modified_date, e.status, e.type');
             $this->db->from('establecimientos as e');
             $this->db->join('archivos as a', 'a.file_id = e.image_id', 'left');
 
@@ -33,7 +33,12 @@ class Establecimientos_model extends CI_Model {
             $this->db->where('status' , $status );
         }
 
-        $this->db->where('establishment_id', $establishment_id );
+        if (!$slug) {
+            $this->db->where('establishment_id', $entry );
+        } else {
+            $this->db->where('slug', $entry );
+        }
+        
         $query = $this->db->get();
         return $query->row_array();
     }

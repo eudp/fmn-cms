@@ -6,14 +6,14 @@ class Multimedia_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($audio = false, $multimedia_id = null, $status = 1, $limit = null, $search = null, $museos = '')
+    public function get($audio = false, $entry = null, $status = 1, $limit = null, $search = null, $museos = '', $slug = false)
     {
-        if ($multimedia_id == null)
+        if ($entry == null)
         {
 
             $museums =  ($museos != '' ? ', m.museums': '');
 
-            $this->db->select('m.title, a.path, m.multimedia_id, m.creation_date, m.modified_date, m.status' . $museums);
+            $this->db->select('m.slug, m.title, a.path, m.multimedia_id, m.creation_date, m.modified_date, m.status' . $museums);
             $this->db->from('multimedia' . $museos . ' as m');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = m.image_id', 'left');
 
@@ -48,7 +48,13 @@ class Multimedia_model extends CI_Model {
         $this->db->from('multimedia' . $museos . ' as m');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = m.image_id', 'left');
         $this->db->join('archivos' . $museos . ' as f', 'f.file_id = m.multimedia_file_id', 'left');
-        $this->db->where('multimedia_id', $multimedia_id);
+
+        if (!$slug){
+            $this->db->where('multimedia_id', $entry);
+        } else {
+            $this->db->where('slug', $entry);
+        }
+        
         $query = $this->db->get();
 
         return $query->row_array();

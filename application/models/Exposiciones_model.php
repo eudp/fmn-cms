@@ -6,14 +6,14 @@ class Exposiciones_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($actual = null, $exposition_id = null, $status = 1, $limit = null, $search = null, $museos = '')
+    public function get($actual = null, $entry = null, $status = 1, $limit = null, $search = null, $museos = '', $slug = false)
     {
-        if ($exposition_id == null)
+        if ($entry == null)
         {
 
             $museums =  ($museos != '' ? ', e.museums': '');
 
-            $this->db->select('e.title, a.path, e.description, e.exposition_id, e.creation_date, e.modified_date, e.status' . $museums);
+            $this->db->select('e.slug, e.title, a.path, e.description, e.exposition_id, e.creation_date, e.modified_date, e.status' . $museums);
             $this->db->from('exposiciones' . $museos . ' as e');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = e.image_id', 'left');
 
@@ -42,7 +42,13 @@ class Exposiciones_model extends CI_Model {
         $this->db->from('exposiciones' . $museos . ' as e');
         $this->db->join('establecimientos as t', 'e.establishment_id = t.establishment_id', 'left');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = e.image_id', 'left');
-        $this->db->where('exposition_id', $exposition_id);
+
+        if (!$slug) {
+            $this->db->where('e.exposition_id', $entry);
+        } else {
+            $this->db->where('e.slug', $entry);
+        }
+        
         $query = $this->db->get();
         return $query->row_array();
     }
