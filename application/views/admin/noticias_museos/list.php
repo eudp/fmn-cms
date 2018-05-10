@@ -8,6 +8,7 @@
 					<th scope="col">ID</th>
 					<th scope="col">Title</th>
 					<th scope="col">Galería de fotos</th>
+					<th scope="col">Url</th>
 					<th scope="col">Fecha de creación</th>
 					<th scope="col">Fecha de última modificación</th>
 					<th scope="col">Fecha de publicación</th>
@@ -22,6 +23,7 @@
 							<th scope="row"><?= $news_item['news_id']; ?></th>
 							<td><a href="<?= site_url('admin/noticias-museos/'. $news_item['news_id']);?>"><?= $news_item['title']; ?></a></td>
 							<td><a href="<?= site_url('admin/galeria-fotos-museos/'. $news_item['news_id']);?>" role="button" class="btn btn-primary">Ver galería de fotos</a></td>
+							<td><a target="_blank" href="<?= site_url('noticias-museos/'. $news_item['slug']);?>"><?= site_url('noticias-museos/'. $news_item['slug']); ?></a></td>
 							<td><?= date('j \d\e F, Y', $news_item['creation_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$news_item['modified_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$news_item['publication_date']); ?></td>

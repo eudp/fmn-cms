@@ -15,6 +15,7 @@
 					<th scope="col">Title</th>
 					<th scope="col">Tipo</th>
 					<th scope="col">Carrusel</th>
+					<th scope="col">Url</th>
 					<th scope="col">Fecha de creación</th>
 					<th scope="col">Fecha de última modificación</th>
 					<th scope="col">Status</th>
@@ -29,6 +30,11 @@
 							<td><a href="<?= site_url('admin/establecimientos/'. $establishment_item['establishment_id']);?>"><?= $establishment_item['title']; ?></a></td>
 							<td><?= $establishment_item['type']; ?></td>
 							<td><a href="<?= site_url('admin/carrusel/' . $establishment_item['type'] . '/' . $establishment_item['establishment_id']);?>" role="button" class="btn btn-primary">Ver/editar carrusel</a></td>
+							<?php if ($establishment_item['type'] == 'museo'): ?>
+								<td><a target="_blank" href="<?= site_url('museos/'. $establishment_item['slug']);?>"><?= site_url('museos/'. $establishment_item['slug']); ?></a></td>
+							<?php else : ?>
+								<td><a target="_blank" href="<?= site_url('centros/'. $establishment_item['slug']);?>"><?= site_url('centros/'. $establishment_item['slug']); ?></a></td>
+							<?php endif ?>
 							<td><?= date('j \d\e F, Y', $establishment_item['creation_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$establishment_item['modified_date']); ?></td>
 							<td><?= ($establishment_item['status'] == 1 ? 'activo' : 'inactivo'); ?></td>
