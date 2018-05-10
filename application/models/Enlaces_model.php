@@ -50,20 +50,4 @@ class enlaces_model extends CI_Model {
     {
         $this->db->delete('enlaces', array('link_id' => $link_id));   
     }
-
-    public function set_slug($link_id, $slug, $museos = '')
-    {
-        $this->db->set('slug', $slug);
-        $this->db->where('link_id', $link_id);
-        return $this->db->update('enlaces' . $museos);
-    }
-
-    public function check_slug($slug, $museos = '')
-    {
-        $this->db->select('link_id');
-        $this->db->from('enlaces' . $museos);
-        $this->db->where('slug', $slug);
-        $query = $this->db->get();
-        return $query->row_array();
-    }
 }
