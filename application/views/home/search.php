@@ -6,7 +6,7 @@
             
             <div class="col-3">
                 <span><?= date('j \d\e F, Y', $news_item['publication_date']); ?></span>
-                <a href="<?= site_url('noticias/'. $news_item['news_id']);?>"><h5><?= $news_item['title']; ?></h5></a>
+                <a href="<?= site_url('noticias/'. $news_item['slug']);?>"><h5><?= $news_item['title']; ?></h5></a>
             </div>
 
         <?php endforeach; ?>
@@ -18,7 +18,7 @@
             
             <div class="col-3">
                 <span><?= date('j \d\e F, Y', $news_item['publication_date']); ?></span>
-                <a href="<?= site_url('noticias-museos/'. $news_item['news_id']);?>"><h5><?= $news_item['title']; ?></h5></a>
+                <a href="<?= site_url('noticias-museos/'. $news_item['slug']);?>"><h5><?= $news_item['title']; ?></h5></a>
             </div>
 
         <?php endforeach; ?>
@@ -30,7 +30,7 @@
             
             <div class="col-3">
                 <span><?= date('j \d\e F, Y', $multimedia_item['creation_date']); ?></span>
-                <a href="<?= site_url('multimedia/'. $multimedia_item['multimedia_id']);?>"><h5><?= $multimedia_item['title']; ?></h5></a>
+                <a href="<?= site_url('multimedia/'. $multimedia_item['slug']);?>"><h5><?= $multimedia_item['title']; ?></h5></a>
             </div>
 
         <?php endforeach; ?>
@@ -42,7 +42,7 @@
             
             <div class="col-3">
                 <span><?= date('j \d\e F, Y', $multimedia_item['creation_date']); ?> - <?= domain_museum($multimedia_item['museums']) ?></span>
-                <a href="<?= site_url('multimedia-museos/'. $multimedia_item['multimedia_id']);?>"><h5><?= $multimedia_item['title']; ?></h5></a>
+                <a href="<?= site_url('multimedia-museos/'. $multimedia_item['slug']);?>"><h5><?= $multimedia_item['title']; ?></h5></a>
             </div>
 
         <?php endforeach; ?>
@@ -54,7 +54,7 @@
             
             <div class="col-3">
                 <!-- <span><?= date('j \d\e F, Y', $diary_item['publication_date']); ?></span> -->
-                <a href="<?= site_url('agenda/'. $diary_item['diary_id']);?>"><h5><?= $diary_item['title']; ?></h5></a>
+                <a href="<?= site_url('agenda/'. $diary_item['slug']);?>"><h5><?= $diary_item['title']; ?></h5></a>
             </div>
 
         <?php endforeach; ?>
@@ -66,7 +66,7 @@
             
             <div class="col-3">
                 <!-- <span><?= date('j \d\e F, Y', $diary_item['publication_date']); ?> - <?= domain_museum($diary_item['museums']) ?></span> -->
-                <a href="<?= site_url('agenda-museos/'. $diary_item['diary_id']);?>"><h5><?= $diary_item['title']; ?></h5></a>
+                <a href="<?= site_url('agenda-museos/'. $diary_item['slug']);?>"><h5><?= $diary_item['title']; ?></h5></a>
             </div>
 
         <?php endforeach; ?>
@@ -78,7 +78,7 @@
             
             <div class="col-3">
                 <span><?= date('j \d\e F, Y', $expositions_item['creation_date']); ?></span>
-                <a href="<?= site_url('exposiciones/'. $expositions_item['exposition_id']);?>"><h5><?= $expositions_item['title']; ?></h5></a>
+                <a href="<?= site_url('exposiciones/'. $expositions_item['slug']);?>"><h5><?= $expositions_item['title']; ?></h5></a>
             </div>
 
         <?php endforeach; ?>
@@ -90,7 +90,7 @@
             
             <div class="col-3">
                 <span><?= date('j \d\e F, Y', $expositions_item['creation_date']); ?> - <?= domain_museum($expositions_item['museums']) ?></span>
-                <a href="<?= site_url('exposiciones-museos/'. $expositions_item['exposition_id']);?>"><h5><?= $expositions_item['title']; ?></h5></a>
+                <a href="<?= site_url('exposiciones-museos/'. $expositions_item['slug']);?>"><h5><?= $expositions_item['title']; ?></h5></a>
             </div>
 
         <?php endforeach; ?>

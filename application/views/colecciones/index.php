@@ -5,7 +5,7 @@
     <?php foreach ($collections as $collection_item): ?>
         
         <div class="col-3">
-            <a href="<?= site_url('colecciones/'. $collection_item['collection_id']);?>"><h3><?= $collection_item['title']; ?></h2></a>
+            <a href="<?= site_url('colecciones/'. $collection_item['slug']);?>"><h3><?= $collection_item['title']; ?></h2></a>
             <img src="<?= site_url('assets/images') . str_replace('public:/', '', $collection_item['path']); ?>" alt="">
         </div>
 

@@ -5,7 +5,7 @@
         <?php foreach ($diary as $diary_item): ?>
             
             <div class="col-3">
-                <a href="<?= site_url('agenda/'. $diary_item['diary_id']);?>"><?= $diary_item['title']; ?></a>
+                <a href="<?= site_url('agenda/'. $diary_item['slug']);?>"><?= $diary_item['title']; ?></a>
                 <p><?= date('d/m/Y', strtotime($diary_item['date'])); ?></p>
             </div>
 
