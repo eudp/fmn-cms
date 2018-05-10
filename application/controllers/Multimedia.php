@@ -19,9 +19,15 @@ class Multimedia extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
-    public function view($multimedia_id, $museos = '')
+    public function view($entry, $museos = '')
     {
-        $data['multimedia_item'] = $this->multimedia_model->get('', $multimedia_id, 1, null, null, $museos );
+        if (!is_numeric($entry)){
+            $entry = rawurldecode($entry);
+            $data['multimedia_item'] = $this->multimedia_model->get('', $entry, 1, null, null, $museos, true );
+        } else {
+            $data['multimedia_item'] = $this->multimedia_model->get('', $entry, 1, null, null, $museos );
+        }
+        
 
         if (empty($data['multimedia_item'])){
             show_404();

@@ -19,15 +19,22 @@ class Exposiciones extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
-    public function view($exposition_id, $museos = '')
+    public function view($entry, $museos = '')
     {
-        $data['exposition_item'] = $this->exposiciones_model->get(1, $exposition_id, 1, null, null, $museos);
+        if (!is_numeric($entry)){
+            $entry = rawurldecode($entry);
+            $data['exposition_item'] = $this->exposiciones_model->get(1, $entry, 1, null, null, $museos, true);
+        } else {
+            $data['exposition_item'] = $this->exposiciones_model->get(1, $entry, 1, null, null, $museos);
+        }
+
+        
 
         if (empty($data['exposition_item'])){
             show_404();
         }
         $data['exposition_item']['description'] = strip_tags($data['exposition_item']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
-        $data['exposition_carousel'] = $this->exposiciones_model->get_carousel($exposition_id, $museos);
+        $data['exposition_carousel'] = $this->exposiciones_model->get_carousel($data['exposition_item']['exposition_id'], $museos);
 
         $h_data['title'] = 'Exposiciones | Fundación Museos Nacionales';
         $h_data['active'] = 'exposiciones';

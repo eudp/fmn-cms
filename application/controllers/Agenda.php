@@ -18,14 +18,17 @@ class Agenda extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
-    public function view($diary_id, $museos = '')
+    public function view($entry, $museos = '')
     {
-        $data['diary_item'] = $this->agenda_model->get($diary_id,1,null,null,$museos);
-
+        if (!is_numeric($entry)){
+            $data['diary_item'] = $this->agenda_model->get($entry,1,null,null,$museos, true);
+        } else {
+            $data['diary_item'] = $this->agenda_model->get($entry,1,null,null,$museos);
+        }
         if (empty($data['diary_item'])){
             show_404();
         }
-        $data['diary_item_fechas'] = $this->agenda_model->get_fechas_agenda($diary_id, $museos);
+        $data['diary_item_fechas'] = $this->agenda_model->get_fechas_agenda($data['diary_item']['diary_id'], $museos);
         $data['diary_item']['description'] = strip_tags($data['diary_item']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
 
         $h_data['title'] = 'Agenda | Fundación Museos Nacionales';

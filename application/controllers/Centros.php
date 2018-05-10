@@ -18,14 +18,19 @@ class Centros extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
-    public function view($establishment_id)
+    public function view($entry)
     {
-        $data['establishment_item'] = $this->establecimientos_model->get('instituto', $establishment_id);
+        if (!is_numeric($entry)){
+            $entry = rawurldecode($entry);
+            $data['establishment_item'] = $this->establecimientos_model->get('instituto', $entry, 1, true);
+        } else {
+            $data['establishment_item'] = $this->establecimientos_model->get('instituto', $entry);
+        }
         if (empty($data['establishment_item'])){
             show_404();
         }
         $data['establishment_item']['description'] = strip_tags($data['establishment_item']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
-        $data['establishment_carousel'] = $this->establecimientos_model->get_carousel($establishment_id);
+        $data['establishment_carousel'] = $this->establecimientos_model->get_carousel($data['establishment_item']['establishment_id']);
 
         $h_data['title'] = $data['establishment_item']['title'] . ' | Fundación Museos Nacionales';
         $h_data['active'] = 'centros';
