@@ -20,6 +20,7 @@ class Admin extends CI_Controller {
 
         $this->load->helper('domain_museum');
         $this->load->helper('servicios');
+        $this->load->helper('slugs');
     }
 
     public function index()
@@ -81,7 +82,7 @@ class Admin extends CI_Controller {
     public function set_establecimiento($u_path)
     {
     	$this->load->library('form_validation');
-    	$this->form_validation->set_rules('titulo', 'titulo', 'required');
+    	$this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
     	if ($this->form_validation->run() == FALSE)
         {
 
@@ -113,6 +114,7 @@ class Admin extends CI_Controller {
 			    'modified_date' => time(),
                 'services'      => ($u_path == 'museo' ? servicios_form_post($this->input->post()) : $this->input->post('servicio')),
                 'type'          => $u_path,
+                'slug'          => valid_slug($this->input->post('titulo'), $this->establecimientos_model),
 			    'status'        => $status
 			);
 
@@ -267,7 +269,7 @@ class Admin extends CI_Controller {
     public function set_noticia()
     {        
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo|trim', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
@@ -290,6 +292,7 @@ class Admin extends CI_Controller {
                 'excerpt'          => $this->input->post('excerpt'),
                 'publication_date' => strtotime($this->input->post('fecha-publicacion')),
                 'modified_date'    => time(),
+                'slug'             => valid_slug($this->input->post('titulo'), $this->noticias_model),
                 'status'           => $status
             );
 
@@ -373,7 +376,7 @@ class Admin extends CI_Controller {
     public function set_exposicion()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
         $this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
         if ($this->form_validation->run() == FALSE)
         {
@@ -401,6 +404,7 @@ class Admin extends CI_Controller {
                 'establishment_id' => $this->input->post('id_establecimiento'),
                 'modified_date'    => time(),
                 'actual'           => $actual,
+                'slug'             => valid_slug($this->input->post('titulo'), $this->exposiciones_model),
                 'status'           => $status
             );
 
@@ -481,7 +485,7 @@ class Admin extends CI_Controller {
     public function set_coleccion()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo|trim', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -503,6 +507,7 @@ class Admin extends CI_Controller {
                 'title'            => $this->input->post('titulo'),
                 'description'      => $this->input->post('descripcion'),
                 'modified_date'    => time(),
+                'slug'             => valid_slug($this->input->post('titulo'), $this->colecciones_model),
                 'status'           => $status
             );
 
@@ -586,7 +591,7 @@ class Admin extends CI_Controller {
     public function set_obra()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
         $this->form_validation->set_rules('id_coleccion', 'id_coleccion', 'required');
         if ($this->form_validation->run() == FALSE)
         {
@@ -722,7 +727,7 @@ class Admin extends CI_Controller {
     public function set_agenda()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
         $this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
         if ($this->form_validation->run() == FALSE)
         {
@@ -747,6 +752,7 @@ class Admin extends CI_Controller {
                 'establishment_id' => $this->input->post('id_establecimiento'),
                 'modified_date'    => time(),
                 'publication_date' => time(),
+                'slug'             => valid_slug($this->input->post('titulo'), $this->agenda_model),
                 'status'           => $status
             );
 
@@ -827,7 +833,7 @@ class Admin extends CI_Controller {
     public function set_multimedia()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -854,6 +860,7 @@ class Admin extends CI_Controller {
                 'description'   => $this->input->post('descripcion'),
                 'modified_date' => time(),
                 'type'          => ($this->input->post('tipo') == '0'? 52 : 54),
+                'slug'          => valid_slug($this->input->post('titulo'), $this->multimedia_model),
                 'status'        => $status
             );
 
@@ -929,7 +936,7 @@ class Admin extends CI_Controller {
     public function set_agenda_museos()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
         //$this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
         if ($this->form_validation->run() == FALSE)
         {
@@ -953,6 +960,7 @@ class Admin extends CI_Controller {
                 'description'      => $this->input->post('descripcion'),
                 'modified_date'    => time(),
                 'publication_date' => time(),
+                'slug'             => valid_slug($this->input->post('titulo'), $this->agenda_model, '_museos'),
                 'status'           => $status
             );
 
@@ -1008,7 +1016,7 @@ class Admin extends CI_Controller {
     public function set_exposicion_museos()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
         if ($this->form_validation->run() == FALSE)
         {
             $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
@@ -1036,6 +1044,7 @@ class Admin extends CI_Controller {
                 'schedule'         => $this->input->post('horario'),
                 'modified_date'    => time(),
                 'actual'           => $actual,
+                'slug'             => valid_slug($this->input->post('titulo'), $this->exposiciones_model, '_museos'),
                 'status'           => $status
             );
 
@@ -1087,7 +1096,7 @@ class Admin extends CI_Controller {
     public function set_multimedia_museos()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -1113,6 +1122,7 @@ class Admin extends CI_Controller {
                 'description'   => $this->input->post('descripcion'),
                 'modified_date' => time(),
                 'type'          => ($this->input->post('tipo') == '0'? 52 : 54),
+                'slug'          => valid_slug($this->input->post('titulo'), $this->multimedia_model, '_museos'),
                 'status'        => $status
             );
 
@@ -1168,7 +1178,7 @@ class Admin extends CI_Controller {
     public function set_noticia_museos()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
         if ($this->form_validation->run() == FALSE)
         {
             $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
@@ -1192,6 +1202,7 @@ class Admin extends CI_Controller {
                 'excerpt'          => $this->input->post('excerpt'),
                 'publication_date' => strtotime($this->input->post('fecha-publicacion')),
                 'modified_date'    => time(),
+                'slug'             => valid_slug($this->input->post('titulo'), $this->noticias_model, '_museos'),
                 'status'           => $status
             );
 
@@ -1469,7 +1480,7 @@ class Admin extends CI_Controller {
     public function set_coleccion_museos()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -1491,6 +1502,7 @@ class Admin extends CI_Controller {
                 'title'            => $this->input->post('titulo'),
                 'description'      => $this->input->post('descripcion'),
                 'modified_date'    => time(),
+                'slug'             => valid_slug($this->input->post('titulo'), $this->multimedia_model, '_museos'),
                 'status'           => $status
             );
 
@@ -1621,7 +1633,7 @@ class Admin extends CI_Controller {
     public function set_enlace()
     {        
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
         if ($this->form_validation->run() == FALSE)
         {
             $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
@@ -1748,5 +1760,13 @@ class Admin extends CI_Controller {
         $this->destacados_model->delete($highlight_id);
 
         redirect(site_url('admin'), 'refresh');
+    }
+
+    public function slug ()
+    {
+
+        //slugs_massive($this->noticias_model);
+
+        return;
     }
 }
