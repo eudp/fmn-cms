@@ -8,6 +8,7 @@
 			<div class="form-group">
 				<label for="titulo">Título</label>
 				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $diary['title'];?>">
+				<input type="hidden" placeholder="" name="titulo_original" value="<?= $diary['title'];?>">
 			</div>
 			<div class="form-group">
 				<label for="descripcion">Descripción</label>

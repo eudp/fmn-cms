@@ -121,7 +121,6 @@ class Admin extends CI_Controller {
 			    'modified_date' => time(),
                 'services'      => ($u_path == 'museo' ? servicios_form_post($this->input->post()) : $this->input->post('servicio')),
                 'type'          => $u_path,
-                'slug'          => valid_slug($this->input->post('titulo'), $this->establecimientos_model),
 			    'status'        => $status
 			);
 
@@ -136,11 +135,16 @@ class Admin extends CI_Controller {
 
 				$array += ['creation_date' => time()];
 				$array += ['user_id' => $this->ion_auth->user()->row()->id];
+                $array += ['slug' => valid_slug($this->input->post('titulo'), $this->establecimientos_model)];
 
 				$this->establecimientos_model->set($array);
 				redirect(site_url('admin/establecimientos/'), 'refresh');
 
 			} else {
+                if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->establecimientos_model)];
+                }
+
 				$this->establecimientos_model->set($array, $this->input->post('id'));
 
 	    		redirect(site_url('admin/establecimientos/'. $this->input->post('id')), 'refresh');
@@ -299,7 +303,6 @@ class Admin extends CI_Controller {
                 'excerpt'          => $this->input->post('excerpt'),
                 'publication_date' => strtotime($this->input->post('fecha-publicacion')),
                 'modified_date'    => time(),
-                'slug'             => valid_slug($this->input->post('titulo'), $this->noticias_model),
                 'status'           => $status
             );
 
@@ -314,11 +317,16 @@ class Admin extends CI_Controller {
 
                 $array += ['creation_date' => time()];
                 $array += ['user_id' => $this->ion_auth->user()->row()->id];
+                $array += ['slug' => valid_slug($this->input->post('titulo'), $this->noticias_model)];
 
                 $this->noticias_model->set($array);
                 redirect(site_url('admin/noticias/'), 'refresh');
 
             } else {
+                if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->noticias_model)];
+                }
+
                 $this->noticias_model->set($array, $this->input->post('id'));
 
                 redirect(site_url('admin/noticias/'. $this->input->post('id')), 'refresh');
@@ -411,7 +419,6 @@ class Admin extends CI_Controller {
                 'establishment_id' => $this->input->post('id_establecimiento'),
                 'modified_date'    => time(),
                 'actual'           => $actual,
-                'slug'             => valid_slug($this->input->post('titulo'), $this->exposiciones_model),
                 'status'           => $status
             );
 
@@ -426,11 +433,16 @@ class Admin extends CI_Controller {
 
                 $array += ['creation_date' => time()];
                 $array += ['user_id' => $this->ion_auth->user()->row()->id];
+                $array += ['slug' => valid_slug($this->input->post('titulo'), $this->exposiciones_model)];
 
                 $this->exposiciones_model->set($array);
                 redirect(site_url('admin/exposiciones/'), 'refresh');
 
             } else {
+                if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->exposiciones_model)];
+                }
+
                 $this->exposiciones_model->set($array, $this->input->post('id'));
 
                 redirect(site_url('admin/exposiciones/'. $this->input->post('id')), 'refresh');
@@ -514,7 +526,6 @@ class Admin extends CI_Controller {
                 'title'            => $this->input->post('titulo'),
                 'description'      => $this->input->post('descripcion'),
                 'modified_date'    => time(),
-                'slug'             => valid_slug($this->input->post('titulo'), $this->colecciones_model),
                 'status'           => $status
             );
 
@@ -529,11 +540,16 @@ class Admin extends CI_Controller {
 
                 $array += ['creation_date' => time()];
                 $array += ['user_id' => $this->ion_auth->user()->row()->id];
+                $array += ['slug' => valid_slug($this->input->post('titulo'), $this->colecciones_model)];
 
                 $this->colecciones_model->set($array);
                 redirect(site_url('admin/colecciones/'), 'refresh');
 
             } else {
+                if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->colecciones_model)];
+                }
+
                 $this->colecciones_model->set($array, $this->input->post('id'));
 
                 redirect(site_url('admin/colecciones/'. $this->input->post('id')), 'refresh');
@@ -758,7 +774,6 @@ class Admin extends CI_Controller {
                 'description'      => $this->input->post('descripcion'),
                 'establishment_id' => $this->input->post('id_establecimiento'),
                 'modified_date'    => time(),
-                'slug'             => valid_slug($this->input->post('titulo'), $this->agenda_model),
                 'status'           => $status
             );
 
@@ -773,11 +788,15 @@ class Admin extends CI_Controller {
 
                 $array += ['creation_date' => time()];
                 $array += ['user_id' => $this->ion_auth->user()->row()->id];
+                $array += ['slug' => valid_slug($this->input->post('titulo'), $this->agenda_model)];
 
                 $this->agenda_model->set($array);
                 redirect(site_url('admin/agenda/'), 'refresh');
 
             } else {
+                if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->agenda_model)];
+                }
                 $this->agenda_model->set($array, $this->input->post('id'));
 
                 redirect(site_url('admin/agenda/'. $this->input->post('id')), 'refresh');
@@ -866,7 +885,6 @@ class Admin extends CI_Controller {
                 'description'   => $this->input->post('descripcion'),
                 'modified_date' => time(),
                 'type'          => ($this->input->post('tipo') == '0'? 52 : 54),
-                'slug'          => valid_slug($this->input->post('titulo'), $this->multimedia_model),
                 'status'        => $status
             );
 
@@ -885,11 +903,15 @@ class Admin extends CI_Controller {
 
                 $array += ['creation_date' => time()];
                 $array += ['user_id' => $this->ion_auth->user()->row()->id];
+                $array += ['slug' => valid_slug($this->input->post('titulo'), $this->multimedia_model)];
 
                 $this->multimedia_model->set($array);
                 redirect(site_url('admin/multimedia/'), 'refresh');
 
             } else {
+                if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->multimedia_model)];
+                }
                 $this->multimedia_model->set($array, $this->input->post('id'));
 
                 redirect(site_url('admin/multimedia/'. $this->input->post('id')), 'refresh');
@@ -965,7 +987,6 @@ class Admin extends CI_Controller {
                 'title'            => $this->input->post('titulo'),
                 'description'      => $this->input->post('descripcion'),
                 'modified_date'    => time(),
-                'slug'             => valid_slug($this->input->post('titulo'), $this->agenda_model, '_museos'),
                 'status'           => $status
             );
 
@@ -973,6 +994,10 @@ class Admin extends CI_Controller {
 
                 $array += ['image_id' => $image_id];
             }
+
+            if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->agenda_model, '_museos')];
+                }
 
 
             $this->agenda_model->set($array, $this->input->post('id'), '_museos');
@@ -1049,7 +1074,6 @@ class Admin extends CI_Controller {
                 'schedule'         => $this->input->post('horario'),
                 'modified_date'    => time(),
                 'actual'           => $actual,
-                'slug'             => valid_slug($this->input->post('titulo'), $this->exposiciones_model, '_museos'),
                 'status'           => $status
             );
 
@@ -1057,6 +1081,10 @@ class Admin extends CI_Controller {
 
                 $array += ['image_id' => $image_id];
             }
+
+            if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->exposiciones_model, '_museos')];
+                }
 
             $this->exposiciones_model->set($array, $this->input->post('id'), '_museos');
 
@@ -1127,7 +1155,6 @@ class Admin extends CI_Controller {
                 'description'   => $this->input->post('descripcion'),
                 'modified_date' => time(),
                 'type'          => ($this->input->post('tipo') == '0'? 52 : 54),
-                'slug'          => valid_slug($this->input->post('titulo'), $this->multimedia_model, '_museos'),
                 'status'        => $status
             );
 
@@ -1139,6 +1166,9 @@ class Admin extends CI_Controller {
 
                 $array += ['multimedia_file_id' => $multimedia_file_id];
             }
+            if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->multimedia_model, '_museos')];
+                }
 
             
             $this->multimedia_model->set($array, $this->input->post('id'), '_museos');
@@ -1207,7 +1237,6 @@ class Admin extends CI_Controller {
                 'excerpt'          => $this->input->post('excerpt'),
                 'publication_date' => strtotime($this->input->post('fecha-publicacion')),
                 'modified_date'    => time(),
-                'slug'             => valid_slug($this->input->post('titulo'), $this->noticias_model, '_museos'),
                 'status'           => $status
             );
 
@@ -1215,6 +1244,10 @@ class Admin extends CI_Controller {
 
                 $array += ['image_id' => $image_id];
             }
+
+            if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->noticias_model, '_museos')];
+                }
 
             $this->noticias_model->set($array, $this->input->post('id'), '_museos');
 
@@ -1507,7 +1540,6 @@ class Admin extends CI_Controller {
                 'title'            => $this->input->post('titulo'),
                 'description'      => $this->input->post('descripcion'),
                 'modified_date'    => time(),
-                'slug'             => valid_slug($this->input->post('titulo'), $this->multimedia_model, '_museos'),
                 'status'           => $status
             );
 
@@ -1515,6 +1547,10 @@ class Admin extends CI_Controller {
 
                 $array += ['image_id' => $image_id];
             }
+
+            if ($this->input->post('titulo') != $this->input->post('titulo_original')) {
+                    $array += ['slug' => valid_slug($this->input->post('titulo'), $this->colecciones_model, '_museos')];
+                }
 
             
             $this->colecciones_model->set($array, $this->input->post('id'));
