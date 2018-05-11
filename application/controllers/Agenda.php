@@ -25,7 +25,7 @@ class Agenda extends CI_Controller {
         } else {
             $data['diary_item'] = $this->agenda_model->get($entry,1,null,null,$museos);
         }
-        if (empty($data['diary_item'])){
+        if (empty($data['diary_item']) || ($data['diary_item']['status'] == 0 && !$this->ion_auth->logged_in())){
             show_404();
         }
         $data['diary_item_fechas'] = $this->agenda_model->get_fechas_agenda($data['diary_item']['diary_id'], $museos);

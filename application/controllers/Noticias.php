@@ -27,7 +27,7 @@ class Noticias extends CI_Controller {
             $data['news_item'] = $this->noticias_model->get($entry, 1, null, null, $museos);
         }
         
-        if (empty($data['news_item'])){
+        if (empty($data['news_item']) || ($data['news_item']['publication_date'] > time() && !$this->ion_auth->logged_in()) || ($data['news_item']['status'] == 0 && !$this->ion_auth->logged_in())){
             show_404();
         }
         $data['photo_gallery'] = $this->noticias_model->get_galeria_fotos($data['news_item']['news_id']);

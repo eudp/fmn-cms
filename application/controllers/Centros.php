@@ -26,7 +26,7 @@ class Centros extends CI_Controller {
         } else {
             $data['establishment_item'] = $this->establecimientos_model->get('instituto', $entry);
         }
-        if (empty($data['establishment_item'])){
+        if (empty($data['establishment_item']) ||  ($data['establishment_item']['status'] == 0 && !$this->ion_auth->logged_in())){
             show_404();
         }
         $data['establishment_item']['description'] = strip_tags($data['establishment_item']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');

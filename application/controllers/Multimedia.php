@@ -29,7 +29,7 @@ class Multimedia extends CI_Controller {
         }
         
 
-        if (empty($data['multimedia_item'])){
+        if (empty($data['multimedia_item']) || ($data['multimedia_item']['status'] == 0 && !$this->ion_auth->logged_in())){
             show_404();
         }
         $data['multimedia_item']['description'] = strip_tags($data['multimedia_item']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
