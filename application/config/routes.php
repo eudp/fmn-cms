@@ -189,6 +189,6 @@ $route['admin/carrusel-museos']['post'] = 'admin/set_carrusel_museos';
 
 $route['default_controller'] = 'home';
 
-$route['(:any)'] = $route['(:any)/(:any)'] = $route['(:any)/(:any)/(:any)'] = function () {
+/*$route['(:any)'] = $route['(:any)/(:any)'] = $route['(:any)/(:any)/(:any)'] = function () {
 	show_404(); 
- };
+ };*/
