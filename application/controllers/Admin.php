@@ -758,7 +758,6 @@ class Admin extends CI_Controller {
                 'description'      => $this->input->post('descripcion'),
                 'establishment_id' => $this->input->post('id_establecimiento'),
                 'modified_date'    => time(),
-                'publication_date' => time(),
                 'slug'             => valid_slug($this->input->post('titulo'), $this->agenda_model),
                 'status'           => $status
             );
@@ -966,7 +965,6 @@ class Admin extends CI_Controller {
                 'title'            => $this->input->post('titulo'),
                 'description'      => $this->input->post('descripcion'),
                 'modified_date'    => time(),
-                'publication_date' => time(),
                 'slug'             => valid_slug($this->input->post('titulo'), $this->agenda_model, '_museos'),
                 'status'           => $status
             );
