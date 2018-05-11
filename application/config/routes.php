@@ -83,6 +83,9 @@ $route['agenda-museos/(:any)']['get'] = 'agenda/view/$1/_museos';
 
 /* Routes for administration */
 
+$route['login']['get'] = 'auth/login';
+$route['logout']['get'] = 'auth/logout';
+
 $route['admin/noticias']['get'] = 'admin/noticias';
 $route['admin/noticias/new']['get'] = 'admin/nueva_noticia';
 $route['admin/noticias/(:num)']['get'] = 'admin/noticias/$1';
