@@ -29,10 +29,6 @@ class Establecimientos_model extends CI_Model {
         $this->db->from('establecimientos as e');
         $this->db->join('archivos as a', 'a.file_id = e.image_id', 'left');
         
-        if ($status != null) {
-            $this->db->where('status' , $status );
-        }
-
         if (!$slug) {
             $this->db->where('establishment_id', $entry );
         } else {
