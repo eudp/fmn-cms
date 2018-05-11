@@ -6,6 +6,7 @@
 				<thead>
 					<tr>
 					<th scope="col">ID</th>
+					<th scope="col">Autor</th>
 					<th scope="col">Title</th>
 					<th scope="col">Fechas de agenda</th>
 					<th scope="col">Url</th>
@@ -21,6 +22,7 @@
 
 						<tr>
 							<th scope="row"><?= $diary_item['diary_id']; ?></th>
+							<th scope="row"><?= $diary_item['first_name']; ?></th>
 							<td><a href="<?= site_url('admin/agenda-museos/'. $diary_item['diary_id']);?>"><?= $diary_item['title']; ?></a></td>
 							<td><a href="<?= site_url('admin/fechas-agenda-museos/'. $diary_item['diary_id']);?>" role="button" class="btn btn-primary">Ver fechas agenda</a></td>
 							<td><a target="_blank" href="<?= site_url('agenda-museos/'. $diary_item['slug']);?>"><?= site_url('agenda-museos/'. $diary_item['slug']); ?></a></td>

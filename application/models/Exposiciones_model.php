@@ -12,10 +12,12 @@ class Exposiciones_model extends CI_Model {
         {
 
             $museums =  ($museos != '' ? ', e.museums': '');
+            $w_user_id = ($museos != '' ? 'u.user_id = e.user_id': 'u.id = e.user_id');
 
-            $this->db->select('e.slug, e.title, a.path, e.description, e.exposition_id, e.creation_date, e.modified_date, e.status' . $museums);
+            $this->db->select('u.first_name, e.slug, e.title, a.path, e.description, e.exposition_id, e.creation_date, e.modified_date, e.status' . $museums);
             $this->db->from('exposiciones' . $museos . ' as e');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = e.image_id', 'left');
+            $this->db->join('usuarios' . $museos . ' as u', $w_user_id);
 
             if ($actual != null) {
                 $this->db->where('actual', $actual);

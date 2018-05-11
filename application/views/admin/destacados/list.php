@@ -18,6 +18,7 @@
 				<thead>
 					<tr>
 					<th scope="col">ID</th>
+					<th scope="col">Autor</th>
 					<th scope="col">Title</th>
 					<th scope="col">Eliminar</th>
 					</tr>
@@ -27,6 +28,7 @@
 
 						<tr>
 							<th scope="row"><?= $highlights_item['highlight_id']; ?></th>
+							<th scope="row"><?= $highlights_item['first_name']; ?></th>
 							<td><?= $highlights_item['title']; ?></td>
 							<!-- Handle delete permisology -->
 							<td>

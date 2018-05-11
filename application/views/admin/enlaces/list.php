@@ -9,6 +9,7 @@
 				<thead>
 					<tr>
 					<th scope="col">ID</th>
+					<th scope="col">Autor</th>
 					<th scope="col">Title</th>
 					<th scope="col">Fecha de creación</th>
 					<th scope="col">Fecha de última modificación</th>
@@ -21,6 +22,7 @@
 
 						<tr>
 							<th scope="row"><?= $link_item['link_id']; ?></th>
+							<th scope="row"><?= $link_item['first_name']; ?></th>
 							<td><a href="<?= site_url('admin/enlaces/'. $link_item['link_id']);?>"><?= $link_item['title']; ?></a></td>
 							<td><?= date('j \d\e F, Y', $link_item['creation_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$link_item['modified_date']); ?></td>

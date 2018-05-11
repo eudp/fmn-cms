@@ -10,10 +10,11 @@ class obras_model extends CI_Model {
     {
         if ($obra_id === null)
         {
-            $this->db->select('c.title, a.path, c.obra_id, c.status,c.creation_date, c.modified_date, o.title as title_c');
+            $this->db->select('u.first_name, c.title, a.path, c.obra_id, c.status,c.creation_date, c.modified_date, o.title as title_c');
             $this->db->from('obras as c');
             $this->db->join('archivos as a', 'a.file_id = c.image_id');
             $this->db->join('colecciones as o', 'o.collection_id = c.collection_id');
+            $this->db->join('usuarios as u', 'u.id = c.user_id');
             if ($status != null) {
                 $this->db->where('status', $status);
             }

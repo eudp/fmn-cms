@@ -6,6 +6,7 @@
 				<thead>
 					<tr>
 					<th scope="col">ID</th>
+					<th scope="col">Autor</th>
 					<th scope="col">Title</th>
 					<th scope="col">Carrusel</th>
 					<th scope="col">Url</th>
@@ -20,6 +21,7 @@
 
 						<tr>
 							<th scope="row"><?= $exposition_item['exposition_id']; ?></th>
+							<th scope="row"><?= $exposition_item['first_name']; ?></th>
 							<td><a href="<?= site_url('admin/exposiciones-museos/'. $exposition_item['exposition_id']);?>"><?= $exposition_item['title']; ?></a></td>
 							<td><a href="<?= site_url('admin/carrusel-museos/exposicion/' . $exposition_item['exposition_id']);?>" role="button" class="btn btn-primary">Ver/editar carrusel</a></td>
 							<td><a target="_blank" href="<?= site_url('exposiciones-museos/'. $exposition_item['slug']);?>"><?= site_url('exposiciones-museos/'. $exposition_item['slug']); ?></a></td>

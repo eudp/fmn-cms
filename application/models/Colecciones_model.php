@@ -11,10 +11,12 @@ class Colecciones_model extends CI_Model {
         if ($entry === null)
         {
             $museums =  ($museos != '' ? ', c.museums': '');
+            $w_user_id = ($museos != '' ? 'u.user_id = c.user_id': 'u.id = c.user_id');
 
-            $this->db->select('c.slug, c.title, a.path, c.collection_id, c.status,c.creation_date, c.modified_date' . $museums);
+            $this->db->select('u.first_name, c.slug, c.title, a.path, c.collection_id, c.status,c.creation_date, c.modified_date' . $museums);
             $this->db->from('colecciones' . $museos . ' as c');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = c.image_id', 'left');
+            $this->db->join('usuarios' . $museos . ' as u', $w_user_id);
             if ($status != null) {
                 $this->db->where('status', $status);
             }

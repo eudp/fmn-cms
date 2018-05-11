@@ -9,6 +9,7 @@
 				<thead>
 					<tr>
 					<th scope="col">ID</th>
+					<th scope="col">Autor</th>
 					<th scope="col">Title</th>
 					<th scope="col">Colección</th>
 					<th scope="col">Fecha de creación</th>
@@ -22,6 +23,7 @@
 
 						<tr>
 							<th scope="row"><?= $obra_item['obra_id']; ?></th>
+							<th scope="row"><?= $obra_item['first_name']; ?></th>
 							<td><a href="<?= site_url('admin/obras/'. $obra_item['obra_id']);?>"><?= $obra_item['title']; ?></a></td>
 							<th scope="row"><?= $obra_item['title_c']; ?></th>
 							<td><?= date('j \d\e F, Y', $obra_item['creation_date']); ?></td>

@@ -12,10 +12,12 @@ class Noticias_model extends CI_Model {
         {
 
             $museums =  ($museos != '' ? ', n.museums': '');
+            $w_user_id = ($museos != '' ? 'u.user_id = n.user_id': 'u.id = n.user_id');
 
-            $this->db->select('n.slug, n.title, a.path, n.news_id, n.excerpt, n.publication_date, n.creation_date, n.modified_date, n.status' . $museums);
+            $this->db->select('u.first_name, n.slug, n.title, a.path, n.news_id, n.excerpt, n.publication_date, n.creation_date, n.modified_date, n.status' . $museums);
             $this->db->from('noticias' . $museos . ' as n');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = n.image_id', 'left');
+            $this->db->join('usuarios' . $museos . ' as u', $w_user_id);
 
             if ($status != null) {
                 $this->db->where('status' , $status);

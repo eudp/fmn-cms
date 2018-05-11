@@ -10,9 +10,10 @@ class enlaces_model extends CI_Model {
     {
         if ($link_id == null) 
         {
-            $this->db->select('e.title, e.url, a.path, e.status, e.link_id, e.creation_date, e.modified_date');
+            $this->db->select('u.first_name, e.title, e.url, a.path, e.status, e.link_id, e.creation_date, e.modified_date');
             $this->db->from('enlaces as e');
             $this->db->join('archivos as a', 'a.file_id = e.image_id', 'left');
+            $this->db->join('usuarios as u', 'u.id = e.user_id');
 
             if ($status != null) {
                 $this->db->where('e.status' , $status);

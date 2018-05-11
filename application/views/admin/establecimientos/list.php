@@ -12,6 +12,7 @@
 				<thead>
 					<tr>
 					<th scope="col">ID</th>
+					<th scope="col">Autor</th>
 					<th scope="col">Title</th>
 					<th scope="col">Tipo</th>
 					<th scope="col">Carrusel</th>
@@ -27,6 +28,7 @@
 
 						<tr>
 							<th scope="row"><?= $establishment_item['establishment_id']; ?></th>
+							<th scope="row"><?= $establishment_item['first_name']; ?></th>
 							<td><a href="<?= site_url('admin/establecimientos/'. $establishment_item['establishment_id']);?>"><?= $establishment_item['title']; ?></a></td>
 							<td><?= $establishment_item['type']; ?></td>
 							<td><a href="<?= site_url('admin/carrusel/' . $establishment_item['type'] . '/' . $establishment_item['establishment_id']);?>" role="button" class="btn btn-primary">Ver/editar carrusel</a></td>

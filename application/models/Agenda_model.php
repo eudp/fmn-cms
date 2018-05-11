@@ -12,9 +12,11 @@ class Agenda_model extends CI_Model {
         {
 
             $museums =  ($museos != '' ? ', d.museums': '');
+            $w_user_id = ($museos != '' ? 'u.user_id = d.user_id': 'u.id = d.user_id');
 
-            $this->db->select('d.slug, d.title, d.publication_date, d.diary_id, d.creation_date, d.modified_date, d.status' . $museums);
+            $this->db->select('u.first_name, d.slug, d.title, d.publication_date, d.diary_id, d.creation_date, d.modified_date, d.status' . $museums);
             $this->db->from('agenda' . $museos . ' as d');
+            $this->db->join('usuarios' . $museos . ' as u', $w_user_id);
 
             if ($status != null) {
                 $this->db->where('status' , $status);

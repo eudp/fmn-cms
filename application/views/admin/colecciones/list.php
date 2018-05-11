@@ -9,6 +9,7 @@
 				<thead>
 					<tr>
 					<th scope="col">ID</th>
+					<th scope="col">Autor</th>
 					<th scope="col">Title</th>
 					<th scope="col">Carrusel</th>
 					<th scope="col">Url</th>
@@ -23,6 +24,7 @@
 
 						<tr>
 							<th scope="row"><?= $collection_item['collection_id']; ?></th>
+							<th scope="row"><?= $collection_item['first_name']; ?></th>
 							<td><a href="<?= site_url('admin/colecciones/'. $collection_item['collection_id']);?>"><?= $collection_item['title']; ?></a></td>
 							<td><a href="<?= site_url('admin/carrusel/coleccion/'. $collection_item['collection_id']);?>" role="button" class="btn btn-primary">Ver/editar carrusel</a></td>
 							<td><a target="_blank" href="<?= site_url('colecciones/'. $collection_item['slug']);?>"><?= site_url('colecciones/'. $collection_item['slug']); ?></a></td>

@@ -10,9 +10,10 @@ class Establecimientos_model extends CI_Model {
     {
         if ($entry === null)
         {
-            $this->db->select('e.slug, e.acronym, e.title, a.path, e.establishment_id, e.creation_date, e.modified_date, e.status, e.type');
+            $this->db->select('u.first_name, e.slug, e.acronym, e.title, a.path, e.establishment_id, e.creation_date, e.modified_date, e.status, e.type');
             $this->db->from('establecimientos as e');
             $this->db->join('archivos as a', 'a.file_id = e.image_id', 'left');
+            $this->db->join('usuarios as u', 'u.id = e.user_id');
 
             if ($type !== null){
                 $this->db->where('type' , $type );
