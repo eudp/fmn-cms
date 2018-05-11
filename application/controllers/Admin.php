@@ -4,6 +4,13 @@ class Admin extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+
+        if (!$this->ion_auth->logged_in())
+        {
+            // redirect to the login page
+            redirect('login', 'refresh');
+        }
+
         $this->load->helper('text');
         $this->load->model('archivos_model');
         $this->load->model('establecimientos_model');
@@ -128,7 +135,7 @@ class Admin extends CI_Controller {
 			if ($establishment_id == null) {
 
 				$array += ['creation_date' => time()];
-				$array += ['user_id' => 66];
+				$array += ['user_id' => $this->ion_auth->user()->row()->id];
 
 				$this->establecimientos_model->set($array);
 				redirect(site_url('admin/establecimientos/'), 'refresh');
@@ -306,7 +313,7 @@ class Admin extends CI_Controller {
             if ($news_id == null) {
 
                 $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
+                $array += ['user_id' => $this->ion_auth->user()->row()->id];
 
                 $this->noticias_model->set($array);
                 redirect(site_url('admin/noticias/'), 'refresh');
@@ -418,7 +425,7 @@ class Admin extends CI_Controller {
             if ($exposition_id == null) {
 
                 $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
+                $array += ['user_id' => $this->ion_auth->user()->row()->id];
 
                 $this->exposiciones_model->set($array);
                 redirect(site_url('admin/exposiciones/'), 'refresh');
@@ -521,7 +528,7 @@ class Admin extends CI_Controller {
             if ($collection_id == null) {
 
                 $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
+                $array += ['user_id' => $this->ion_auth->user()->row()->id];
 
                 $this->colecciones_model->set($array);
                 redirect(site_url('admin/colecciones/'), 'refresh');
@@ -628,7 +635,7 @@ class Admin extends CI_Controller {
             if ($obra_id == null) {
 
                 $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
+                $array += ['user_id' => $this->ion_auth->user()->row()->id];
 
                 $this->obras_model->set($array);
                 redirect(site_url('admin/obras/'), 'refresh');
@@ -766,7 +773,7 @@ class Admin extends CI_Controller {
             if ($diary_id == null) {
 
                 $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
+                $array += ['user_id' => $this->ion_auth->user()->row()->id];
 
                 $this->agenda_model->set($array);
                 redirect(site_url('admin/agenda/'), 'refresh');
@@ -878,7 +885,7 @@ class Admin extends CI_Controller {
             if ($multimedia_id == null) {
 
                 $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
+                $array += ['user_id' => $this->ion_auth->user()->row()->id];
 
                 $this->multimedia_model->set($array);
                 redirect(site_url('admin/multimedia/'), 'refresh');
@@ -1667,7 +1674,7 @@ class Admin extends CI_Controller {
             if ($link_id == null) {
 
                 $array += ['creation_date' => time()];
-                $array += ['user_id' => 66];
+                $array += ['user_id' => $this->ion_auth->user()->row()->id];
 
                 $this->enlaces_model->set($array);
                 redirect(site_url('admin/enlaces/'), 'refresh');
