@@ -24,7 +24,7 @@ class Museos extends CI_Controller {
     {
         if (!is_numeric($entry)){
             $entry = rawurldecode($entry);
-            $data['establishment_item'] = $this->establecimientos_model->get('museo', $entry, 1, true);
+            $data['establishment_item'] = $this->establecimientos_model->get('museo', $entry, null, true);
         } else {
             $data['establishment_item'] = $this->establecimientos_model->get('museo', $entry);
         }

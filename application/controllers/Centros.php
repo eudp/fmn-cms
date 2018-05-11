@@ -22,7 +22,7 @@ class Centros extends CI_Controller {
     {
         if (!is_numeric($entry)){
             $entry = rawurldecode($entry);
-            $data['establishment_item'] = $this->establecimientos_model->get('instituto', $entry, 1, true);
+            $data['establishment_item'] = $this->establecimientos_model->get('instituto', $entry, null, true);
         } else {
             $data['establishment_item'] = $this->establecimientos_model->get('instituto', $entry);
         }
