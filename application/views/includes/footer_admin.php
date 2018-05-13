@@ -1,45 +1,74 @@
-    <!-- Banner de footer -->
-    <div class="container">
-    	<div class="row">
-	    	<div class="col-10">
-	    		<img src="http://www.fmn.gob.ve/sites/default/files/styles/aviso_inferior/public/aviso-inferior/1896-2404.jpg?itok=WP9dE8t9" alt="">
-	    	</div>
-    	</div>
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+      Administración
     </div>
-    <!-- Fin de Banner de footer -->
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2018 <a href="#">Fundación Nacional de Museos</a>.</strong> Todo los derechos reservados.
+  </footer>
+    <?php if ($this->ion_auth->is_admin()) : ?>
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- Home tab content -->
+          <div class="tab-pane active" id="control-sidebar-home-tab">
+            <h3 class="control-sidebar-heading">Administrador de usuarios</h3>
+            <ul class="control-sidebar-menu">
+              <li>
+                <a href="javascript:;">
+                  <i class="menu-icon fa fa-server  bg-red"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Listar usuarios</h4>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;">
+                  <i class="menu-icon fa fa-user-plus bg-red"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Crear usuario</h4>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;">
+                  <i class="menu-icon fa fa-object-group bg-red"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Crear grupo</h4>
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <!-- /.control-sidebar-menu -->
+          </div>
+          <!-- /.tab-pane -->
+        </div>
+      </aside>
+      <!-- /.control-sidebar -->
+    <?php endif ?>
+  <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="<?= site_url('assets/js/jquery-3.2.1.min.js'); ?>" ></script>
-    <script src="<?= site_url('assets/js/popper.js'); ?>"></script> 
-    <script src="<?= site_url('assets/js/bootstrap.min.js'); ?>"></script>
+<!-- REQUIRED JS SCRIPTS -->
 
-    <script src="<?= site_url('assets/js/tinymce/tinymce.min.js'); ?>" ></script>
+<!-- jQuery 3 -->
+<script src="<?= site_url('assets/AdminLTE-2.4.3/'); ?>bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="<?= site_url('assets/AdminLTE-2.4.3/'); ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?= site_url('assets/AdminLTE-2.4.3/'); ?>dist/js/adminlte.min.js"></script>
 
-    <script src="<?= site_url('assets/js/image-picker/image-picker.min.js'); ?>" ></script>
-
-    <script>
-        $(document).ready(function () {
-
-            /* If it's edit page*/
-            if($("#descripcion").length != 0) {
-
-                /* Retrieve value from hidden input and set in tinymce*/
-                $('#descripcion').html($('#descripcion-oculta').val());
-                tinymce.init({
-                    selector: '#descripcion',
-                    plugins: 'preview',
-                    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist ',
-                    menu: {
-                        view: {title: 'Edit', items: 'cut, copy, paste'}
-                    }
-                });
-            }
-
-            $( "#pick-image-button" ).on( "click", function() {
-                $("#select-image").imagepicker();
-            });
-        });
-    </script>
-  </body>
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
+</body>
 </html>
