@@ -280,7 +280,7 @@ class Admin extends CI_Controller {
     public function set_noticia()
     {        
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo|trim', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
         if ($this->form_validation->run() == FALSE)
         {
             $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
@@ -504,7 +504,7 @@ class Admin extends CI_Controller {
     public function set_coleccion()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('titulo', 'titulo|trim', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
 
         if ($this->form_validation->run() == FALSE)
         {
