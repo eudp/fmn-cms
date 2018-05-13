@@ -12,10 +12,12 @@ class Multimedia_model extends CI_Model {
         {
 
             $museums =  ($museos != '' ? ', m.museums': '');
+            $w_user_id = ($museos != '' ? 'u.user_id = m.user_id': 'u.id = m.user_id');
 
-            $this->db->select('m.slug, m.title, a.path, m.multimedia_id, m.creation_date, m.modified_date, m.status' . $museums);
+            $this->db->select('u.first_name, m.slug, m.title, a.path, m.multimedia_id, m.creation_date, m.modified_date, m.status' . $museums);
             $this->db->from('multimedia' . $museos . ' as m');
             $this->db->join('archivos' . $museos . ' as a', 'a.file_id = m.image_id', 'left');
+            $this->db->join('usuarios' . $museos . ' as u', $w_user_id);
 
             if ($audio) {
                 if ($museos == ''){
