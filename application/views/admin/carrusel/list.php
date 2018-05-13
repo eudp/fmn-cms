@@ -1,21 +1,39 @@
-<div class="container">
-	<div class="row">
-		<div class="col-12">
-			<a href="<?= site_url('admin/carrusel/' . $type . '/' . $element_id . '/' . 'new');?>"><button type="button" class="btn btn-success">Agregar carrusel</button></a>
-		</div>
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Carrusel
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i>&nbsp;&nbsp;Carrusel</li>
+        <li class="active">Lista</li>
+      </ol>
+    </section>
 
-		<div class="col-12">
-			<table class="table table-sm">
-				<thead>
-					<tr>
-						<th scope="col">Imagen</th>
-						<th scope="col">Título</th>
-						<th scope="col">Descripción</th>
-						<th scope="col">Link ("Ver más...")</th>
-						<th scope="col">Ancho</th>
-						<th scope="col">Alto</th>
-						<th scope="col">Editar</th>
-						<th scope="col">Eliminar</th>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Listado de carrusel</h3>
+              <a class= "pull-right" href="<?= site_url('admin/carrusel/' . $type . '/' . $element_id . '/' . 'new');?>"><button type="button" class="btn btn-primary">Agregar carrusel</button></a>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="list-table" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+						<th>Imagen</th>
+						<th>Título</th>
+						<th>Descripción</th>
+						<th>Link ("Ver más...")</th>
+						<th>Ancho</th>
+						<th>Alto</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,9 +60,18 @@
 						</tr>
 
 					<?php endforeach; ?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>

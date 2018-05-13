@@ -1,10 +1,31 @@
-<div class="container">
-	<div class="row">
-		<div class="col-12">
-			<h3>Actualizar "<?= $collection['title'];?>"</h3>
-		</div>
-		<div class="col-12">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Actualizar "<?= $collection['title'];?>"
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Colecciones Museos</a></li>
+        <li class="active">Editar</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Completa los campos</h3>
+            </div>
+            <!-- /.box-header -->
+
 			<?php echo form_open_multipart('admin/colecciones-museos/'); ?>
+			<div class="box-body">
 			<div class="form-group">
 				<label for="titulo">Título</label>
 				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $collection['title'];?>">
@@ -17,6 +38,7 @@
 			</div>
 			<div class="form-group">
 				<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $collection['path']); ?>"><?= $collection['file_name'];?></a></p>
+				<label for="userfile">Selecciona una nueva imagen</label>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
 			</div>
 			<div class="form-check">
@@ -31,8 +53,19 @@
 
 			<?php $this->load->view('includes/errors'); ?>
 			
-			<button type="submit" class="btn btn-primary">Actualizar</button>
+			</div>
+				<!-- /.box-body -->
+
+				<div class="box-footer">
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+				</div>
 			</form>
-		</div>
-	</div>
-</div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>

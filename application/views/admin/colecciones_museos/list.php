@@ -1,38 +1,67 @@
-<div class="container">
-	<div class="row">
-		<div class="col-12"></div>
-		<div class="col-12">
-			<table class="table">
-				<thead>
-					<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Autor</th>
-					<th scope="col">Title</th>
-					<th scope="col">Carrusel</th>
-					<th scope="col">Fecha de creación</th>
-					<th scope="col">Fecha de última modificación</th>
-					<th scope="col">Status</th>
-					<th scope="col">Museo</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($collection as $collection_item): ?>
 
-						<tr>
-							<th scope="row"><?= $collection_item['collection_id']; ?></th>
-							<th scope="row"><?= $collection_item['first_name']; ?></th>
-							<td><a href="<?= site_url('admin/colecciones-museos/'. $collection_item['collection_id']);?>"><?= $collection_item['title']; ?></a></td>
-							<td><a href="<?= site_url('admin/carrusel-museos/coleccion/'. $collection_item['collection_id']);?>" role="button" class="btn btn-primary">Ver/editar carrusel</a></td>
-							<td><?= date('j \d\e F, Y', $collection_item['creation_date']); ?></td>
-							<td><?= date('j \d\e F, Y',$collection_item['modified_date']); ?></td>
-							<td><?= ($collection_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
-							<td><?= domain_museum($collection_item['museums']); ?></td>
-						</tr>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Colecciones Museos
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i>&nbsp;&nbsp;Colecciones Museos</li>
+        <li class="active">Lista</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Listado de colecciones museos</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="list-table" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+        					<th>ID</th>
+        					<th>Autor</th>
+        					<th>Title</th>
+        					<th>Carrusel</th>
+        					<th>Fecha de creación</th>
+        					<th>Fecha de última modificación</th>
+        					<th>Status</th>
+        					<th>Museo</th>
+					     </tr>
+				      </thead>
+      				<tbody>
+      					<?php foreach ($collection as $collection_item): ?>
+
+      						<tr>
+      							<td><?= $collection_item['collection_id']; ?></td>
+      							<td><?= $collection_item['first_name']; ?></td>
+      							<td><a href="<?= site_url('admin/colecciones-museos/'. $collection_item['collection_id']);?>"><?= $collection_item['title']; ?></a></td>
+      							<td><a href="<?= site_url('admin/carrusel-museos/coleccion/'. $collection_item['collection_id']);?>" role="button" class="btn btn-primary">Ver/editar carrusel</a></td>
+      							<td><?= date('j \d\e F, Y', $collection_item['creation_date']); ?></td>
+      							<td><?= date('j \d\e F, Y',$collection_item['modified_date']); ?></td>
+      							<td><?= ($collection_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
+      							<td><?= domain_museum($collection_item['museums']); ?></td>
+      						</tr>
 
 					<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
-	</div>
-</div>
