@@ -50,7 +50,7 @@
         							<td><?= ($collection_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
         							<!-- Handle delete permisology -->
         							<td>
-        								<form method="post" action="<?= site_url('admin/colecciones/'. $collection_item['collection_id'] . '/destroy');?>">
+        								<form  onsubmit="return confirm('¿Confirmas la eliminación de este elemento?');" method="post" action="<?= site_url('admin/colecciones/'. $collection_item['collection_id'] . '/destroy');?>">
         									<button type="submit" class="btn btn-danger">Eliminar</button>
         								</form>
         							</td>

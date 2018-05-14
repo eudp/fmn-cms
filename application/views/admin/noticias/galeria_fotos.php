@@ -41,7 +41,7 @@
 							<td><?= $photo_gallery_item['height']; ?></td>
 							<!-- Handle delete permisology -->
 							<td>
-								<form method="post" action="<?= site_url('admin/galeria-fotos/'. $photo_gallery_item['photo_gallery_id'] . '/destroy');?>">
+								<form  onsubmit="return confirm('¿Confirmas la eliminación de este elemento?');" method="post" action="<?= site_url('admin/galeria-fotos/'. $photo_gallery_item['photo_gallery_id'] . '/destroy');?>">
 										<input type="hidden" name="noticia_id"  value="<?= $news_id; ?>">
 									<button type="submit" class="btn btn-danger">Eliminar</button>
 								</form>

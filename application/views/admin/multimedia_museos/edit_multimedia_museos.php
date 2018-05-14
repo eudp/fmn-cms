@@ -28,7 +28,7 @@
 			<div class="box-body">
 			<div class="form-group">
 				<label for="titulo">Título</label>
-				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $multimedia['title'];?>">
+				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $multimedia['title'];?>" required>
 				<input type="hidden"  placeholder="" name="titulo_original" value="<?= $multimedia['title'];?>">
 			</div>
 			<div class="form-group">
@@ -37,7 +37,7 @@
 				<input type="hidden" id="descripcion-oculta" name="descripcion-oculta" value='<?= $multimedia["description"];?>'>
 			</div>
 			<div class="form-group">
-				<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $multimedia['path']); ?>"><?= $multimedia['file_name'];?></a></p>
+				<p>Archivo actual : <a target="_blank" href="<?= site_url('assets/images') . str_replace('public:/', '', $multimedia['path']); ?>"><?= $multimedia['file_name'];?></a></p>
 				<label for="userfile">Selecciona una nueva imagen</label>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
 			</div>

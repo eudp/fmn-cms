@@ -27,7 +27,7 @@
 			<div class="box-body">
 			<div class="form-group">
 				<label for="titulo">Título</label>
-				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $obra['title'];?>">
+				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $obra['title'];?>" required>
 			</div>
 			<div class="form-group">
 				<label for="descripcion">Descripción</label>
@@ -49,7 +49,7 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $obra['path']); ?>"><?= $obra['file_name'];?></a></p>
+				<p>Archivo actual : <a target="_blank" href="<?= site_url('assets/images') . str_replace('public:/', '', $obra['path']); ?>"><?= $obra['file_name'];?></a></p>
 				<label for="userfile">Selecciona una nueva imagen</label>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
 			</div>

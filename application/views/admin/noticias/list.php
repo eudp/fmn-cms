@@ -53,7 +53,7 @@
                       <td><?= ($news_item['status'] == 1 ? 'Activo': 'Inactivo'); ?></td>
                       <!-- Handle delete permisology -->
                       <td>
-                        <form method="post" action="<?= site_url('admin/noticias/'. $news_item['news_id'] . '/destroy');?>">
+                        <form onsubmit="return confirm('¿Confirmas la eliminación de este elemento?');" method="post" action="<?= site_url('admin/noticias/'. $news_item['news_id'] . '/destroy');?>">
                           <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
                       </td>

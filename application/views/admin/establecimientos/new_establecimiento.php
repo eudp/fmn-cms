@@ -32,7 +32,7 @@
 					</div>
 					<div class="form-group">
 						<label for="titulo">Título</label>
-						<input type="text" class="form-control"  placeholder="" name="titulo" >
+						<input type="text" class="form-control"  placeholder="" name="titulo"  required>
 					</div>
 					<div class="form-group">
 						<label for="descripcion">Descripción</label>

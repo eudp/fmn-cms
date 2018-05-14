@@ -50,7 +50,7 @@
 							<td><a href="<?= site_url('admin/carrusel/'. $carousel_item['carousel_id']);?>" role="button" class="btn btn-primary">Editar</a></td>
 							<!-- Handle delete permisology -->
 							<td>
-								<form method="post" action="<?= site_url('admin/carrusel/'. $carousel_item['carousel_id'] . '/destroy');?>">
+								<form  onsubmit="return confirm('¿Confirmas la eliminación de este elemento?');"  method="post" action="<?= site_url('admin/carrusel/'. $carousel_item['carousel_id'] . '/destroy');?>">
 
 										<input type="hidden" name="tipo"  value="<?= $carousel_item['type'] ; ?>">
 										<input type="hidden" name="elemento_id"  value="<?= $carousel_item['element_id'] ; ?>">

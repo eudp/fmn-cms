@@ -42,7 +42,7 @@
 
 							<!-- Handle delete permisology -->
 							<td>
-								<form method="post" action="<?= site_url('admin/fechas-agenda/'. $diary_date_item['diary_date_id'] . '/destroy');?>">
+								<form  onsubmit="return confirm('¿Confirmas la eliminación de este elemento?');" method="post" action="<?= site_url('admin/fechas-agenda/'. $diary_date_item['diary_date_id'] . '/destroy');?>">
 									<input type="hidden" name="id" value="<?= $diary_id;?>">
 									<button type="submit" class="btn btn-danger">Eliminar</button>
 								</form>

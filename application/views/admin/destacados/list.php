@@ -43,7 +43,7 @@
 							<td><?= $highlights_item['title']; ?></td>
 							<!-- Handle delete permisology -->
 							<td>
-								<form method="post" action="<?= site_url('admin/destacados/'. $highlights_item['highlight_id'] . '/destroy');?>">
+								<form  onsubmit="return confirm('¿Confirmas la eliminación de este elemento?');" method="post" action="<?= site_url('admin/destacados/'. $highlights_item['highlight_id'] . '/destroy');?>">
 									<button type="submit" class="btn btn-danger">Eliminar</button>
 								</form>
 							</td>

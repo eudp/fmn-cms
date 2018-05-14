@@ -28,7 +28,7 @@
 				<div class="box-body">
 					<div class="form-group">
 						<label for="titulo">Título</label>
-						<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $news['title'];?>">
+						<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $news['title'];?>" required>
 						<input type="hidden"  placeholder="" name="titulo_original" value="<?= $news['title'];?>">
 					</div>
 					<div class="form-group">
@@ -45,7 +45,7 @@
 						<input class="form-control" type="date" value="<?= date('Y-m-d',$news['publication_date']);?>" name="fecha-publicacion">
 					</div>
 					<div class="form-group">
-						<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $news['path']); ?>"><?= $news['file_name'];?></a></p>
+						<p>Archivo actual : <a target="_blank" href="<?= site_url('assets/images') . str_replace('public:/', '', $news['path']); ?>"><?= $news['file_name'];?></a></p>
 						<label for="userfile">Selecciona una nueva imagen</label>
 						<input  type="file" class="form-control-file" name="userfile" size="20" />
 					</div>

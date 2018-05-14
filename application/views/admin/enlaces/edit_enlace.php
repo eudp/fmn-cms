@@ -27,14 +27,14 @@
 			<div class="box-body">
 			<div class="form-group">
 				<label for="titulo">Título</label>
-				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $link['title'];?>">
+				<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $link['title'];?>" required>
 			</div>
 			<div class="form-group">
 				<label for="url">Url</label>
 				<input type="text" class="form-control"  placeholder="" name="url" value="<?= $link['url'];?>">
 			</div>
 			<div class="form-group">
-				<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $link['path']); ?>"><?= $link['file_name'];?></a></p>
+				<p>Archivo actual : <a target="_blank" href="<?= site_url('assets/images') . str_replace('public:/', '', $link['path']); ?>"><?= $link['file_name'];?></a></p>
         <label for="userfile">Selecciona una nueva imagen</label>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
 			</div>

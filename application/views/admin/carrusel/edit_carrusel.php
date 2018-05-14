@@ -41,7 +41,7 @@
 					</div>
 
 					<div class="form-group">
-						<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $carousel['path']); ?>"><?= $carousel['file_name'];?></a></p>
+						<p>Archivo actual : <a target="_blank" href="<?= site_url('assets/images') . str_replace('public:/', '', $carousel['path']); ?>"><?= $carousel['file_name'];?></a></p>
 						<label for="userfile">Selecciona una nueva imagen</label>
 						<input  type="file" class="form-control-file" name="userfile" size="20" />
 					</div>

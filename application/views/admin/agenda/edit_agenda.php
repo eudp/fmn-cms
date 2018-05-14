@@ -28,7 +28,7 @@
 				<div class="box-body">
 					<div class="form-group">
 						<label for="titulo">Título</label>
-						<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $diary['title'];?>">
+						<input type="text" class="form-control"  placeholder="" name="titulo" value="<?= $diary['title'];?>" required>
 						<input type="hidden" placeholder="" name="titulo_original" value="<?= $diary['title'];?>">
 					</div>
 					<div class="form-group">
@@ -50,7 +50,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<p>Archivo actual : <a href="<?= site_url('assets/images') . str_replace('public:/', '', $diary['path']); ?>"><?= $diary['file_name'];?></a></p>
+						<p>Archivo actual : <a target="_blank" href="<?= site_url('assets/images') . str_replace('public:/', '', $diary['path']); ?>"><?= $diary['file_name'];?></a></p>
 						<label for="userfile">Selecciona una nueva imagen</label>
 						<input  type="file" class="form-control-file" name="userfile" size="20" />
 					</div>
