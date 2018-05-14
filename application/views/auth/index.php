@@ -1,10 +1,35 @@
-<h1><?php echo lang('index_heading');?></h1>
-<p><?php echo lang('index_subheading');?></p>
+<?php  	$h_data['title'] = 'Admin | Fundación Museos Nacionales';
+	    $h_data['active'] = 'admin';
 
-<div id="infoMessage"><?php echo $message;?></div>
+	    $this->load->view('includes/header_admin',$h_data);
+?>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        <?php echo lang('index_heading');?>
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i>&nbsp;&nbsp;<?php echo lang('index_heading');?></li>
+        <li class="active">Lista</li>
+      </ol>
+    </section>
 
-<table cellpadding=0 cellspacing=10>
-	<tr>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><?php echo lang('index_subheading');?></h3>
+              <div id="infoMessage"><?php echo $message;?></div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="list-table" class="table table-bordered table-hover">
+                <thead>
+                <tr>
 		<th><?php echo lang('index_fname_th');?></th>
 		<th><?php echo lang('index_lname_th');?></th>
 		<th><?php echo lang('index_email_th');?></th>
@@ -26,6 +51,19 @@
 			<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit') ;?></td>
 		</tr>
 	<?php endforeach;?>
-</table>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
-<p><?php echo anchor('auth/create_user', lang('index_create_user_link'))?> | <?php echo anchor('auth/create_group', lang('index_create_group_link'))?></p>
+<?php  $this->load->view('includes/footer_admin'); ?>
