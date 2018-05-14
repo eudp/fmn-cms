@@ -6,6 +6,18 @@ class Noticias_model extends CI_Model {
         $this->load->database();
     }
 
+    /**
+     * Recupera registros de este modelo.
+     *
+     * @param string|int $entry, id o slug del elemento.
+     * @param int $status, estatus del elemento.
+     * @param int $limit, cantidad de elementos que se quiren recuerar.
+     * @param string $search, cadena de caracteres para hacer las busqueda en la bd.
+     * @param string $museos, su valor puede ser '_museos' o '', dependiendo cual tabla se quiere mostrar.
+     * @param boolean $actual, indica si se quiere solo elementos menores a la fecha actual o no.
+     * @param boolean $slug, indica si $entry es id o un slug.
+    */
+
     public function get($entry = null, $status = 1, $limit = null, $search = null, $museos = '', $actual = true, $slug = false)
     {
         if ($entry == null)
@@ -42,7 +54,7 @@ class Noticias_model extends CI_Model {
             return $query->result_array();
         }
 
-        $this->db->select('n.title, a.path, n.description, n.publication_date, n.excerpt, a.file_name, n.status, n.news_id');
+        $this->db->select('n.title, a.path, n.description, n.publication_date, n.excerpt, a.file_name, n.status, n.news_id, n.slug');
         $this->db->from('noticias' . $museos . ' as n');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = n.image_id', 'left');
 

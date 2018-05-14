@@ -6,6 +6,15 @@ class Colecciones_model extends CI_Model {
         $this->load->database();
     }
 
+    /**
+     * Recupera registros de este modelo.
+     *
+     * @param string|int $entry, id o slug del elemento.
+     * @param int $status, estatus del elemento.
+     * @param string $museos, su valor puede ser '_museos' o '', dependiendo cual tabla se quiere mostrar.
+     * @param boolean $slug, indica si $entry es id o un slug.
+    */
+
     public function get($entry = null, $status = 1, $museos = '', $slug = false)
     {
         if ($entry === null)

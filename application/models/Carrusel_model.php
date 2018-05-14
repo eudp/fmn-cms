@@ -6,6 +6,16 @@ class Carrusel_model extends CI_Model {
         $this->load->database();
     }
 
+    /**
+     * Recupera registros de este modelo.
+     *
+     * @param int $element_id, id del elemento al que pertenece el carrusel.
+     * @param int $type, tipo del elemento al que pertenece el carrusel.
+     * @param int $carousel_id, id del carrusel.
+     * @param string $museos, su valor puede ser '_museos' o '', dependiendo cual tabla se quiere mostrar.
+    */
+
+
     public function get($element_id, $type, $carousel_id = null, $museos = '')
     {
         if ($carousel_id == null) {

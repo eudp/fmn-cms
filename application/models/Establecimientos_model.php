@@ -6,6 +6,15 @@ class Establecimientos_model extends CI_Model {
         $this->load->database();
     }
 
+    /**
+     * Recupera registros de este modelo.
+     * @param string $type, indica el tipo del establecimiento 'instituto' o 'museo'.
+     * @param string|int $entry, id o slug del elemento.
+     * @param int $status, estatus del elemento.
+     * @param boolean $slug, indica si $entry es id o un slug.
+    */
+
+
     public function get($type = null, $entry = null, $status = 1, $slug = false)
     {
         if ($entry === null)

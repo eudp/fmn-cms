@@ -7,14 +7,38 @@ class Home extends CI_Controller {
         $this->load->model('noticias_model');
         $this->load->model('multimedia_model');
         $this->load->model('agenda_model');
+        $this->load->model('enlaces_model');
         $this->load->model('exposiciones_model');
+        $this->load->model('destacados_model');
 
         $this->load->helper('domain_museum');
     }
 
     public function index()
     {                                         
-        $data['news'] = $this->noticias_model->get(null,1,4);
+        $data['highlight'] = $this->destacados_model->get();
+
+
+        foreach ($data['highlight'] as $key => $value) {
+            if ($value['type'] == 'noticias'){
+                $out = $this->noticias_model->get($value['element_id']);
+                $data['highlight'][$key] += ['publication_date' => $out['publication_date']];
+                $data['highlight'][$key] += ['excerpt' => $out['excerpt']];
+                $data['highlight'][$key] += ['slug' => $out['slug']];
+            } else if ($value['type'] == 'multimedia') {
+                $out = $this->multimedia_model->get(false, $value['element_id']);
+                $data['highlight'][$key] += ['slug' => $out['slug']];
+            } else if ($value['type'] == 'agenda') {
+                $out = $this->agenda_model->get($value['element_id']);
+                $data['highlight'][$key] += ['slug' => $out['slug']];
+            } else if ($value['type'] == 'enlaces') {
+                $out = $this->enlaces_model->get($value['element_id']);
+                $data['highlight'][$key] += ['url' => $out['url']];
+            } 
+
+            $data['highlight'][$key] += ['title' => $out['title']];
+            $data['highlight'][$key] += ['path' => $out['path']];
+        }
         $h_data['title'] = 'Fundación Museos Nacionales';
         $h_data['active'] = 'home';
 

@@ -6,6 +6,19 @@ class Exposiciones_model extends CI_Model {
         $this->load->database();
     }
 
+    /**
+     * Recupera registros de este modelo.
+     *
+     * @param int (1) $actual, indica si se quiere una exposición actual, aún en exhibición.
+     * @param string|int $entry, id o slug del elemento.
+     * @param int $status, estatus del elemento.
+     * @param int $limit, cantidad de elementos que se quiren recuerar.
+     * @param string $search, cadena de caracteres para hacer las busqueda en la bd.
+     * @param string $museos, su valor puede ser '_museos' o '', dependiendo cual tabla se quiere mostrar.
+     * @param boolean $slug, indica si $entry es id o un slug.
+    */
+
+
     public function get($actual = null, $entry = null, $status = 1, $limit = null, $search = null, $museos = '', $slug = false)
     {
         if ($entry == null)
@@ -40,7 +53,7 @@ class Exposiciones_model extends CI_Model {
             return $query->result_array();
         }
 
-        $this->db->select('e.title, e.description, t.title as title_m, t.address, t.establishment_id, e.exhibition_place, e.schedule, e.status, e.actual, a.path, a.file_name, e.exposition_id');
+        $this->db->select('e.title, e.description, t.title as title_m, t.address, t.establishment_id, e.exhibition_place, e.schedule, e.status, e.actual, a.path, a.file_name, e.exposition_id, e.slug');
         $this->db->from('exposiciones' . $museos . ' as e');
         $this->db->join('establecimientos as t', 'e.establishment_id = t.establishment_id', 'left');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = e.image_id', 'left');

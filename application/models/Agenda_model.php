@@ -6,6 +6,18 @@ class Agenda_model extends CI_Model {
         $this->load->database();
     }
 
+    /**
+     * Recupera registros de este modelo.
+     *
+     * @param string|int $entry, id o slug del elemento.
+     * @param int $status, estatus del elemento.
+     * @param int $limit, cantidad de elementos que se quiren recuerar.
+     * @param string $search, cadena de caracteres para hacer las busqueda en la bd.
+     * @param string $museos, su valor puede ser '_museos' o '', dependiendo cual tabla se quiere mostrar.
+     * @param boolean $slug, indica si $entry es id o un slug.
+    */
+
+
     public function get($entry = null, $status = 1, $limit = null, $search = null, $museos = '', $slug = false)
     {
         if ($entry == null)
@@ -37,7 +49,7 @@ class Agenda_model extends CI_Model {
         }
 
         //duda con establecimiento en entrada de agendas de museos
-        $this->db->select('d.title, d.description, a.path, d.diary_id, e.title as e_title, d.status, d.establishment_id, a.file_name');
+        $this->db->select('d.title, d.description, a.path, d.diary_id, e.title as e_title, d.status, d.establishment_id, a.file_name, d.slug');
         $this->db->from('agenda' . $museos . ' as d');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = d.image_id', 'left');
         $this->db->join('establecimientos' . ' as e', 'e.establishment_id = d.establishment_id', 'left');

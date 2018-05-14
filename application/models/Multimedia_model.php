@@ -6,6 +6,19 @@ class Multimedia_model extends CI_Model {
         $this->load->database();
     }
 
+    /**
+     * Recupera registros de este modelo.
+     *
+     * @param boolean $audio, indica si se quiere un audio o no.
+     * @param string|int $entry, id o slug del elemento.
+     * @param int $status, estatus del elemento.
+     * @param int $limit, cantidad de elementos que se quiren recuerar.
+     * @param string $search, cadena de caracteres para hacer las busqueda en la bd.
+     * @param string $museos, su valor puede ser '_museos' o '', dependiendo cual tabla se quiere mostrar.
+     * @param boolean $slug, indica si $entry es id o un slug.
+    */
+
+
     public function get($audio = false, $entry = null, $status = 1, $limit = null, $search = null, $museos = '', $slug = false)
     {
         if ($entry == null)
@@ -46,7 +59,7 @@ class Multimedia_model extends CI_Model {
             return $query->result_array();
         }
 
-        $this->db->select('m.title, m.description, a.path, a.file_name, f.path as multimedia_path, f.file_name as multimedia_name, m.status, m.multimedia_id, m.type');
+        $this->db->select('m.title, m.description, a.path, a.file_name, f.path as multimedia_path, f.file_name as multimedia_name, m.status, m.multimedia_id, m.type, m.slug');
         $this->db->from('multimedia' . $museos . ' as m');
         $this->db->join('archivos' . $museos . ' as a', 'a.file_id = m.image_id', 'left');
         $this->db->join('archivos' . $museos . ' as f', 'f.file_id = m.multimedia_file_id', 'left');
