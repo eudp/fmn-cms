@@ -21,7 +21,7 @@
             <h3 class="control-sidebar-heading">Administrador de usuarios</h3>
             <ul class="control-sidebar-menu">
               <li>
-                <a href="javascript:;">
+                <a href="<?= site_url('auth'); ?>">
                   <i class="menu-icon fa fa-server  bg-red"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Listar usuarios</h4>
@@ -29,7 +29,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript:;">
+                <a href="<?= site_url('auth/create_user/'); ?>">
                   <i class="menu-icon fa fa-user-plus bg-red"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Crear usuario</h4>
@@ -37,7 +37,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript:;">
+                <a href="<?= site_url('auth/create_group/'); ?>">
                   <i class="menu-icon fa fa-object-group bg-red"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Crear grupo</h4>
