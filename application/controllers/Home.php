@@ -23,6 +23,9 @@ class Home extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
+    /**
+     * Realiza la búsqueda
+     */
     public function search()
     {
     	$this->load->library('form_validation');

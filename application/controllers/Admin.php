@@ -40,7 +40,7 @@ class Admin extends CI_Controller {
         $this->load->view('includes/footer_admin');
     }
 
-    /*List of establishments and edit individual establishments*/
+    /*Lista y permite la edición de los elementos*/
 
     public function establecimientos($establishment_id = null)
     {
@@ -75,6 +75,12 @@ class Admin extends CI_Controller {
     	}
     }
 
+    /**
+     * Permite subir archivos
+     *
+     * @param string $type, puede ser museo o instituto.
+     */
+
     public function nuevo_establecimiento ($type) 
     {
         $data['type'] = $type;
@@ -85,6 +91,12 @@ class Admin extends CI_Controller {
         $this->load->view('admin/establecimientos/new_establecimiento', $data);
         $this->load->view('includes/footer_admin');
     }
+
+    /**
+     * Permite subir archivos
+     *
+     * @param string $u_path, key para obtener dirección de subida de archivo.
+     */
 
     public function set_establecimiento($u_path)
     {
@@ -151,13 +163,20 @@ class Admin extends CI_Controller {
 			}
         }
     }
-    /* Handle delete permisology*/
+
     public function eliminar_museo ($establishment_id) 
     {
 		$this->establecimientos_model->delete($establishment_id);
 
 		redirect(site_url('admin/establecimientos/'), 'refresh');
     }
+
+    /**
+     * Permite subir archivos
+     *
+     * @param string $u_path, key para obtener dirección de subida.
+     * @param string $featured_image, para conocer si se sube una imagen o un archivo multimedia.
+     */
 
     public function upload_file ($u_path, $featured_image = true, $museos = '')
     {
@@ -205,7 +224,6 @@ class Admin extends CI_Controller {
         if ( ! $this->upload->do_upload($file))
         {
             return null;            
-            /* Handling this error*/
         }
         else
         {
@@ -234,7 +252,8 @@ class Admin extends CI_Controller {
             return $this->archivos_model->set($array, $museos);
         }
     }
-    /*List of news and edit individual news*/
+
+    /*Lista y permite la edición de los elementos*/
 
     public function noticias($news_id = null)
     {
@@ -334,7 +353,6 @@ class Admin extends CI_Controller {
         }
     }
 
-    /* Handle delete permisology*/
     public function eliminar_noticia ($news_id) 
     {
         $this->noticias_model->delete($news_id);
@@ -342,7 +360,7 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/noticias/'), 'refresh');
     }
 
-    /*List of expositions and edit individual exposition*/
+    /*Lista y permite la edición de los elementos*/
 
     public function exposiciones($exposition_id = null)
     {
@@ -450,7 +468,6 @@ class Admin extends CI_Controller {
         }
     }
 
-    /* Handle delete permisology*/
     public function eliminar_exposicion ($exposition_id) 
     {
         $this->exposiciones_model->delete($exposition_id);
@@ -458,7 +475,7 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/exposiciones/'), 'refresh');
     }
 
-    /*List of collections and edit individual collection*/
+    /*Lista y permite la edición de los elementos*/
 
     public function colecciones($collection_id = null)
     {
@@ -557,7 +574,6 @@ class Admin extends CI_Controller {
         }
     }
 
-    /* Handle delete permisology*/
     public function eliminar_coleccion ($collection_id) 
     {
         $this->colecciones_model->delete($collection_id);
@@ -565,7 +581,7 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/colecciones/'), 'refresh');
     }
 
-    /*List of obras and edit individual obra*/
+    /*Lista y permite la edición de los elementos*/
 
     public function obras($obra_id = null)
     {
@@ -664,7 +680,7 @@ class Admin extends CI_Controller {
         }
     }
 
-    /* Handle delete permisology*/
+    
     public function eliminar_obra ($obra_id) 
     {
         $this->obras_model->delete($obra_id);
@@ -672,7 +688,7 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/obras/'), 'refresh');
     }
 
-    /*List of contact and individual contact*/
+    /*Lista los elementos*/
 
     public function contactenos($id = null)
     {
@@ -701,7 +717,7 @@ class Admin extends CI_Controller {
         } 
     }
 
-    /*List of diarys and edit individual diary*/
+    /*Lista y permite la edición de los elementos*/
 
     public function agenda($diary_id = null)
     {
@@ -803,7 +819,7 @@ class Admin extends CI_Controller {
             }
         }
     }
-    /* Handle delete permisology*/
+    
     public function eliminar_agenda ($diary_id) 
     {
         $this->agenda_model->delete($diary_id);
@@ -811,7 +827,7 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/agenda/'), 'refresh');
     }
 
-    /*List of multimedias and edit individual multimedia*/
+    /*Lista y permite la edición de los elementos*/
 
     public function multimedia($multimedia_id = null)
     {
@@ -918,7 +934,7 @@ class Admin extends CI_Controller {
             }
         }
     }
-    /* Handle delete permisology*/
+    
     public function eliminar_multimedia ($multimedia_id) 
     {
         $this->multimedia_model->delete($multimedia_id);
@@ -926,7 +942,7 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/multimedia/'), 'refresh');
     }
 
-    /*List of diarys and edit individual diary*/
+    /*Lista y permite la edición de los elementos*/
 
     public function agenda_museos($diary_id = null)
     {
@@ -950,8 +966,6 @@ class Admin extends CI_Controller {
 
             $data['diary']['description'] = strip_tags($data['diary']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
-            //$data['establishments'] = $this->establecimientos_model->get(null, null);
-
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
 
@@ -965,7 +979,7 @@ class Admin extends CI_Controller {
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('titulo', 'titulo', 'required|trim');
-        //$this->form_validation->set_rules('id_establecimiento', 'id_establecimiento', 'required');
+
         if ($this->form_validation->run() == FALSE)
         {
             $this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
@@ -974,7 +988,6 @@ class Admin extends CI_Controller {
         }
         else
         {
-
             /* Upload image*/
             $image_id = $this->upload_file('agenda_museos', true, '_museos');
 
@@ -999,7 +1012,6 @@ class Admin extends CI_Controller {
                     $array += ['slug' => valid_slug($this->input->post('titulo'), $this->agenda_model, '_museos')];
                 }
 
-
             $this->agenda_model->set($array, $this->input->post('id'), '_museos');
 
             redirect(site_url('admin/agenda-museos/'. $this->input->post('id')), 'refresh');
@@ -1007,7 +1019,7 @@ class Admin extends CI_Controller {
         }
     }
 
-    /*List of expositions and edit individual exposition*/
+    /*Lista y permite la edición de los elementos*/
 
     public function exposiciones_museos($exposition_id = null)
     {
@@ -1031,8 +1043,6 @@ class Admin extends CI_Controller {
 
             $data['exposition']['description'] = strip_tags($data['exposition']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6>');
 
-            //$data['establishments'] = $this->establecimientos_model->get(null, null);
-
             $h_data['title'] = 'Admin | Fundación Museos Nacionales';
             $h_data['active'] = 'admin';
 
@@ -1055,7 +1065,6 @@ class Admin extends CI_Controller {
         }
         else
         {
-
             /* Upload image*/
             $image_id = $this->upload_file('exposicion_museos', true, '_museos');
 
@@ -1093,7 +1102,7 @@ class Admin extends CI_Controller {
         }
     }
 
-    /*List of multimedia_museoss and edit individual multimedia_museos*/
+    /*Lista y permite la edición de los elementos*/
 
     public function multimedia_museos($multimedia_id = null)
     {
@@ -1178,7 +1187,7 @@ class Admin extends CI_Controller {
         }
     }
 
-    /*List of news and edit individual news*/
+    /*Lista y permite la edición de los elementos*/
 
     public function noticias_museos($news_id = null)
     {
@@ -1300,7 +1309,6 @@ class Admin extends CI_Controller {
         }
     }
 
-    /* Handle delete permisology */
     public function eliminar_fechas_agenda ($diary_date_id) 
     {
         $diary_id = $this->input->post('id');
@@ -1448,12 +1456,9 @@ class Admin extends CI_Controller {
 
     public function set_carrusel_museos()
     {        
-        //$this->load->library('form_validation');
 
-        //if ($this->form_validation->run() == FALSE)
         if (empty($_FILES['userfile']['name']))
         {
-            //$this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
 
             ($this->input->post('id') != null ? redirect(site_url('admin/carrusel-museos/'. $this->input->post('id')), 'refresh') :redirect(site_url('admin/carrusel-museos/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id') .'/new'), 'refresh'));
         }
@@ -1482,7 +1487,7 @@ class Admin extends CI_Controller {
         }
     }
 
-    /*List of collections and edit individual collection*/
+    /*Lista y permite la edición de los elementos*/
 
     public function colecciones_museos($collection_id = null)
     {
@@ -1578,13 +1583,9 @@ class Admin extends CI_Controller {
 
      public function set_galeria_fotos()
     {        
-        //$this->load->library('form_validation');
 
-        //if ($this->form_validation->run() == FALSE)
         if (empty($_FILES['userfile']['name']))
         {
-            //$this->session->set_flashdata('errors', validation_errors('<li>', '</li>'));
-
             redirect(site_url('admin/galeria-fotos/'. $this->input->post('noticia_id')), 'refresh');
         }
         else
@@ -1604,7 +1605,7 @@ class Admin extends CI_Controller {
         }
     }
 
-    /* Handle delete permisology */
+    
     public function eliminar_galeria_fotos ($photo_gallery_id) 
     {
         $news_id = $this->input->post('noticia_id');
@@ -1630,7 +1631,7 @@ class Admin extends CI_Controller {
         
     }
 
-    /*List of link and edit individual link*/
+    /*Lista y permite la edición de los elementos*/
 
     public function enlaces($link_id = null)
     {
@@ -1721,13 +1722,15 @@ class Admin extends CI_Controller {
         }
     }
 
-    /* Handle delete permisology*/
+
     public function eliminar_enlace ($link_id) 
     {
         $this->enlaces_model->delete($link_id);
 
         redirect(site_url('admin/enlaces/'), 'refresh');
     }
+
+    /*Lista los elementos*/
 
     public function destacados($type = null)
     {
@@ -1795,19 +1798,11 @@ class Admin extends CI_Controller {
         redirect(site_url('admin'), 'refresh');
     }
 
-    /* Handle delete permisology*/
+
     public function eliminar_destacado ($highlight_id) 
     {
         $this->destacados_model->delete($highlight_id);
 
         redirect(site_url('admin'), 'refresh');
-    }
-
-    public function slug ()
-    {
-
-        //slugs_massive($this->noticias_model);
-
-        return;
     }
 }

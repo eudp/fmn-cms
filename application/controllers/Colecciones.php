@@ -17,7 +17,11 @@ class Colecciones extends CI_Controller {
         $this->load->view('colecciones/index', $data);
         $this->load->view('includes/footer');
     }
-
+    /**
+     * Muestra el elemento
+     *
+     * @param string|int $entry, id o slug del elemento.
+     */
     public function view($entry)
     {
         if (!is_numeric($entry)){

@@ -18,7 +18,12 @@ class Multimedia extends CI_Controller {
         $this->load->view('multimedia/index', $data);
         $this->load->view('includes/footer');
     }
-
+    /**
+     * Muestra el elemento
+     *
+     * @param string|int $entry, id o slug del elemento.
+     * @param string $museos, su valor puede ser '_museos' o '', dependiendo cual tabla se quiere mostrar.
+     */
     public function view($entry, $museos = '')
     {
         if (!is_numeric($entry)){
