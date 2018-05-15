@@ -19,10 +19,10 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado de Destacados</h3>
-              <a class="pull-right" href="<?= site_url('admin/destacados/agenda');?>"><button type="button" class="btn btn-primary">Agregar destacado agenda</button></a>
-              <a class="pull-right" href="<?= site_url('admin/destacados/noticia');?>"><button type="button" class="btn btn-primary">Agregar destacado noticia</button></a>
-              <a class="pull-right" href="<?= site_url('admin/destacados/multimedia');?>"><button type="button" class="btn btn-primary">Agregar destacado multimedia</button></a>
-              <a class="pull-right" href="<?= site_url('admin/destacados/enlace');?>"><button type="button" class="btn btn-primary">Agregar destacado enlace</button></a>
+              <a class="pull-right" href="<?= site_url('admin/destacados/agenda');?>"><button type="button" class="btn bg-maroon  margin">Agregar destacado agenda</button></a>
+              <a class="pull-right" href="<?= site_url('admin/destacados/noticia');?>"><button type="button" class="btn bg-purple  margin">Agregar destacado noticia</button></a>
+              <a class="pull-right" href="<?= site_url('admin/destacados/multimedia');?>"><button type="button" class="btn bg-orange  margin">Agregar destacado multimedia</button></a>
+              <a class="pull-right" href="<?= site_url('admin/destacados/enlace');?>"><button type="button" class="btn bg-olive margin">Agregar destacado enlace</button></a>
             </div>
             
             <!-- /.box-header -->
