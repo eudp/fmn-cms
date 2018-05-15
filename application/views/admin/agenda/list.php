@@ -32,7 +32,6 @@
 					<th>Url</th>
 					<th>Fecha de creación</th>
 					<th>Fecha de última modificación</th>
-					<th>Fecha de publicación</th>
 					<th>Status</th>
 					<th>Eliminar</th>
 					</tr>
@@ -48,7 +47,6 @@
 							<td><a target="_blank" href="<?= site_url('agenda/'. $diary_item['slug']);?>"><?= site_url('agenda/'. $diary_item['slug']); ?></a></td>
 							<td><?= date('j \d\e F, Y', $diary_item['creation_date']); ?></td>
 							<td><?= date('j \d\e F, Y',$diary_item['modified_date']); ?></td>
-							<td><?= date('j \d\e F, Y',$diary_item['publication_date']); ?></td>
 							<td><?= ($diary_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
 							<!-- Handle delete permisology -->
 							<td>
