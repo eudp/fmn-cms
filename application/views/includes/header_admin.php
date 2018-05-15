@@ -74,8 +74,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           $('#descripcion').html($('#descripcion-oculta').val())
           tinymce.init({
               selector: '#descripcion',
-              plugins: 'preview',
-              toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist ',
+              height: 500,
+              plugins: 'preview directionality visualblocks visualchars image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help table',
+              toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | table',
               menu: {
                   view: {title: 'Edit', items: 'cut, copy, paste'}
               }
@@ -144,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="<?= site_url('admin');?>"><i class="fa fa-link"></i> <span>Destacados</span></a></li>
+        <li><a href="<?= site_url('admin');?>"><i class="fa fa-link"></i> <span>Destacados</span></a></li>
 
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Noticias</span>
