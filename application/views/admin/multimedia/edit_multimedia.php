@@ -41,18 +41,13 @@
 				<label for="userfile">Selecciona una nueva imagen</label>
 				<input  type="file" class="form-control-file" name="userfile" size="20" />
 			</div>
+			<hr>
 			<div class="form-group">
 				<p>Archivo multimedia actual : <a href="<?= site_url('assets/files') . str_replace('public:/', '', $multimedia['multimedia_path']); ?>"><?= $multimedia['multimedia_name'];?></a></p>
 				<label for="multimediafile">Seleccione un nuevo archivo multimedia</label>
 				<input  type="file" class="form-control-file" name="multimediafile" size="20" />
 			</div>
-			<div class="form-check">
-				<?php $status = ($multimedia['status'] == 1 ? 'checked' : '');?>
-				<input class="form-check-input" name="status" type="checkbox" value="1" <?= $status;?>>
-				<label class="form-check-label" for="status">
-					Activo
-				</label>
-			</div>
+
 			<p>Tipo de multimedia: </p>
 			<?php 
 				$audio     = ($multimedia['type'] == 52 ? 'checked' : '');
@@ -68,10 +63,15 @@
 				<label class="custom-control-label" for="customRadio2">Documento o guía</label>
 			</div>
 
-			<!-- Button trigger modal -->
-			<!-- 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pick-image" id="pick-image-button">
-			Seleccionar imagen
-			</button> -->
+			<hr>
+
+			<div class="form-check">
+				<?php $status = ($multimedia['status'] == 1 ? 'checked' : '');?>
+				<input class="form-check-input" name="status" type="checkbox" value="1" <?= $status;?>>
+				<label class="form-check-label" for="status">
+					Activo
+				</label>
+			</div>
 
 			<input type="hidden" name="id" value="<?= $multimedia['multimedia_id'];?>">
 

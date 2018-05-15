@@ -43,6 +43,19 @@
 						<label for="multimediafile">Archivo multimedia</label>
 						<input  type="file" class="form-control-file" name="multimediafile" size="20" />
 					</div>
+
+					<p>Tipo de multimedia: </p>
+	
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio1" name="tipo" class="custom-control-input" value="0" checked>
+						<label class="custom-control-label" for="customRadio1">Audio</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio2" name="tipo" class="custom-control-input" value="1">
+						<label class="custom-control-label" for="customRadio2">Documento o guía</label>
+					</div>
+				<hr>
+
 					<div class="form-check">
 						<input class="form-check-input" name='status' type="checkbox" value="1">
 						<label class="form-check-label" for="status">
