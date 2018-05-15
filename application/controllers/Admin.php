@@ -40,6 +40,91 @@ class Admin extends CI_Controller {
         $this->load->view('includes/footer_admin');
     }
 
+    /**
+     * Permite subir archivos
+     *
+     * @param string $u_path, key para obtener dirección de subida.
+     * @param string $featured_image, para conocer si se sube una imagen o un archivo multimedia.
+     */
+
+    public function upload_file ($u_path, $featured_image = true, $museos = '')
+    {
+        // Select input field
+        $file = 'userfile';
+        $config['allowed_types'] = 'jpg|gif|jpeg|png';
+        if (!$featured_image) {
+            $file = 'multimediafile';
+            $config['allowed_types'] = 'mp3|pdf';
+        }
+
+        $upload_path = [
+            "museo"                      => "./assets/images/museos/",
+            "instituto"                  => "./assets/images/institutos/",
+            "noticia"                    => "./assets/images/noticias/",
+            "exposicion"                 => "./assets/images/exposiciones/",
+            "coleccion"                  => "./assets/images/colecciones/",
+            "obra"                       => "./assets/images/obras/",
+            "agenda"                     => "./assets/images/agenda/",
+            "multimedia"                 => "./assets/images/multimedias/",
+            "multimedia_file"            => "./assets/files/multimedias/",
+            "enlace"                     => "./assets/images/enlaces/",
+            "galeria"                    => "./assets/images/galeria/",
+            "agenda_museos"              => "./assets/images/agenda_museos/",
+            "coleccion_museos"           => "./assets/images/colecciones_museos/",
+            "exposicion_museos"          => "./assets/images/exposicion_museos/",
+            "multimedia_museos"          => "./assets/images/multimedias_museos/",
+            "multimedia_file_museos"     => "./assets/files/multimedias_museos/",
+            "noticia_museos"             => "./assets/images/noticias_museos/",
+            "galeria_museos"             => "./assets/images/galeria_museos/",
+            "carrusel_museo"             => "./assets/images/museos/carrusel/",
+            "carrusel_instituto"         => "./assets/images/institutos/carrusel/",
+            "carrusel_coleccion"         => "./assets/images/colecciones/carrusel/",
+            "carrusel_exposicion"        => "./assets/images/exposiciones/carrusel/",
+            "carrusel_coleccion_museos"  => "./assets/images/colecciones/carrusel/",
+            "carrusel_exposicion_museos" => "./assets/images/exposiciones/carrusel/"
+        ];
+
+        $config['upload_path']   = $upload_path[$u_path];
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        $_FILES[$file]['name'] = time() . '-' .  convert_accented_characters($_FILES[$file]['name']) ;
+
+        if ( ! $this->upload->do_upload($file))
+        {
+            return null;            
+        }
+        else
+        {
+            $data = array('upload_data' => $this->upload->data());
+
+            if ($data['upload_data']['file_type'] == 'image/jpeg' || $data['upload_data']['file_type'] == 'image/png' || $data['upload_data']['file_type'] == 'image/gif') {
+                $path = str_replace('./assets/images', '', $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']);
+            } else {
+                $path = str_replace('./assets/files', '', $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']);
+            }
+            $array = array(
+                'user_id'       => ($museos == '' ? 66 : 83),
+                'creation_date' => time(),
+                'modified_date' => time(),
+                'filemime'      => $data['upload_data']['file_type'],
+                'path'          => $path,
+                'file_size'     => $_FILES[$file]['size'],
+                'file_name'     => $data['upload_data']['file_name']
+            );
+
+            if ($data['upload_data']['is_image'] == 1) {
+                $array += ['height' => $data['upload_data']['image_height']];
+                $array += ['width'  => $data['upload_data']['image_width']];
+            }
+
+            return $this->archivos_model->set($array, $museos);
+        }
+    }
+
+
+    /**********************************************************************************************************************************/
+
     /*Lista y permite la edición de los elementos*/
 
     public function establecimientos($establishment_id = null)
@@ -171,87 +256,7 @@ class Admin extends CI_Controller {
 		redirect(site_url('admin/establecimientos/'), 'refresh');
     }
 
-    /**
-     * Permite subir archivos
-     *
-     * @param string $u_path, key para obtener dirección de subida.
-     * @param string $featured_image, para conocer si se sube una imagen o un archivo multimedia.
-     */
-
-    public function upload_file ($u_path, $featured_image = true, $museos = '')
-    {
-        // Select input field
-        $file = 'userfile';
-        $config['allowed_types'] = 'jpg|gif|jpeg|png';
-        if (!$featured_image) {
-            $file = 'multimediafile';
-            $config['allowed_types'] = 'mp3|pdf';
-        }
-
-        $upload_path = [
-            "museo"                      => "./assets/images/museos/",
-            "instituto"                  => "./assets/images/institutos/",
-            "noticia"                    => "./assets/images/noticias/",
-            "exposicion"                 => "./assets/images/exposiciones/",
-            "coleccion"                  => "./assets/images/colecciones/",
-            "obra"                       => "./assets/images/obras/",
-            "agenda"                     => "./assets/images/agenda/",
-            "multimedia"                 => "./assets/images/multimedias/",
-            "multimedia_file"            => "./assets/files/multimedias/",
-            "enlace"                     => "./assets/images/enlaces/",
-            "galeria"                    => "./assets/images/galeria/",
-            "agenda_museos"              => "./assets/images/agenda_museos/",
-            "coleccion_museos"           => "./assets/images/colecciones_museos/",
-            "exposicion_museos"          => "./assets/images/exposicion_museos/",
-            "multimedia_museos"          => "./assets/images/multimedias_museos/",
-            "multimedia_file_museos"     => "./assets/files/multimedias_museos/",
-            "noticia_museos"             => "./assets/images/noticias_museos/",
-            "galeria_museos"             => "./assets/images/galeria_museos/",
-            "carrusel_museo"             => "./assets/images/museos/carrusel/",
-            "carrusel_instituto"         => "./assets/images/institutos/carrusel/",
-            "carrusel_coleccion"         => "./assets/images/colecciones/carrusel/",
-            "carrusel_exposicion"        => "./assets/images/exposiciones/carrusel/",
-            "carrusel_coleccion_museos"  => "./assets/images/colecciones/carrusel/",
-            "carrusel_exposicion_museos" => "./assets/images/exposiciones/carrusel/"
-        ];
-
-        $config['upload_path']   = $upload_path[$u_path];
-
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
-        $_FILES[$file]['name'] = time() . '-' .  convert_accented_characters($_FILES[$file]['name']) ;
-
-        if ( ! $this->upload->do_upload($file))
-        {
-            return null;            
-        }
-        else
-        {
-            $data = array('upload_data' => $this->upload->data());
-
-            if ($data['upload_data']['file_type'] == 'image/jpeg' || $data['upload_data']['file_type'] == 'image/png' || $data['upload_data']['file_type'] == 'image/gif') {
-                $path = str_replace('./assets/images', '', $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']);
-            } else {
-                $path = str_replace('./assets/files', '', $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']);
-            }
-            $array = array(
-                'user_id'       => ($museos == '' ? 66 : 83),
-                'creation_date' => time(),
-                'modified_date' => time(),
-                'filemime'      => $data['upload_data']['file_type'],
-                'path'          => $path,
-                'file_size'     => $_FILES[$file]['size'],
-                'file_name'     => $data['upload_data']['file_name']
-            );
-
-            if ($data['upload_data']['is_image'] == 1) {
-                $array += ['height' => $data['upload_data']['image_height']];
-                $array += ['width'  => $data['upload_data']['image_width']];
-            }
-
-            return $this->archivos_model->set($array, $museos);
-        }
-    }
+    /**********************************************************************************************************************************/
 
     /*Lista y permite la edición de los elementos*/
 
@@ -359,6 +364,8 @@ class Admin extends CI_Controller {
 
         redirect(site_url('admin/noticias/'), 'refresh');
     }
+
+    /**********************************************************************************************************************************/
 
     /*Lista y permite la edición de los elementos*/
 
@@ -475,6 +482,8 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/exposiciones/'), 'refresh');
     }
 
+    /**********************************************************************************************************************************/
+
     /*Lista y permite la edición de los elementos*/
 
     public function colecciones($collection_id = null)
@@ -580,6 +589,8 @@ class Admin extends CI_Controller {
 
         redirect(site_url('admin/colecciones/'), 'refresh');
     }
+
+    /**********************************************************************************************************************************/
 
     /*Lista y permite la edición de los elementos*/
 
@@ -688,6 +699,8 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/obras/'), 'refresh');
     }
 
+    /**********************************************************************************************************************************/
+
     /*Lista los elementos*/
 
     public function contactenos($id = null)
@@ -716,6 +729,8 @@ class Admin extends CI_Controller {
             $this->load->view('includes/footer_admin');
         } 
     }
+
+    /**********************************************************************************************************************************/
 
     /*Lista y permite la edición de los elementos*/
 
@@ -826,6 +841,9 @@ class Admin extends CI_Controller {
 
         redirect(site_url('admin/agenda/'), 'refresh');
     }
+
+
+    /**********************************************************************************************************************************/
 
     /*Lista y permite la edición de los elementos*/
 
@@ -942,6 +960,8 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/multimedia/'), 'refresh');
     }
 
+    /**********************************************************************************************************************************/
+
     /*Lista y permite la edición de los elementos*/
 
     public function agenda_museos($diary_id = null)
@@ -1018,6 +1038,8 @@ class Admin extends CI_Controller {
             
         }
     }
+
+    /**********************************************************************************************************************************/
 
     /*Lista y permite la edición de los elementos*/
 
@@ -1101,6 +1123,8 @@ class Admin extends CI_Controller {
             
         }
     }
+
+    /**********************************************************************************************************************************/
 
     /*Lista y permite la edición de los elementos*/
 
@@ -1187,6 +1211,8 @@ class Admin extends CI_Controller {
         }
     }
 
+    /**********************************************************************************************************************************/
+
     /*Lista y permite la edición de los elementos*/
 
     public function noticias_museos($news_id = null)
@@ -1265,6 +1291,8 @@ class Admin extends CI_Controller {
         }
     }
 
+    /**********************************************************************************************************************************/
+
     /*List of news and add individual fechas agenda*/
 
     public function fechas_agenda($diary_id)
@@ -1318,6 +1346,7 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/fechas-agenda/' . $diary_id), 'refresh');
     }
 
+    /**********************************************************************************************************************************/
 
     public function fechas_agenda_museos($diary_id)
     {
@@ -1332,6 +1361,8 @@ class Admin extends CI_Controller {
         $this->load->view('admin/agenda_museos/fechas_agenda_museos', $data);
         $this->load->view('includes/footer_admin');
     }
+
+    /**********************************************************************************************************************************/
 
     public function listar_carrusel ($type, $element_id)
     {
@@ -1426,6 +1457,8 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/carrusel/' . $this->input->post('tipo') . '/' . $this->input->post('elemento_id')), 'refresh');
     }
 
+    /**********************************************************************************************************************************/
+
     public function listar_carrusel_museos ($type, $element_id)
     {
 
@@ -1486,6 +1519,8 @@ class Admin extends CI_Controller {
             
         }
     }
+
+    /**********************************************************************************************************************************/
 
     /*Lista y permite la edición de los elementos*/
 
@@ -1565,6 +1600,8 @@ class Admin extends CI_Controller {
         }
     }
 
+    /**********************************************************************************************************************************/
+
     /*List of news and add individual fechas agenda*/
 
     public function galeria_fotos($news_id)
@@ -1615,6 +1652,8 @@ class Admin extends CI_Controller {
         redirect(site_url('admin/galeria-fotos/' . $news_id), 'refresh');
     }
 
+    /**********************************************************************************************************************************/
+
     /*List of news and add individual fechas agenda*/
 
     public function galeria_fotos_museos($news_id)
@@ -1630,6 +1669,8 @@ class Admin extends CI_Controller {
         $this->load->view('includes/footer_admin');
         
     }
+
+    /**********************************************************************************************************************************/
 
     /*Lista y permite la edición de los elementos*/
 
@@ -1729,6 +1770,8 @@ class Admin extends CI_Controller {
 
         redirect(site_url('admin/enlaces/'), 'refresh');
     }
+
+    /**********************************************************************************************************************************/
 
     /*Lista los elementos*/
 
