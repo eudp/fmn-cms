@@ -104,7 +104,7 @@ class Admin extends CI_Controller {
                 $path = str_replace('./assets/files', '', $upload_path[$u_path]) . convert_accented_characters($data['upload_data']['file_name']);
             }
             $array = array(
-                'user_id'       => ($museos == '' ? 66 : 83),
+                'user_id'       => $this->ion_auth->user()->row()->id,
                 'creation_date' => time(),
                 'modified_date' => time(),
                 'filemime'      => $data['upload_data']['file_type'],
@@ -1834,7 +1834,7 @@ class Admin extends CI_Controller {
         $array = array(
             'element_id' => $this->input->post('id'),
             'type'       => $table,
-            'user_id'    => 66
+            'user_id'    => $this->ion_auth->user()->row()->id
         );
 
         $this->destacados_model->set($array);
