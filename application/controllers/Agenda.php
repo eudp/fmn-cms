@@ -36,7 +36,7 @@ class Agenda extends CI_Controller {
             show_404();
         }
         $data['diary_item_fechas'] = $this->agenda_model->get_fechas_agenda($data['diary_item']['diary_id'], $museos);
-        $data['diary_item']['description'] = strip_tags($data['diary_item']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+        $data['diary_item']['description'] = strip_tags($data['diary_item']['description'],'<a><em><strong><p><br><ul><ol><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6><span>');
 
         $h_data['title'] = 'Agenda | Fundación Museos Nacionales';
         $h_data['active'] = 'agenda';

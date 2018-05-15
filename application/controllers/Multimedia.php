@@ -37,7 +37,7 @@ class Multimedia extends CI_Controller {
         if (empty($data['multimedia_item']) || ($data['multimedia_item']['status'] == 0 && !$this->ion_auth->logged_in())){
             show_404();
         }
-        $data['multimedia_item']['description'] = strip_tags($data['multimedia_item']['description'],'<a><em><strong><p><br><ul><li><table><tbody><tr><td>');
+        $data['multimedia_item']['description'] = strip_tags($data['multimedia_item']['description'],'<a><em><strong><p><br><ul><ol><li><table><tbody><tr><td><u><strike><h1><h2><h3><h4><h5><h6><span>');
         $data['multimedia_item']['path'] = str_replace('public:/', '', $data['multimedia_item']['path']);
 
         $h_data['title'] = 'Multimedias | Fundación Museos Nacionales';
