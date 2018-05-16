@@ -47,7 +47,7 @@
         							<td><a target="_blank" href="<?= site_url('colecciones/'. $collection_item['slug']);?>"><?= site_url('colecciones/'. $collection_item['slug']); ?></a></td>
         							<td><?= date('j \d\e F, Y', $collection_item['creation_date']); ?></td>
         							<td><?= date('j \d\e F, Y',$collection_item['modified_date']); ?></td>
-        							<td><?= ($collection_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
+        							<td><?= ($collection_item['status'] == 1 ? 'Activo': 'Inactivo'); ?></td>
         							<!-- Handle delete permisology -->
         							<td>
         								<form  onsubmit="return confirm('¿Confirmas la eliminación de este elemento?');" method="post" action="<?= site_url('admin/colecciones/'. $collection_item['collection_id'] . '/destroy');?>">

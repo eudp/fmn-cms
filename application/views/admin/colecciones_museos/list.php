@@ -45,7 +45,7 @@
       							<td><a href="<?= site_url('admin/carrusel-museos/coleccion/'. $collection_item['collection_id']);?>" role="button" class="btn btn-primary">Ver/editar carrusel</a></td>
       							<td><?= date('j \d\e F, Y', $collection_item['creation_date']); ?></td>
       							<td><?= date('j \d\e F, Y',$collection_item['modified_date']); ?></td>
-      							<td><?= ($collection_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
+      							<td><?= ($collection_item['status'] == 1 ? 'Activo': 'Inactivo'); ?></td>
       							<td><?= domain_museum($collection_item['museums']); ?></td>
       						</tr>
 

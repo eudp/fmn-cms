@@ -47,7 +47,7 @@
         							<td><a target="_blank" href="<?= site_url('agenda-museos/'. $diary_item['slug']);?>"><?= site_url('agenda-museos/'. $diary_item['slug']); ?></a></td>
         							<td><?= date('j \d\e F, Y', $diary_item['creation_date']); ?></td>
         							<td><?= date('j \d\e F, Y',$diary_item['modified_date']); ?></td>
-        							<td><?= ($diary_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
+        							<td><?= ($diary_item['status'] == 1 ? 'Activo': 'Inactivo'); ?></td>
         							<td><?= domain_museum($diary_item['museums']); ?></td>
         						</tr>
 

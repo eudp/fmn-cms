@@ -4,10 +4,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Noticias
+        Establecimientos
       </h1>
       <ol class="breadcrumb">
-        <li><i class="fa fa-dashboard"></i>&nbsp;&nbsp;Noticias</li>
+        <li><i class="fa fa-dashboard"></i>&nbsp;&nbsp;Establecimientos</li>
         <li class="active">Lista</li>
       </ol>
     </section>
@@ -18,7 +18,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Listado de noticias</h3>
+              <h3 class="box-title">Listado de establecimientos</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -53,7 +53,7 @@
         							<?php endif ?>
         							<td><?= date('j \d\e F, Y', $establishment_item['creation_date']); ?></td>
         							<td><?= date('j \d\e F, Y',$establishment_item['modified_date']); ?></td>
-        							<td><?= ($establishment_item['status'] == 1 ? 'activo' : 'inactivo'); ?></td>
+        							<td><?= ($establishment_item['status'] == 1 ? 'Activo' : 'Inactivo'); ?></td>
         							<!-- Handle delete permisology -->
         							<td>
         								<form  onsubmit="return confirm('¿Confirmas la eliminación de este elemento?');" method="post" action="<?= site_url('admin/establecimientos/'. $establishment_item['establishment_id'] . '/destroy');?>">

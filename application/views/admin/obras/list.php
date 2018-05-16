@@ -45,7 +45,7 @@
         							<th scope="row"><?= $obra_item['title_c']; ?></th>
         							<td><?= date('j \d\e F, Y', $obra_item['creation_date']); ?></td>
         							<td><?= date('j \d\e F, Y',$obra_item['modified_date']); ?></td>
-        							<td><?= ($obra_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
+        							<td><?= ($obra_item['status'] == 1 ? 'Activo': 'Inactivo'); ?></td>
         							<!-- Handle delete permisology -->
         							<td>
         								<form onsubmit="return confirm('¿Confirmas la eliminación de este elemento?');" method="post" action="<?= site_url('admin/obras/'. $obra_item['obra_id'] . '/destroy');?>">

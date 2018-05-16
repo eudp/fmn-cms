@@ -47,7 +47,7 @@
         							<td><a target="_blank" href="<?= site_url('exposiciones-museos/'. $exposition_item['slug']);?>"><?= site_url('exposiciones-museos/'. $exposition_item['slug']); ?></a></td>
         							<td><?= date('j \d\e F, Y', $exposition_item['creation_date']); ?></td>
         							<td><?= date('j \d\e F, Y',$exposition_item['modified_date']); ?></td>
-        							<td><?= ($exposition_item['status'] == 1 ? 'activo': 'inactivo'); ?></td>
+        							<td><?= ($exposition_item['status'] == 1 ? 'Activo': 'Inactivo'); ?></td>
         							<td><?= domain_museum($exposition_item['museums']); ?></td>
         						</tr>
 
