@@ -43,7 +43,7 @@ class Agenda_model extends CI_Model {
                 $this->db->limit($limit);
             }
 
-            $this->db->order_by('d.publication_date', 'DESC');
+            $this->db->order_by('d.creation_date', 'DESC');
             $query = $this->db->get();
             return $query->result_array();
         }
