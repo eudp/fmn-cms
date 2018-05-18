@@ -1,6 +1,6 @@
 # CMS for Fundación de Museos Nacionales (FMN) de Venezuela 
-This web application is an administration panel for the FMN website, made with Codeigniter, a PHP framework.
+This web application is an administration panel made with Codeigniter, a PHP framework, for the FMN website.
 
-Allows you to create, modify or delete different elements within the web site, such as news, exhibitions, collections, among others. In addition to managing users within the system.
+This app allows you to create, modify and delete different elements within the website such as news, exhibitions, collections and so on. It also allows managing users within the system.
 
-The goal was to join the FMN page with the websites of each museum in Venezuela. Previously the sites were made with Drupal and used the data of two different databases, so my task was to use the existing databases and make one more manageable for this new application. So, I needed to create an ETL (using Kettle Pentaho) to get the relevant data for about 400 tables.
+The goal was to join the FMN web site with the websites of the others museums in Venezuela.  Previously the web sites were made with Drupal (a CMS) and used the data of two different databases, so my task was to use the existing databases and create one more manageable for this new application. Therefore, I created an ETL (using Kettle Pentaho) to get the relevant data for about 400 tables.
