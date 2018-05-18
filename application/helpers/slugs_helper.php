@@ -1,4 +1,12 @@
 <?php
+
+    /**
+     * Verifica si el slug que se va a crear está disponible.
+     *
+     * @param string $string, cadena de caracteres que corresponde al titulo del elemento.
+     * @param object $model, modelo al que pertenece el elemento
+     * @param string $museos, su valor puede ser '_museos' o '', dependiendo cual tabla se quiere mostrar.
+    */
     
     function valid_slug ($string, $model, $museos = '')
     {
@@ -19,6 +27,12 @@
 
         return $string . $extra;
     }
+
+    /**
+     * Carga masivamente todos los slugs  de una tabla (modelo).
+     *
+     * @param object $model, modelo al que pertenece el elemento
+    */
 
     function slugs_massive ($model)
     {
@@ -57,6 +71,13 @@
 
         return $out;
     }
+
+    /**
+     * Elimina caracteres hasta que encuentre un guión. Esto con la finalidad de crear un 
+     * slug coherente.
+     *
+     * @param string $str, cadena de caracteres.
+    */
 
     function eliminar_hasta ($str)
     {
