@@ -4,7 +4,7 @@
      * Traduce el string de servicios de la tabla establecimientos en su nombre de 
      * servicio correspondiente.
      *
-     * @param string $string, cadena de caracteres con los servicios codificados.
+     * @param string $services, cadena de caracteres con los servicios codificados.
     */
 
     function servicios_translate($services)
