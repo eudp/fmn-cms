@@ -81,14 +81,20 @@ class Home extends CI_Controller {
 
     public function fmn()
     {
-    	$this->load->view('includes/header');
+        $h_data['title'] = 'Fundación Museos Nacionales';
+        $h_data['active'] = 'fmn';
+
+    	$this->load->view('includes/header', $h_data);
         $this->load->view('home/fmn');
         $this->load->view('includes/footer');
     }
 
     public function educacion()
     {
-    	$this->load->view('includes/header');
+        $h_data['title'] = 'Fundación Museos Nacionales';
+        $h_data['active'] = 'educacion';
+
+    	$this->load->view('includes/header', $h_data);
         $this->load->view('home/eduacion');
         $this->load->view('includes/footer');
     }
