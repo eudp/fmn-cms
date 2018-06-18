@@ -46,6 +46,7 @@
                     });
                   }
                 </script>
+                <!-- Aquí va la key de google maps -->
                 <script async defer
                 src="">
                 </script>
